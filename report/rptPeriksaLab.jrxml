@@ -391,37 +391,37 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp5}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="0" width="1" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="14"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="186" y="0" width="1" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="186" y="0" width="1" height="14"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="274" y="0" width="1" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="274" y="0" width="1" height="14"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="353" y="0" width="1" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="353" y="0" width="1" height="14"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="446" y="0" width="1" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="446" y="0" width="1" height="14"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="554" y="0" width="1" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="554" y="0" width="1" height="14"/>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>

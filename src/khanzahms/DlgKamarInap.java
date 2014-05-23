@@ -510,7 +510,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(jLabel13);
         jLabel13.setBounds(0, 85, 72, 23);
 
-        cmbDtk.setBackground(new java.awt.Color(245, 250, 240));
         cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk.setName("cmbDtk"); // NOI18N
         cmbDtk.addItemListener(new java.awt.event.ItemListener() {
@@ -526,7 +525,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(cmbDtk);
         cmbDtk.setBounds(177, 115, 48, 23);
 
-        cmbMnt.setBackground(new java.awt.Color(245, 250, 240));
         cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt.setName("cmbMnt"); // NOI18N
         cmbMnt.addItemListener(new java.awt.event.ItemListener() {
@@ -542,7 +540,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(cmbMnt);
         cmbMnt.setBounds(126, 115, 48, 23);
 
-        cmbJam.setBackground(new java.awt.Color(245, 250, 240));
         cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam.setName("cmbJam"); // NOI18N
         cmbJam.addItemListener(new java.awt.event.ItemListener() {
@@ -704,7 +701,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(jLabel23);
         jLabel23.setBounds(275, 115, 140, 23);
 
-        CmbTahun.setBackground(new java.awt.Color(245, 250, 240));
         CmbTahun.setName("CmbTahun"); // NOI18N
         CmbTahun.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -719,7 +715,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(CmbTahun);
         CmbTahun.setBounds(75, 85, 70, 23);
 
-        CmbBln.setBackground(new java.awt.Color(245, 250, 240));
         CmbBln.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         CmbBln.setName("CmbBln"); // NOI18N
         CmbBln.addItemListener(new java.awt.event.ItemListener() {
@@ -735,7 +730,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(CmbBln);
         CmbBln.setBounds(148, 85, 48, 23);
 
-        CmbTgl.setBackground(new java.awt.Color(245, 250, 240));
         CmbTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         CmbTgl.setName("CmbTgl"); // NOI18N
         CmbTgl.addItemListener(new java.awt.event.ItemListener() {
@@ -756,7 +750,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(jLabel24);
         jLabel24.setBounds(0, 115, 72, 23);
 
-        cmbStatus.setBackground(new java.awt.Color(245, 250, 240));
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sehat", "Rujuk", "APS", "+", "Meninggal", "Sembuh", "Membaik", "Pulang Paksa", "-" }));
         cmbStatus.setName("cmbStatus"); // NOI18N
         cmbStatus.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1082,19 +1075,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame3.add(jLabel27);
         jLabel27.setBounds(0, 85, 72, 23);
 
-        cmbDtkpindah.setBackground(new java.awt.Color(245, 250, 240));
         cmbDtkpindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtkpindah.setName("cmbDtkpindah"); // NOI18N
         internalFrame3.add(cmbDtkpindah);
         cmbDtkpindah.setBounds(466, 85, 55, 23);
 
-        cmbMntpindah.setBackground(new java.awt.Color(245, 250, 240));
         cmbMntpindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMntpindah.setName("cmbMntpindah"); // NOI18N
         internalFrame3.add(cmbMntpindah);
         cmbMntpindah.setBounds(408, 85, 55, 23);
 
-        cmbJampindah.setBackground(new java.awt.Color(245, 250, 240));
         cmbJampindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJampindah.setName("cmbJampindah"); // NOI18N
         internalFrame3.add(cmbJampindah);
@@ -1193,18 +1183,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame3.add(TTarifpindah);
         TTarifpindah.setBounds(188, 115, 160, 23);
 
-        CmbTahunpindah.setBackground(new java.awt.Color(245, 250, 240));
         CmbTahunpindah.setName("CmbTahunpindah"); // NOI18N
         internalFrame3.add(CmbTahunpindah);
         CmbTahunpindah.setBounds(75, 85, 80, 23);
 
-        CmbBlnpindah.setBackground(new java.awt.Color(245, 250, 240));
         CmbBlnpindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         CmbBlnpindah.setName("CmbBlnpindah"); // NOI18N
         internalFrame3.add(CmbBlnpindah);
         CmbBlnpindah.setBounds(158, 85, 55, 23);
 
-        CmbTglpindah.setBackground(new java.awt.Color(245, 250, 240));
         CmbTglpindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         CmbTglpindah.setName("CmbTglpindah"); // NOI18N
         internalFrame3.add(CmbTglpindah);
@@ -1587,7 +1574,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
         DTPCari1.setDisplayFormat("yyyy-MM-dd");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1612,7 +1599,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
         DTPCari2.setDisplayFormat("yyyy-MM-dd");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1647,7 +1634,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari3.setEditable(false);
         DTPCari3.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
         DTPCari3.setDisplayFormat("yyyy-MM-dd");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -1664,7 +1651,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         panelCari.add(DTPCari3);
 
-        cmbJam1.setBackground(new java.awt.Color(245, 250, 240));
         cmbJam1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam1.setName("cmbJam1"); // NOI18N
         cmbJam1.addItemListener(new java.awt.event.ItemListener() {
@@ -1679,7 +1665,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         panelCari.add(cmbJam1);
 
-        cmbMnt1.setBackground(new java.awt.Color(245, 250, 240));
         cmbMnt1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt1.setName("cmbMnt1"); // NOI18N
         cmbMnt1.addItemListener(new java.awt.event.ItemListener() {
@@ -1694,7 +1679,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         panelCari.add(cmbMnt1);
 
-        cmbDtk1.setBackground(new java.awt.Color(245, 250, 240));
         cmbDtk1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk1.setName("cmbDtk1"); // NOI18N
         cmbDtk1.addItemListener(new java.awt.event.ItemListener() {
@@ -1715,7 +1699,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        cmbJam2.setBackground(new java.awt.Color(245, 250, 240));
         cmbJam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam2.setName("cmbJam2"); // NOI18N
         cmbJam2.addItemListener(new java.awt.event.ItemListener() {
@@ -1730,7 +1713,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         panelCari.add(cmbJam2);
 
-        cmbMnt2.setBackground(new java.awt.Color(245, 250, 240));
         cmbMnt2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt2.setName("cmbMnt2"); // NOI18N
         cmbMnt2.addItemListener(new java.awt.event.ItemListener() {
@@ -1745,7 +1727,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         panelCari.add(cmbMnt2);
 
-        cmbDtk2.setBackground(new java.awt.Color(245, 250, 240));
         cmbDtk2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk2.setName("cmbDtk2"); // NOI18N
         cmbDtk2.addItemListener(new java.awt.event.ItemListener() {
@@ -2650,21 +2631,21 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 ttlbiayapindah.getText()+"','-'","No.Rawat");
                         Sequel.mengedit("kamar","kd_kamar='"+kdkamarpindah.getText()+"'","status='ISI'");  
                         Sequel.queryu("delete from kamar_inap where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+
-                                "' and kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+
+                                "' and kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+
                                 "' and tgl_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString()+
                                 "' and jam_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"'");
-                        Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+"'","status='KOSONG'");  
+                        Sequel.mengedit("kamar","kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+"'","status='KOSONG'");  
                     }else if(Rganti2.isSelected()==true){
                         Sequel.queryu("update kamar_inap set kd_kamar='"+kdkamarpindah.getText()+"', ttl_biaya='"+ttlbiayapindah.getText()+
                                 "' where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+
-                                "' and kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+
+                                "' and kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+
                                 "' and tgl_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString()+
                                 "' and jam_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"'");                        
                         Sequel.mengedit("kamar","kd_kamar='"+kdkamarpindah.getText()+"'","status='ISI'"); 
-                        Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+"'","status='KOSONG'");  
+                        Sequel.mengedit("kamar","kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+"'","status='KOSONG'");  
                     }else if(Rganti3.isSelected()==true){
                         i=1;
-                        kdkamar.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString());
+                        kdkamar.setText(Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString()));
                         isKmr();
                         Sequel.cariIsi("select if(to_days('"+CmbTahunpindah.getSelectedItem()+
                                 "-"+CmbBlnpindah.getSelectedItem()+"-"+CmbTglpindah.getSelectedItem()+
@@ -2683,13 +2664,19 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 " "+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"')) as lama",TJmlHari);             
                         isjml();
                         Sequel.mengedit("kamar_inap","no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+
-                                "' and kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+
+                                "' and kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+
                                 "' and tgl_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString()+
                                 "' and jam_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"'",
                                 "tgl_keluar='"+CmbTahunpindah.getSelectedItem()+"-"+CmbBlnpindah.getSelectedItem()+"-"+CmbTglpindah.getSelectedItem()+
                                 "',jam_keluar='"+cmbJampindah.getSelectedItem()+":"+cmbMntpindah.getSelectedItem()+":"+cmbDtkpindah.getSelectedItem()+
                                 "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='Pindah Kamar'");
-                        Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+"'","status='KOSONG'");
+                        System.out.println("kamar_inap | no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+
+                                "' and kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+
+                                "' and tgl_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString()+
+                                "' and jam_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"' | tgl_keluar='"+CmbTahunpindah.getSelectedItem()+"-"+CmbBlnpindah.getSelectedItem()+"-"+CmbTglpindah.getSelectedItem()+
+                                "',jam_keluar='"+cmbJampindah.getSelectedItem()+":"+cmbMntpindah.getSelectedItem()+":"+cmbDtkpindah.getSelectedItem()+
+                                "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='Pindah Kamar'");
+                        Sequel.mengedit("kamar","kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+"'","status='KOSONG'");
                         Sequel.menyimpan("kamar_inap","'"+norawatpindah.getText()+"','"+
                                 kdkamarpindah.getText()+"','"+
                                 diagnosaawal.getText()+"','"+
@@ -2700,7 +2687,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         Sequel.mengedit("kamar","kd_kamar='"+kdkamarpindah.getText()+"'","status='ISI'");                         
                     }else if(Rganti4.isSelected()==true){
                         i=1;
-                        kdkamar.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString());
+                        kdkamar.setText(Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString()));
                         isKmr();
                         Sequel.cariIsi("select if(to_days('"+CmbTahunpindah.getSelectedItem()+
                                 "-"+CmbBlnpindah.getSelectedItem()+"-"+CmbTglpindah.getSelectedItem()+
@@ -2729,13 +2716,13 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                             ttlbiaya.setText(df2.format(x*y));
                         }
                         Sequel.mengedit("kamar_inap","no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+
-                                "' and kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+
+                                "' and kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+
                                 "' and tgl_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString()+
                                 "' and jam_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"'",
                                 "tgl_keluar='"+CmbTahunpindah.getSelectedItem()+"-"+CmbBlnpindah.getSelectedItem()+"-"+CmbTglpindah.getSelectedItem()+
                                 "',jam_keluar='"+cmbJampindah.getSelectedItem()+":"+cmbMntpindah.getSelectedItem()+":"+cmbDtkpindah.getSelectedItem()+
                                 "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='Pindah Kamar'");
-                        Sequel.mengedit("kamar","kd_kamar='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),4).toString()+"'","status='KOSONG'");
+                        Sequel.mengedit("kamar","kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+"'","status='KOSONG'");
                         Sequel.menyimpan("kamar_inap","'"+norawatpindah.getText()+"','"+
                                 kdkamarpindah.getText()+"','"+
                                 diagnosaawal.getText()+"','"+
@@ -3078,8 +3065,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         kdkamar.setText("");
         TKdBngsal.setText("");
         TBangsal.setText("");
-        diagnosaawal.setText("-");
-        diagnosaakhir.setText("-");
+        diagnosaawal.setText("");
+        diagnosaakhir.setText("");
 
         CmbTahun.setSelectedItem(now.substring(0,4));
         CmbBln.setSelectedItem(now.substring(5,7));

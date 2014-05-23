@@ -483,14 +483,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                
                //periksa lab
                ResultSet rs4=koneksi.createStatement().executeQuery(
-                       "select jns_perawatan.nm_perawatan,jns_perawatan.tarif_tindakanpr,"+
-                       "count(jns_perawatan.nm_perawatan) as jml, " +
-                       "jns_perawatan.tarif_tindakanpr * count(jns_perawatan.nm_perawatan) as total "+
-                       " from jns_perawatan inner join periksa_lab "+
-                       "on periksa_lab.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
+                       "select jns_perawatan_lab.nm_perawatan,jns_perawatan_lab.tarif_tindakan_petugas,"+
+                       "count(jns_perawatan_lab.nm_perawatan) as jml, " +
+                       "jns_perawatan_lab.tarif_tindakan_petugas * count(jns_perawatan_lab.nm_perawatan) as total "+
+                       " from jns_perawatan_lab inner join periksa_lab "+
+                       "on periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                        "where periksa_lab.tgl_periksa between '"+Tgl1.getSelectedItem()+
                        "' and '"+Tgl2.getSelectedItem()+"' and periksa_lab.nip='"+rs.getString("nip")+
-                       "' group by jns_perawatan.nm_perawatan order by jns_perawatan.nm_perawatan  ");
+                       "' group by jns_perawatan_lab.nm_perawatan order by jns_perawatan_lab.nm_perawatan  ");
                if(rs4.next()){
                     Object[] data6={"","","Periksa Lab : ","","",""}; 
                     tabMode.addRow(data6); 

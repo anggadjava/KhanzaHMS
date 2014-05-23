@@ -72,8 +72,8 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         tabModeRwJlDr=new DefaultTableModel(null,rowRwJlDr){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                     boolean a = false;
-                    if (colIndex==1) {
-                        a=false;
+                    if (colIndex==0) {
+                        a=true;
                     }
                     return a;
               }
@@ -297,12 +297,12 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
                                                "on rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw and "+
                                                "jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori where "+
                                                "rawat_jl_dr.no_rawat=? and kategori_perawatan.kd_kategori=? group by jns_perawatan.nm_perawatan");
-            psranapdokter=koneksi.prepareStatement("select jns_perawatan.nm_perawatan,jns_perawatan.total_byrdr,count(jns_perawatan.nm_perawatan) as jml, "+
-                                               "jns_perawatan.total_byrdr*count(jns_perawatan.nm_perawatan) as biaya "+
-                                               "from rawat_inap_dr inner join jns_perawatan inner join kategori_perawatan "+
-                                               "on rawat_inap_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw and "+
-                                               "jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori where "+
-                                               "rawat_inap_dr.no_rawat=? and kategori_perawatan.kd_kategori=? group by jns_perawatan.nm_perawatan");
+            psranapdokter=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,jns_perawatan_inap.total_byrdr,count(jns_perawatan_inap.nm_perawatan) as jml, "+
+                                               "jns_perawatan_inap.total_byrdr*count(jns_perawatan_inap.nm_perawatan) as biaya "+
+                                               "from rawat_inap_dr inner join jns_perawatan_inap inner join kategori_perawatan "+
+                                               "on rawat_inap_dr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw and "+
+                                               "jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori where "+
+                                               "rawat_inap_dr.no_rawat=? and kategori_perawatan.kd_kategori=? group by jns_perawatan_inap.nm_perawatan");
             psoperasi=koneksi.prepareStatement("select paket_operasi.nm_perawatan,(operasi.biayaoperator1+operasi.biayaoperator2+operasi.biayaoperator3+"+
                                                 "operasi.biayaasisten_operator1+operasi.biayaasisten_operator2+operasi.biayaasisten_operator3+"+
                                                 "operasi.biayadokter_anak+operasi.biayaperawaat_resusitas+operasi.biayadokter_anestesi+"+
@@ -317,18 +317,18 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
                                            "on rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw  and "+
                                                "jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori where "+
                                            "rawat_jl_pr.no_rawat=? and kategori_perawatan.kd_kategori=? group by jns_perawatan.nm_perawatan ");
-            psranapperawat=koneksi.prepareStatement("select jns_perawatan.nm_perawatan,jns_perawatan.total_byrpr,count(jns_perawatan.nm_perawatan) as jml, "+
-                                           "jns_perawatan.total_byrpr*count(jns_perawatan.nm_perawatan) as biaya "+
-                                           "from rawat_inap_pr inner join jns_perawatan  inner join kategori_perawatan "+
-                                           "on rawat_inap_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw  and "+
-                                               "jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori where "+
-                                           "rawat_inap_pr.no_rawat=? and kategori_perawatan.kd_kategori=?  group by jns_perawatan.nm_perawatan");
+            psranapperawat=koneksi.prepareStatement("select jns_perawatan_inap.nm_perawatan,jns_perawatan_inap.total_byrpr,count(jns_perawatan_inap.nm_perawatan) as jml, "+
+                                           "jns_perawatan_inap.total_byrpr*count(jns_perawatan_inap.nm_perawatan) as biaya "+
+                                           "from rawat_inap_pr inner join jns_perawatan_inap  inner join kategori_perawatan "+
+                                           "on rawat_inap_pr.kd_jenis_prw=jns_perawatan_inap.kd_jenis_prw  and "+
+                                               "jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori where "+
+                                           "rawat_inap_pr.no_rawat=? and kategori_perawatan.kd_kategori=?  group by jns_perawatan_inap.nm_perawatan");
             psperiksalab=koneksi.prepareStatement(
-                    "select jns_perawatan.nm_perawatan, count(periksa_lab.kd_jenis_prw) as jml,jns_perawatan.total_byrpr as biaya, "+
+                    "select jns_perawatan_lab.nm_perawatan, count(periksa_lab.kd_jenis_prw) as jml,jns_perawatan_lab.total_byr as biaya, "+
                     "sum(periksa_lab.biaya) as total "+
-                    " from periksa_lab inner join jns_perawatan "+
-                    " on jns_perawatan.kd_jenis_prw=periksa_lab.kd_jenis_prw where "+
-                    " periksa_lab.no_rawat=? group by jns_perawatan.nm_perawatan  ");
+                    " from periksa_lab inner join jns_perawatan_lab "+
+                    " on jns_perawatan_lab.kd_jenis_prw=periksa_lab.kd_jenis_prw where "+
+                    " periksa_lab.no_rawat=? group by jns_perawatan_lab.nm_perawatan  ");
             psdetaillab=koneksi.prepareStatement("select sum(detail_periksa_lab.biaya_item) as total from detail_periksa_lab where detail_periksa_lab.no_rawat=? ");
             pssudahmasuk=koneksi.prepareStatement("select no,nm_perawatan, if(biaya<>0,biaya,'') as satu, if(jumlah<>0,jumlah,'') as dua,"+
                         "if(tambahan<>0,tambahan,'') as tiga, if(totalbiaya<>0,totalbiaya,'') as empat,pemisah,status "+
@@ -1136,7 +1136,7 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(100, 100, 100));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
         DTPTgl.setDisplayFormat("yyyy-MM-dd");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1264,7 +1264,7 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
 
         DTPTempo.setEditable(false);
         DTPTempo.setForeground(new java.awt.Color(100, 100, 100));
-        DTPTempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPTempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
         DTPTempo.setDisplayFormat("yyyy-MM-dd");
         DTPTempo.setName("DTPTempo"); // NOI18N
         DTPTempo.setOpaque(false);
@@ -1727,6 +1727,7 @@ private void BtnSimpan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             Sequel.menyimpan("tagihan_obat_langsung","'"+TNoRw.getText()+"','"+TotalObat.getText()+"'","No.Rawat");
             WindowInput.setVisible(false);
             isRawat();
+            isKembali();
         }
 }//GEN-LAST:event_BtnSimpan2ActionPerformed
 
@@ -1741,6 +1742,7 @@ private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             Sequel.queryu("delete from tagihan_obat_langsung where no_rawat=? ",TNoRw.getText());
             WindowInput.setVisible(false);
             isRawat();
+            isKembali();
         }
 }//GEN-LAST:event_BtnBatal1ActionPerformed
 
@@ -1769,6 +1771,7 @@ private void BtnSimpan3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
         }
         isRawat();
+        isKembali();
         WindowInput3.dispose();
     }
 }//GEN-LAST:event_BtnSimpan3ActionPerformed
@@ -1778,6 +1781,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             "' and nama_biaya='"+tbTambahan.getValueAt(tbTambahan.getSelectedRow(),0).toString() +"'");
     tabModeTambahan.removeRow(tbTambahan.getSelectedRow());
     isRawat();
+    isKembali();
 }//GEN-LAST:event_BtnHapusActionPerformed
 
 private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
@@ -1825,6 +1829,7 @@ private void BtnSimpanPotonganActionPerformed(java.awt.event.ActionEvent evt) {/
             }
         }
         isRawat();
+        isKembali();
         WindowInput4.dispose();
     }
 }//GEN-LAST:event_BtnSimpanPotonganActionPerformed
@@ -1834,6 +1839,7 @@ private void BtnHapusPotonganActionPerformed(java.awt.event.ActionEvent evt) {//
             "' and nama_pengurangan='"+tbPotongan.getValueAt(tbPotongan.getSelectedRow(),0).toString() +"'");
     tabModePotongan.removeRow(tbPotongan.getSelectedRow());
     isRawat();
+    isKembali();
 }//GEN-LAST:event_BtnHapusPotonganActionPerformed
 
 private void BtnKeluarPotonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarPotonganActionPerformed
@@ -2107,6 +2113,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
             }
             isRawat();
+            isKembali();
             WindowInput5.dispose();
         }
     }//GEN-LAST:event_BtnSimpanUbahLamaActionPerformed
@@ -2675,8 +2682,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             
             psdetaillab.setString(1,TNoRw.getText());
             rsdetaillab=psdetaillab.executeQuery();
-            if(rsperiksalab.next()||rsdetaillab.next()){
-                   tabModeRwJlDr.addRow(new Object[]{true,x+". Pemeriksaan Lab",":","","","","","","Ranap Dokter"}); 
+            if(rsperiksalab.next()){
+                   tabModeRwJlDr.addRow(new Object[]{true,x+". Pemeriksaan Lab",":","","","","","","Ranap Paramedis"}); 
                    x++;
             }
             rsperiksalab.beforeFirst();
@@ -2687,9 +2694,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }
             rsdetaillab.beforeFirst();
             while(rsdetaillab.next()){
-                tabModeRwJlDr.addRow(new Object[]{true,"                           ","Laboratorium",":",
-                              rsdetaillab.getString("total"),"1","",rsdetaillab.getString("total"),"Ranap Paramedis"});
-                subttl=subttl+rsdetaillab.getDouble("total");
+                if(rsdetaillab.getDouble("total")>0){
+                    tabModeRwJlDr.addRow(new Object[]{true,"                           ","Laboratorium",":",
+                                rsdetaillab.getDouble("total"),"1","",rsdetaillab.getDouble("total"),"Ranap Paramedis"});
+                    subttl=subttl+rsdetaillab.getDouble("total");
+                }                
             }
             
             if(subttl>1){

@@ -27,13 +27,16 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private Jurnal jur=new Jurnal();
-    private PreparedStatement pspoli,psdokter,pstindakan,pspasien,psobat,pslaborat,psdetailobat,psdetaillaborat,psdetailtindakan;
-    private ResultSet rspoli,rsdokter,rstindakan,rsobat,rspasien,rslaborat,rsdetailobat,rsdetailtindakan,rsdetaillaborat; 
+    private PreparedStatement pspoli,psdokter,pstindakan,pspasien,psobat,psobatlangsung,pslaborat,psdetailobat,psregistrasi,psdetailregistrasi,
+            psdetaillaborat,psdetailtindakan,psdetailobatlangsung,pstambahan,pspotongan,psdetailtambahan,psdetailpotongan;
+    private ResultSet rspoli,rsdokter,rstindakan,rsobat,rsobatlangsung,rspasien,rslaborat,rsdetailobat,rsregistrasi,rsdetailregistrasi,
+            rsdetailtindakan,rsdetaillaborat,rsdetailobatlangsung,rstambahan,rspotongan,rsdetailtambahan,rsdetailpotongan; 
     private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");   
     private DlgCariPoli poli=new DlgCariPoli(null,false);
     private int i=0,a=0;
-    private double obat=0,laborat=0,jm=0,biaya=0,ttlbiaya=0,detailobat=0,detailtindakan=0,detaillaborat=0;
+    private double obat=0,obatlangsung=0,laborat=0,jm=0,biaya=0,ttlbiaya=0,detailobat=0,detailobatlangsung=0,
+            detailtindakan=0,detaillaborat=0,tambahan,potongan,detailtambahan,detailpotongan,registrasi=0,detailregistrasi;
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -42,7 +45,7 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row={"No.","Poliklinik","Jml.Pasien","Obat","Laborat","Jasa Medis","Total"};
+        Object[] row={"No.","Poliklinik","Jml.Pas","Obat","Laborat","Jasa Medis","Tambahan","Potongan","Registrasi","Total"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -51,16 +54,16 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0;i < 7; i++) {
+        for (i = 0;i < 10; i++) {
             TableColumn column = tbDokter.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(35);
             }else if(i==1){
-                column.setPreferredWidth(350);
+                column.setPreferredWidth(250);
             }else if(i==2){
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(50);
             }else{
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(80);
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
@@ -98,7 +101,19 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
             psobat=koneksi.prepareStatement(
                     "select sum(detail_pemberian_obat.total) from detail_pemberian_obat inner join rawat_jl_dr inner join reg_periksa "+
                     "on detail_pemberian_obat.no_rawat=rawat_jl_dr.no_rawat and reg_periksa.no_rawat=rawat_jl_dr.no_rawat where rawat_jl_dr.kd_dokter=? "+
-                    "and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_poli=?");    
+                    "and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_poli=?");  
+            psobatlangsung=koneksi.prepareStatement(
+                    "select sum(tagihan_obat_langsung.besar_tagihan) from tagihan_obat_langsung inner join rawat_jl_dr inner join reg_periksa "+
+                    "on tagihan_obat_langsung.no_rawat=rawat_jl_dr.no_rawat and reg_periksa.no_rawat=rawat_jl_dr.no_rawat where rawat_jl_dr.kd_dokter=? "+
+                    "and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_poli=?");  
+            pstambahan=koneksi.prepareStatement(
+                    "select sum(tambahan_biaya.besar_biaya) from tambahan_biaya inner join rawat_jl_dr inner join reg_periksa "+
+                    "on tambahan_biaya.no_rawat=rawat_jl_dr.no_rawat and reg_periksa.no_rawat=rawat_jl_dr.no_rawat where rawat_jl_dr.kd_dokter=? "+
+                    "and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_poli=?"); 
+            pspotongan=koneksi.prepareStatement(
+                    "select sum(pengurangan_biaya.besar_pengurangan) from pengurangan_biaya inner join rawat_jl_dr inner join reg_periksa "+
+                    "on pengurangan_biaya.no_rawat=rawat_jl_dr.no_rawat and reg_periksa.no_rawat=rawat_jl_dr.no_rawat where rawat_jl_dr.kd_dokter=? "+
+                    "and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_poli=?"); 
             pslaborat=koneksi.prepareStatement(
                     "select sum(periksa_lab.biaya) from periksa_lab inner join rawat_jl_dr inner join reg_periksa "+
                     "on periksa_lab.no_rawat=rawat_jl_dr.no_rawat and reg_periksa.no_rawat=rawat_jl_dr.no_rawat where rawat_jl_dr.kd_dokter=? "+
@@ -111,8 +126,19 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
                     "select sum(rawat_jl_dr.biaya_rawat) from rawat_jl_dr where rawat_jl_dr.no_rawat=?");
             psdetailobat=koneksi.prepareStatement(
                     "select sum(detail_pemberian_obat.total) from detail_pemberian_obat where detail_pemberian_obat.no_rawat=?");
+            psdetailobatlangsung=koneksi.prepareStatement(
+                    "select sum(tagihan_obat_langsung.besar_tagihan) from tagihan_obat_langsung where tagihan_obat_langsung.no_rawat=?");
             psdetaillaborat=koneksi.prepareStatement(
                     "select sum(periksa_lab.biaya) from periksa_lab where periksa_lab.no_rawat=?");
+            psdetailtambahan=koneksi.prepareStatement(
+                    "select sum(tambahan_biaya.besar_biaya) from tambahan_biaya where tambahan_biaya.no_rawat=?");
+            psdetailpotongan=koneksi.prepareStatement(
+                    "select sum(pengurangan_biaya.besar_pengurangan) from pengurangan_biaya where pengurangan_biaya.no_rawat=?");
+            psregistrasi=koneksi.prepareStatement(
+                    "select sum(reg_periksa.biaya_reg) from reg_periksa where reg_periksa.kd_dokter=? "+
+                    "and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.kd_poli=?");
+            psdetailregistrasi=koneksi.prepareStatement(
+                    "select sum(reg_periksa.biaya_reg) from reg_periksa where reg_periksa.no_rawat=?");
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -157,9 +183,9 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
         ppTampilkanPasien.setBackground(new java.awt.Color(242, 242, 242));
-        ppTampilkanPasien.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ppTampilkanPasien.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppTampilkanPasien.setForeground(java.awt.Color.darkGray);
-        ppTampilkanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        ppTampilkanPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         ppTampilkanPasien.setText("Tampilkan Pasien");
         ppTampilkanPasien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppTampilkanPasien.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -375,7 +401,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
                                 tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','','','','','','','','','',''","Rekap Harian Perpoli Dokter"); 
+                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','','','','','','',''","Rekap Harian Perpoli Dokter"); 
             }
             Valid.MyReport("rptRBTindakanPoli.jrxml","report","[ Rekap Bulanan Tindakan Dokter ]",
                 "select no, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14 from temporary order by no asc");
@@ -506,7 +535,7 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
            i=1;
            ttlbiaya=0;
            while(rspoli.next()){
-               tabMode.addRow(new Object[]{i+". ",rspoli.getString(2),"","","","",""});
+               tabMode.addRow(new Object[]{i+". ",rspoli.getString(2),"","","","","","","",""});
                psdokter.setString(1,rspoli.getString(1));
                psdokter.setString(2,Tgl1.getSelectedItem().toString());
                psdokter.setString(3,Tgl2.getSelectedItem().toString());
@@ -533,6 +562,16 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
                       obat=rsobat.getDouble(1); 
                    }
                    
+                   obatlangsung=0;
+                   psobatlangsung.setString(1,rsdokter.getString(1));
+                   psobatlangsung.setString(2,Tgl1.getSelectedItem().toString());
+                   psobatlangsung.setString(3,Tgl2.getSelectedItem().toString());
+                   psobatlangsung.setString(4,rspoli.getString(1));
+                   rsobatlangsung=psobatlangsung.executeQuery();
+                   if(rsobatlangsung.next()){
+                      obatlangsung=rsobatlangsung.getDouble(1); 
+                   }
+                   
                    laborat=0;
                    pslaborat.setString(1,rsdokter.getString(1));
                    pslaborat.setString(2,Tgl1.getSelectedItem().toString());
@@ -543,13 +582,43 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
                       laborat=rslaborat.getDouble(1); 
                    }
                    
-                   ttlbiaya=ttlbiaya+biaya+obat+laborat;
-                   tabMode.addRow(new Object[]{"",a+". "+rsdokter.getString(2),rsdokter.getString(3),Valid.SetAngka(obat),Valid.SetAngka(laborat),Valid.SetAngka(biaya),Valid.SetAngka(biaya+obat+laborat)});
+                   tambahan=0;
+                   pstambahan.setString(1,rsdokter.getString(1));
+                   pstambahan.setString(2,Tgl1.getSelectedItem().toString());
+                   pstambahan.setString(3,Tgl2.getSelectedItem().toString());
+                   pstambahan.setString(4,rspoli.getString(1));
+                   rstambahan=pstambahan.executeQuery();
+                   if(rstambahan.next()){
+                      tambahan=rstambahan.getDouble(1); 
+                   }
+                   
+                   potongan=0;
+                   pspotongan.setString(1,rsdokter.getString(1));
+                   pspotongan.setString(2,Tgl1.getSelectedItem().toString());
+                   pspotongan.setString(3,Tgl2.getSelectedItem().toString());
+                   pspotongan.setString(4,rspoli.getString(1));
+                   rspotongan=pspotongan.executeQuery();
+                   if(rspotongan.next()){
+                      potongan=rspotongan.getDouble(1); 
+                   }
+                   
+                   registrasi=0;
+                   psregistrasi.setString(1,rsdokter.getString(1));
+                   psregistrasi.setString(2,Tgl1.getSelectedItem().toString());
+                   psregistrasi.setString(3,Tgl2.getSelectedItem().toString());
+                   psregistrasi.setString(4,rspoli.getString(1));
+                   rsregistrasi=psregistrasi.executeQuery();
+                   if(rsregistrasi.next()){
+                      registrasi=rsregistrasi.getDouble(1); 
+                   }         
+                   
+                   ttlbiaya=ttlbiaya+biaya+obat+obatlangsung+laborat+tambahan+registrasi-potongan;
+                   tabMode.addRow(new Object[]{"",a+". "+rsdokter.getString(2),rsdokter.getString(3),Valid.SetAngka(obat+obatlangsung),Valid.SetAngka(laborat),Valid.SetAngka(biaya),Valid.SetAngka(tambahan),Valid.SetAngka(potongan),Valid.SetAngka(registrasi),Valid.SetAngka(biaya+obat+obatlangsung+laborat+tambahan+registrasi-potongan)});
                    a++;
                }
                i++;
            }
-           tabMode.addRow(new Object[]{">>","Total Biaya :","","","","",Valid.SetAngka(ttlbiaya)});
+           tabMode.addRow(new Object[]{">>","Total Biaya :","","","","","","","",Valid.SetAngka(ttlbiaya)});
            this.setCursor(Cursor.getDefaultCursor());             
         }catch(SQLException e){
             System.out.println("Error  "+e);
@@ -566,7 +635,7 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
            i=1;
            ttlbiaya=0;
            while(rspoli.next()){
-               tabMode.addRow(new Object[]{i+". ",rspoli.getString(2),"","","","",""});
+               tabMode.addRow(new Object[]{i+". ",rspoli.getString(2),"","","","","","","",""});
                psdokter.setString(1,rspoli.getString(1));
                psdokter.setString(2,Tgl1.getSelectedItem().toString());
                psdokter.setString(3,Tgl2.getSelectedItem().toString());
@@ -593,6 +662,16 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
                       obat=rsobat.getDouble(1); 
                    }
                    
+                   obatlangsung=0;
+                   psobatlangsung.setString(1,rsdokter.getString(1));
+                   psobatlangsung.setString(2,Tgl1.getSelectedItem().toString());
+                   psobatlangsung.setString(3,Tgl2.getSelectedItem().toString());
+                   psobatlangsung.setString(4,rspoli.getString(1));
+                   rsobatlangsung=psobatlangsung.executeQuery();
+                   if(rsobatlangsung.next()){
+                      obatlangsung=rsobatlangsung.getDouble(1); 
+                   }
+                   
                    laborat=0;
                    pslaborat.setString(1,rsdokter.getString(1));
                    pslaborat.setString(2,Tgl1.getSelectedItem().toString());
@@ -603,8 +682,38 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
                       laborat=rslaborat.getDouble(1); 
                    }
                    
-                   ttlbiaya=ttlbiaya+biaya+obat+laborat;
-                   tabMode.addRow(new Object[]{"",a+". "+rsdokter.getString(2),rsdokter.getString(3),Valid.SetAngka(obat),Valid.SetAngka(laborat),Valid.SetAngka(biaya),Valid.SetAngka(biaya+obat+laborat)});
+                   tambahan=0;
+                   pstambahan.setString(1,rsdokter.getString(1));
+                   pstambahan.setString(2,Tgl1.getSelectedItem().toString());
+                   pstambahan.setString(3,Tgl2.getSelectedItem().toString());
+                   pstambahan.setString(4,rspoli.getString(1));
+                   rstambahan=pstambahan.executeQuery();
+                   if(rstambahan.next()){
+                      tambahan=rstambahan.getDouble(1); 
+                   }
+                   
+                   potongan=0;
+                   pspotongan.setString(1,rsdokter.getString(1));
+                   pspotongan.setString(2,Tgl1.getSelectedItem().toString());
+                   pspotongan.setString(3,Tgl2.getSelectedItem().toString());
+                   pspotongan.setString(4,rspoli.getString(1));
+                   rspotongan=pspotongan.executeQuery();
+                   if(rspotongan.next()){
+                      potongan=rspotongan.getDouble(1); 
+                   }
+                   
+                   registrasi=0;
+                   psregistrasi.setString(1,rsdokter.getString(1));
+                   psregistrasi.setString(2,Tgl1.getSelectedItem().toString());
+                   psregistrasi.setString(3,Tgl2.getSelectedItem().toString());
+                   psregistrasi.setString(4,rspoli.getString(1));
+                   rsregistrasi=psregistrasi.executeQuery();
+                   if(rsregistrasi.next()){
+                      registrasi=rsregistrasi.getDouble(1); 
+                   }         
+                   
+                   ttlbiaya=ttlbiaya+biaya+obat+obatlangsung+laborat+tambahan+registrasi-potongan;
+                   tabMode.addRow(new Object[]{"",a+". "+rsdokter.getString(2),rsdokter.getString(3),Valid.SetAngka(obat+obatlangsung),Valid.SetAngka(laborat),Valid.SetAngka(biaya),Valid.SetAngka(tambahan),Valid.SetAngka(potongan),Valid.SetAngka(registrasi),Valid.SetAngka(biaya+obat+obatlangsung+laborat+tambahan+registrasi-potongan)});
                                                         
                    pspasien.setString(1,Tgl1.getSelectedItem().toString());
                    pspasien.setString(2,Tgl2.getSelectedItem().toString());
@@ -612,16 +721,25 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
                    pspasien.setString(4,rspoli.getString(1));
                    rspasien=pspasien.executeQuery();
                    while(rspasien.next()){
+                       detailtindakan=0;
                        psdetailtindakan.setString(1,rspasien.getString(4));
                        rsdetailtindakan=psdetailtindakan.executeQuery();
                        if(rsdetailtindakan.next()){
                            detailtindakan=rsdetailtindakan.getDouble(1);
                        }
                        
+                       detailobat=0;
                        psdetailobat.setString(1,rspasien.getString(4));
                        rsdetailobat=psdetailobat.executeQuery();
                        if(rsdetailobat.next()){
                            detailobat=rsdetailobat.getDouble(1);
+                       }
+                       
+                       detailobatlangsung=0;
+                       psdetailobatlangsung.setString(1,rspasien.getString(4));
+                       rsdetailobatlangsung=psdetailobatlangsung.executeQuery();
+                       if(rsdetailobatlangsung.next()){
+                           detailobatlangsung=rsdetailobatlangsung.getDouble(1);
                        }
                        
                        psdetaillaborat.setString(1,rspasien.getString(4));
@@ -630,13 +748,35 @@ private void ppTampilkanPasienBtnPrintActionPerformed(java.awt.event.ActionEvent
                            detaillaborat=rsdetaillaborat.getDouble(1);
                        }
                        
-                       tabMode.addRow(new Object[]{"",rspasien.getString(1)+" "+rspasien.getString(3),"",Valid.SetAngka(detailobat),Valid.SetAngka(detaillaborat),Valid.SetAngka(detailtindakan),Valid.SetAngka(detailtindakan+detailobat+detaillaborat)});
+                       detailtambahan=0;
+                       psdetailtambahan.setString(1,rspasien.getString(4));
+                       rsdetailtambahan=psdetailtambahan.executeQuery();
+                       if(rsdetailtambahan.next()){
+                           detailtambahan=rsdetailtambahan.getDouble(1);
+                       }
+                       
+                       detailpotongan=0;
+                       psdetailpotongan.setString(1,rspasien.getString(4));
+                       rsdetailpotongan=psdetailpotongan.executeQuery();
+                       if(rsdetailpotongan.next()){
+                           detailpotongan=rsdetailpotongan.getDouble(1);
+                       }
+                       
+                       detailregistrasi=0;
+                       psdetailregistrasi.setString(1,rspasien.getString(4));
+                       rsdetailregistrasi=psdetailregistrasi.executeQuery();
+                       if(rsdetailregistrasi.next()){
+                           detailregistrasi=rsdetailregistrasi.getDouble(1);
+                       }
+                       
+                       tabMode.addRow(new Object[]{"",rspasien.getString(1)+" "+rspasien.getString(3),"",Valid.SetAngka(detailobat+detailobatlangsung),Valid.SetAngka(detaillaborat),Valid.SetAngka(detailtindakan),
+                           Valid.SetAngka(detailtambahan),Valid.SetAngka(detailpotongan),Valid.SetAngka(detailregistrasi),Valid.SetAngka(detailtindakan+detailobat+detailobatlangsung+detaillaborat+detailtambahan+detailregistrasi-detailpotongan)});
                    }
                    a++;
                }
                i++;
            }
-           tabMode.addRow(new Object[]{">>","Total Biaya :","","","","",Valid.SetAngka(ttlbiaya)});
+           tabMode.addRow(new Object[]{">>","Total Biaya :","","","","","","","",Valid.SetAngka(ttlbiaya)});
            this.setCursor(Cursor.getDefaultCursor());             
         }catch(SQLException e){
             System.out.println("Error  "+e);

@@ -532,6 +532,9 @@
                 </Component>
                 <Component class="widget.ComboBox" name="cmbMenu">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f2" green="fc" red="f7" type="rgb"/>
+                    </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="32" green="46" red="28" type="rgb"/>
                     </Property>

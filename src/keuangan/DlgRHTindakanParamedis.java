@@ -101,12 +101,12 @@ public class DlgRHTindakanParamedis extends javax.swing.JDialog {
                        "and rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                        "where reg_periksa.tgl_registrasi between ? and ? and rawat_jl_pr.nip=? "+
                        " and jns_perawatan.total_byrpr>0 order by reg_periksa.tgl_registrasi,jns_perawatan.nm_perawatan");
-            ps4=koneksi.prepareStatement("select jns_perawatan.tarif_tindakanpr,pasien.nm_pasien,"+
-                       "jns_perawatan.nm_perawatan,periksa_lab.tgl_periksa,periksa_lab.jam "+
-                       " from periksa_lab inner join reg_periksa inner join pasien inner join petugas inner join jns_perawatan "+
+            ps4=koneksi.prepareStatement("select jns_perawatan_lab.tarif_tindakan_petugas,pasien.nm_pasien,"+
+                       "jns_perawatan_lab.nm_perawatan,periksa_lab.tgl_periksa,periksa_lab.jam "+
+                       " from periksa_lab inner join reg_periksa inner join pasien inner join petugas inner join jns_perawatan_lab "+
                        " on periksa_lab.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                       " and periksa_lab.nip=petugas.nip and periksa_lab.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
-                       " where periksa_lab.tgl_periksa between ? and ? and periksa_lab.nip=? order by periksa_lab.tgl_periksa,periksa_lab.jam,jns_perawatan.nm_perawatan  ");
+                       " and periksa_lab.nip=petugas.nip and periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
+                       " where periksa_lab.tgl_periksa between ? and ? and periksa_lab.nip=? order by periksa_lab.tgl_periksa,periksa_lab.jam,jns_perawatan_lab.nm_perawatan  ");
             ps3=koneksi.prepareStatement("select jns_perawatan_inap.tarif_tindakanpr,pasien.nm_pasien,jns_perawatan_inap.nm_perawatan,"+
                        "rawat_inap_pr.tgl_perawatan,rawat_inap_pr.jam_rawat " +
                        "from pasien inner join reg_periksa inner join jns_perawatan_inap inner join rawat_inap_pr "+

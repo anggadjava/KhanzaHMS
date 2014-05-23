@@ -177,7 +177,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private double[] jumlah,harga,stok;
     private String[] kodebarang,namabarang,kodesatuan,letakbarang,namajenis;
     private DlgCariPenyakit dlgpnykt=new DlgCariPenyakit(null,false);
-    private DlgBarang nm_dokter=new DlgBarang(null,false);
+    private DlgBarang barang=new DlgBarang(null,false);
     private String bangsal=Sequel.cariIsi("select kd_bangsal from set_lokasi limit 1"),bangsal2="";
 
     /** This method is called from within the constructor to
@@ -427,7 +427,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-04-27" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
         DTPTgl.setDisplayFormat("yyyy-MM-dd");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -472,13 +472,11 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         });
         FormInput.add(cmbDtk);
 
-        ChkJln.setBackground(new java.awt.Color(235, 255, 235));
-        ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkJln.setForeground(new java.awt.Color(153, 0, 51));
-        ChkJln.setSelected(true);
         ChkJln.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
+        ChkJln.setForeground(new java.awt.Color(153, 0, 51));
         ChkJln.setBorderPainted(true);
         ChkJln.setBorderPaintedFlat(true);
+        ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkJln.setName("ChkJln"); // NOI18N
@@ -511,11 +509,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         TNmPny.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TNmPny.setName("TNmPny"); // NOI18N
         TNmPny.setPreferredSize(new java.awt.Dimension(235, 23));
-        TNmPny.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNmPnyKeyPressed(evt);
-            }
-        });
         FormInput.add(TNmPny);
 
         BtnSeek2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
@@ -630,14 +623,14 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         var.setStatus(false);
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         
-        //nm_dokter.setModal(true);
-        nm_dokter.emptTeks();
-        nm_dokter.tampil(" order by databarang.kode_brng ");
-        nm_dokter.isCek();
-        nm_dokter.setSize(internalFrame1.getWidth()+40,internalFrame1.getHeight()+40);
-        nm_dokter.setLocationRelativeTo(internalFrame1);
-        nm_dokter.setAlwaysOnTop(false);
-        nm_dokter.setVisible(true);
+        //barang.setModal(true);
+        barang.emptTeks();
+        barang.tampil(" order by databarang.kode_brng ");
+        barang.isCek();
+        barang.setSize(internalFrame1.getWidth()+40,internalFrame1.getHeight()+40);
+        barang.setLocationRelativeTo(internalFrame1);
+        barang.setAlwaysOnTop(false);
+        barang.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());           
     }//GEN-LAST:event_BtnTambahActionPerformed
 
@@ -673,7 +666,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                        psobatsimpan2.setString(2,bangsal2);
                                        psobatsimpan2.setDouble(3,-(Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)));
                                        psobatsimpan2.executeUpdate();
-                                    }catch(SQLException | NumberFormatException ex){
+                                    }catch(Exception ex){
                                         psobatsimpan3.setDouble(1,(Double.parseDouble(tbObat.getValueAt(i,1).toString())/carikapasitas.getDouble(1)));
                                         psobatsimpan3.setString(2,tbObat.getValueAt(i,2).toString());
                                         psobatsimpan3.setString(3,bangsal2);
@@ -764,10 +757,6 @@ private void TKdPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TK
             Valid.pindah(evt,TNoRw,BtnSimpan);
         }
 }//GEN-LAST:event_TKdPnyKeyPressed
-
-private void TNmPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmPnyKeyPressed
-        // TODO add your handling code here:
-}//GEN-LAST:event_TNmPnyKeyPressed
 
 private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
         dlgpnykt.emptTeks();

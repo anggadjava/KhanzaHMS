@@ -280,7 +280,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="2014-05-04"/>
+                        <StringItem index="0" value="2014-05-15"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="yyyy-MM-dd"/>
@@ -309,7 +309,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="2014-05-04"/>
+                        <StringItem index="0" value="2014-05-15"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="yyyy-MM-dd"/>
@@ -505,7 +505,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="2014-05-04"/>
+                        <StringItem index="0" value="2014-05-15"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="yyyy-MM-dd"/>
@@ -523,6 +523,9 @@
                 </Component>
                 <Component class="widget.ComboBox" name="cmbJam">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f0" green="fa" red="f5" type="rgb"/>
+                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
                         <StringItem index="0" value="Pagi"/>

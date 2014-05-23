@@ -37,7 +37,6 @@ import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import khanzahms.DlgJnsPerawatanRanap;
 import widget.Button;
 
 /**
@@ -60,16 +59,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Pilih",
-                      "Kode",
-                      "Nama Perawatan",
-                      "Kategori Perawatan",
-                      "Tarif Dokter",
-                      "Tarif Perawat"};
-        /*Object[] row={"Pilih",
-                      "Kode",
-                      "Nama Perawatan",
-                      "Kategori Perawatan"};*/
+        Object[] row={"Pilih","Kode","Nama Perawatan","Kategori Perawatan","Tarif Dokter","Tarif Perawat"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -1062,13 +1052,13 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             for(i=0;i<jml;i++){
                 tabMode.addRow(new Object[] {pilih[i],kode[i],nama[i],kategori[i],totaldr[i],totalpr[i]});
             }
-            pstampil.setString(1,"%"+kd_pj.trim()+"%");
+            pstampil.setString(1,"%"+kd_pj+"%");
             pstampil.setString(2,"%"+kd_bangsal.trim()+"%");
             pstampil.setString(3,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(4,"%"+kd_pj.trim()+"%");
+            pstampil.setString(4,"%"+kd_pj+"%");
             pstampil.setString(5,"%"+kd_bangsal.trim()+"%");
             pstampil.setString(6,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(7,"%"+kd_pj.trim()+"%");
+            pstampil.setString(7,"%"+kd_pj+"%");
             pstampil.setString(8,"%"+kd_bangsal.trim()+"%");
             pstampil.setString(9,"%"+TCari.getText().trim()+"%");
             rs=pstampil.executeQuery();
@@ -1145,11 +1135,11 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     public void setNoRm(String norwt,String pilihtable,Date tanggal,String jam,String menit,String detik,boolean status) {
         TNoRw.setText(norwt);
         KdDok.setText("");
-        this.kd_pj=Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat='"+norwt+"'");
+        this.kd_pj=Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat='"+TNoRw.getText()+"'");
         this.kd_bangsal=Sequel.cariIsi(
                 "select bangsal.kd_bangsal from bangsal inner join kamar inner join kamar_inap "+
                 "on bangsal.kd_bangsal=kamar.kd_bangsal and kamar.kd_kamar=kamar_inap.kd_kamar "+
-                "where no_rawat='"+norwt+"' and tgl_keluar='0000-00-00' order by kamar_inap.tgl_masuk desc limit 1");
+                "where no_rawat='"+TNoRw.getText()+"' and tgl_keluar='0000-00-00' order by kamar_inap.tgl_masuk desc limit 1");
         this.pilihtable=pilihtable;
         switch (pilihtable) {
             case "rawat_inap_dr":

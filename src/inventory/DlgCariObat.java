@@ -119,8 +119,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         try{
             psobatsimpan= koneksi.prepareStatement("insert into detail_pemberian_obat values(?,?,?,?,?,?,?,?,?,?)");
             psobatsimpan3= koneksi.prepareStatement("update gudangbarang set stok=stok-? where kode_brng=? and kd_bangsal='"+bangsal+"'");
-            psobatsimpan2= koneksi.prepareStatement("insert into gudangbarang values(?,?,?)");
-            
+            psobatsimpan2= koneksi.prepareStatement("insert into gudangbarang values(?,?,?)");            
             psobatsimpan4= koneksi.prepareStatement("update gudangbarang set stok=stok+? where kode_brng=? and kd_bangsal='"+bangsal+"'");
             pshapusobat=koneksi.prepareStatement("delete from detail_pemberian_obat where no_rawat=? and kd_penyakit=? and kode_brng=? and tgl_perawatan=? and jam=?");
             
@@ -368,6 +367,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         label12.setPreferredSize(new java.awt.Dimension(50, 23));
         panelisi3.add(label12);
 
+        Jenisjual.setBackground(new java.awt.Color(245, 250, 240));
         Jenisjual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Jalan", "Ranap JKM", "Ranap Umum" }));
         Jenisjual.setName("Jenisjual"); // NOI18N
         Jenisjual.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -538,7 +538,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                psobatsimpan2.setString(2,bangsal);
                                psobatsimpan2.setDouble(3,-Double.parseDouble(tbObat.getValueAt(i,0).toString()));
                                psobatsimpan2.executeUpdate();
-                            }catch(SQLException | NumberFormatException ex){
+                            }catch(Exception ex){
                                 psobatsimpan3.setDouble(1,Double.parseDouble(tbObat.getValueAt(i,0).toString()));
                                 psobatsimpan3.setString(2,tbObat.getValueAt(i,1).toString());
                                 psobatsimpan3.executeUpdate();                                 
@@ -599,7 +599,7 @@ private void ppHapusObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                            psobatsimpan2.setString(2,bangsal);
                            psobatsimpan2.setDouble(3,Double.parseDouble(tbObat.getValueAt(i,0).toString()));
                            psobatsimpan2.executeUpdate();
-                        }catch(SQLException | NumberFormatException ex){
+                        }catch(Exception ex){
                            psobatsimpan4.setDouble(1,Double.parseDouble(tbObat.getValueAt(i,0).toString()));
                            psobatsimpan4.setString(2,tbObat.getValueAt(i,1).toString());
                            psobatsimpan4.executeUpdate();                                 
