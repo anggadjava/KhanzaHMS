@@ -328,7 +328,6 @@ public final class DlgReg extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnRawatJalan = new javax.swing.JMenuItem();
         MnKamarInap = new javax.swing.JMenuItem();
-        MnRawanInap = new javax.swing.JMenuItem();
         MnPemberianObat = new javax.swing.JMenuItem();
         MnBilling = new javax.swing.JMenuItem();
         MnResepObat = new javax.swing.JMenuItem();
@@ -513,20 +512,6 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnKamarInap);
-
-        MnRawanInap.setBackground(new java.awt.Color(255, 255, 255));
-        MnRawanInap.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnRawanInap.setForeground(java.awt.Color.darkGray);
-        MnRawanInap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnRawanInap.setText("Tagihan/Tindakan Rawat Inap");
-        MnRawanInap.setName("MnRawanInap"); // NOI18N
-        MnRawanInap.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnRawanInap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnRawanInapActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnRawanInap);
 
         MnPemberianObat.setBackground(new java.awt.Color(255, 255, 255));
         MnPemberianObat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -967,7 +952,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglRalan.setEditable(false);
         TglRalan.setForeground(new java.awt.Color(50, 70, 50));
-        TglRalan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        TglRalan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         TglRalan.setDisplayFormat("yyyy-MM-dd");
         TglRalan.setName("TglRalan"); // NOI18N
         TglRalan.setOpaque(false);
@@ -1185,7 +1170,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         TglSakit1.setDisplayFormat("yyyy-MM-dd");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -1232,7 +1217,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         TglSakit2.setDisplayFormat("yyyy-MM-dd");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -1569,7 +1554,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari1.setDisplayFormat("yyyy-MM-dd");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1584,7 +1569,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari2.setDisplayFormat("yyyy-MM-dd");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1726,7 +1711,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPReg.setEditable(false);
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-15" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPReg.setDisplayFormat("yyyy-MM-dd");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -1778,7 +1763,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(TNoReg);
         TNoReg.setBounds(81, 12, 120, 23);
 
-        CmbJam.setBackground(new java.awt.Color(245, 250, 240));
         CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         CmbJam.setName("CmbJam"); // NOI18N
         CmbJam.setOpaque(false);
@@ -1790,7 +1774,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(CmbJam);
         CmbJam.setBounds(220, 72, 48, 23);
 
-        CmbMenit.setBackground(new java.awt.Color(245, 250, 240));
         CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbMenit.setName("CmbMenit"); // NOI18N
         CmbMenit.setOpaque(false);
@@ -1802,7 +1785,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(CmbMenit);
         CmbMenit.setBounds(270, 72, 48, 23);
 
-        CmbDetik.setBackground(new java.awt.Color(245, 250, 240));
         CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbDetik.setName("CmbDetik"); // NOI18N
         CmbDetik.setOpaque(false);
@@ -2029,7 +2011,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_TPngJwbKeyPressed
 
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isPas();
         }else{
             Valid.pindah(evt,kdpoli,TPngJwb);
@@ -2107,7 +2089,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,kdpnj,BtnBatal);
@@ -2121,7 +2103,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -2133,7 +2115,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
@@ -2170,7 +2152,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
@@ -2182,7 +2164,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -2195,7 +2177,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
             TCari.setText("");
         }else{
@@ -2240,9 +2222,13 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -2250,7 +2236,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -2275,10 +2261,8 @@ public final class DlgReg extends javax.swing.JDialog {
                 }else if(kolom==1){
                     MnKamarInapActionPerformed(null);
                 }else if(kolom==2){
-                    MnRawanInapActionPerformed(null);
-                }else if(kolom==3){
                     MnPemberianObatActionPerformed(null);
-                }else if(kolom==4){
+                }else if(kolom==3){
                     MnBillingActionPerformed(null);
                 }
             }
@@ -2301,10 +2285,8 @@ public final class DlgReg extends javax.swing.JDialog {
                 }else if(kolom==1){
                     MnKamarInapActionPerformed(null);
                 }else if(kolom==2){
-                    MnRawanInapActionPerformed(null);
-                }else if(kolom==3){
                     MnPemberianObatActionPerformed(null);
-                }else if(kolom==4){
+                }else if(kolom==3){
                     MnBillingActionPerformed(null);
                 }
             }
@@ -2312,7 +2294,7 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_tbPetugasKeyPressed
 
 private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isNumber();
             isPtg();
         }else{
@@ -2333,7 +2315,7 @@ private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_BtnSeek1ActionPerformed
 
 private void kdpoliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpoliKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isPoli();
         }else{
             Valid.pindah(evt,kddokter,TNoRM);
@@ -2447,25 +2429,6 @@ private void MnRujukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             dlgrjk.setVisible(true);
         }
 }//GEN-LAST:event_MnRujukActionPerformed
-
-private void MnRawanInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRawanInapActionPerformed
-       if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
-            TNoReg.requestFocus();
-        }else if(TPasien.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-            tbPetugas.requestFocus();
-        }else{
-            DlgRawatInap dlgrwinap=new DlgRawatInap(null,false);
-            dlgrwinap.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            dlgrwinap.setLocationRelativeTo(internalFrame1);
-            dlgrwinap.emptTeks();    
-            dlgrwinap.isCek();
-            dlgrwinap.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());   
-            dlgrwinap.tampilDr();
-            dlgrwinap.setVisible(true);
-        }
-}//GEN-LAST:event_MnRawanInapActionPerformed
 
 private void MnPemberianObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianObatActionPerformed
         if(tabMode.getRowCount()==0){
@@ -2587,7 +2550,7 @@ private void BtnPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnPrint1ActionPerformed
 
 private void BtnPrint1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
@@ -2599,7 +2562,7 @@ private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_BtnKeluar1ActionPerformed
 
 private void BtnKeluar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
 }//GEN-LAST:event_BtnKeluar1KeyPressed
@@ -2870,13 +2833,13 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void kdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpnjKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());
-            BtnSimpan.requestFocus();            
+            Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());      
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());
             TAlmt.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());
+            BtnSimpan.requestFocus();      
         }
 }//GEN-LAST:event_kdpnjKeyPressed
 
@@ -3032,7 +2995,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem MnLaporanRekapRawatDarurat;
     private javax.swing.JMenuItem MnPemberianObat;
     private javax.swing.JMenuItem MnPeriksaLab;
-    private javax.swing.JMenuItem MnRawanInap;
     private javax.swing.JMenuItem MnRawatJalan;
     private javax.swing.JMenuItem MnResepObat;
     private javax.swing.JMenuItem MnResumePasien;
@@ -3407,7 +3369,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnBilling.setEnabled(var.getbilling_ralan());
         MnKamarInap.setEnabled(var.getkamin());
         MnPemberianObat.setEnabled(var.getberiobat());
-        MnRawanInap.setEnabled(var.getranap());
         MnRawatJalan.setEnabled(var.getralan());
         MnResepObat.setEnabled(var.getresep());
         MnRujuk.setEnabled(var.getrujuk());

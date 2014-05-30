@@ -2516,7 +2516,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="widget.ButtonBig" name="BtnToolRanap">
+        <Component class="widget.ButtonBig" name="BtnToolKamnap">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="50" green="64" red="50" type="rgb"/>
@@ -2534,7 +2534,7 @@
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[1, 2, 1, 0]"/>
             </Property>
-            <Property name="name" type="java.lang.String" value="BtnToolRanap" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="BtnToolKamnap" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[105, 40]"/>
             </Property>
@@ -2542,7 +2542,7 @@
             <Property name="verticalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnToolRanapActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnToolKamnapActionPerformed"/>
           </Events>
         </Component>
         <Component class="widget.ButtonBig" name="BtnToolRalan">

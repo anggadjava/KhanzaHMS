@@ -25,7 +25,6 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import khanzahms.DlgKamarInap;
 import khanzahms.DlgPemberianDiet;
 import khanzahms.DlgPemberianObat;
 import khanzahms.DlgPeriksaLaboratorium;
@@ -325,11 +324,12 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
                                            "rawat_inap_pr.no_rawat=? and kategori_perawatan.kd_kategori=?  group by jns_perawatan_inap.nm_perawatan");
             psperiksalab=koneksi.prepareStatement(
                     "select jns_perawatan_lab.nm_perawatan, count(periksa_lab.kd_jenis_prw) as jml,jns_perawatan_lab.total_byr as biaya, "+
-                    "sum(periksa_lab.biaya) as total "+
+                    "sum(periksa_lab.biaya) as total,jns_perawatan_lab.kd_jenis_prw "+
                     " from periksa_lab inner join jns_perawatan_lab "+
                     " on jns_perawatan_lab.kd_jenis_prw=periksa_lab.kd_jenis_prw where "+
                     " periksa_lab.no_rawat=? group by jns_perawatan_lab.nm_perawatan  ");
-            psdetaillab=koneksi.prepareStatement("select sum(detail_periksa_lab.biaya_item) as total from detail_periksa_lab where detail_periksa_lab.no_rawat=? ");
+            psdetaillab=koneksi.prepareStatement("select sum(detail_periksa_lab.biaya_item) as total from detail_periksa_lab where detail_periksa_lab.no_rawat=? "+
+                    "and detail_periksa_lab.kd_jenis_prw=? ");
             pssudahmasuk=koneksi.prepareStatement("select no,nm_perawatan, if(biaya<>0,biaya,'') as satu, if(jumlah<>0,jumlah,'') as dua,"+
                         "if(tambahan<>0,tambahan,'') as tiga, if(totalbiaya<>0,totalbiaya,'') as empat,pemisah,status "+
                         "from billing where no_rawat=?  order by noindex");            
@@ -395,7 +395,7 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         
     }
    
-    private double ttl=0,y=0,subttl=0,uangmuka=0,sisapiutang;
+    private double ttl=0,y=0,subttl=0,uangmuka=0,sisapiutang,lab;
     private int x=0,z=0,i=0;
     
     /** This method is called from within the constructor to
@@ -1020,7 +1020,6 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         panelisi3.add(label17);
 
         norawatubahlama.setEditable(false);
-        norawatubahlama.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         norawatubahlama.setName("norawatubahlama"); // NOI18N
         norawatubahlama.setPreferredSize(new java.awt.Dimension(150, 23));
         norawatubahlama.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1094,22 +1093,12 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.setPreferredSize(new java.awt.Dimension(100, 23));
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRMKeyPressed(evt);
-            }
-        });
         panelGlass1.add(TNoRM);
 
         TPasien.setEditable(false);
         TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.setPreferredSize(new java.awt.Dimension(310, 23));
-        TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPasienKeyPressed(evt);
-            }
-        });
         panelGlass1.add(TPasien);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
@@ -1136,7 +1125,7 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(100, 100, 100));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-27" }));
         DTPTgl.setDisplayFormat("yyyy-MM-dd");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1176,11 +1165,6 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         TtlSemua.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TtlSemua.setHighlighter(null);
         TtlSemua.setName("TtlSemua"); // NOI18N
-        TtlSemua.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TtlSemuaKeyPressed(evt);
-            }
-        });
         panelGlass2.add(TtlSemua);
         TtlSemua.setBounds(179, 10, 264, 25);
 
@@ -1235,11 +1219,6 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         TBayar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TBayar.setHighlighter(null);
         TBayar.setName("TBayar"); // NOI18N
-        TBayar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TBayarKeyPressed(evt);
-            }
-        });
         panelGlass2.add(TBayar);
         TBayar.setBounds(179, 40, 264, 25);
 
@@ -1247,11 +1226,6 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         TKembali.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TKembali.setHighlighter(null);
         TKembali.setName("TKembali"); // NOI18N
-        TKembali.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TKembaliKeyPressed(evt);
-            }
-        });
         panelGlass2.add(TKembali);
         TKembali.setBounds(179, 70, 264, 25);
 
@@ -1264,7 +1238,7 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
 
         DTPTempo.setEditable(false);
         DTPTempo.setForeground(new java.awt.Color(100, 100, 100));
-        DTPTempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
+        DTPTempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-27" }));
         DTPTempo.setDisplayFormat("yyyy-MM-dd");
         DTPTempo.setName("DTPTempo"); // NOI18N
         DTPTempo.setOpaque(false);
@@ -1346,14 +1320,6 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
         }
 }//GEN-LAST:event_TNoRwKeyPressed
 
-    private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-        // Valid.pindah(evt, TNm, BtnSimpan);
-}//GEN-LAST:event_TNoRMKeyPressed
-
-    private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
-        // TODO add your handling code here:
-}//GEN-LAST:event_TPasienKeyPressed
-
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         WindowInput.dispose();
         WindowInput3.dispose();
@@ -1361,17 +1327,13 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnView,BtnSimpan);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
-    private void TtlSemuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TtlSemuaKeyPressed
-        Valid.pindah(evt,BtnKeluar,BtnSimpan);
-    }//GEN-LAST:event_TtlSemuaKeyPressed
-
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnKeluar,BtnView);
@@ -1419,7 +1381,7 @@ public class DlgBilingRanap2 extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnViewActionPerformed
 
     private void BtnViewKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnViewKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnViewActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnSimpan,BtnKeluar);
@@ -1644,14 +1606,6 @@ private void MnHapusTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GE
         isRawat();
 }//GEN-LAST:event_MnHapusTagihanActionPerformed
 
-private void TBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBayarKeyPressed
-// TODO add your handling code here:
-}//GEN-LAST:event_TBayarKeyPressed
-
-private void TKembaliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKembaliKeyPressed
-// TODO add your handling code here:
-}//GEN-LAST:event_TKembaliKeyPressed
-
 private void DTPTempoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTempoKeyPressed
 // TODO add your handling code here:
 }//GEN-LAST:event_DTPTempoKeyPressed
@@ -1715,7 +1669,7 @@ private void BtnCloseInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_BtnCloseInActionPerformed
 
 private void BtnCloseInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCloseInKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
         }else{Valid.pindah(evt, BtnBatal1, TotalObat);}
 }//GEN-LAST:event_BtnCloseInKeyPressed
@@ -1747,7 +1701,7 @@ private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnBatal1ActionPerformed
 
 private void BtnBatal1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatal1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnBatal1ActionPerformed(null);
         }else{Valid.pindah(evt, BtnSimpan, BtnCloseIn);}
 }//GEN-LAST:event_BtnBatal1KeyPressed
@@ -1859,10 +1813,10 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnCariActionPerformed
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
-            //Valid.pindah(evt, TCari, BtnAll);
+            Valid.pindah(evt,BtnSimpan, BtnKeluar);
         }
 }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -2420,7 +2374,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             rskamarin=pskamarin.executeQuery();
             while(rskamarin.next()){
                 tabModeRwJlDr.addRow(new Object[]{true,"                           ",rskamarin.getString("kd_kamar")+", "+rskamarin.getString("nm_bangsal"),":",
-                               rskamarin.getString("trf_kamar"),rskamarin.getString("lama"),"",Valid.SetAngka(rskamarin.getString("total")),"Kamar"});
+                               rskamarin.getString("trf_kamar"),rskamarin.getString("lama"),"",rskamarin.getString("total"),"Kamar"});
                 subttl=subttl+rskamarin.getDouble("total");   
                 
                 psbiayasekali.setString(1,rskamarin.getString("kd_kamar"));
@@ -2680,25 +2634,22 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             psperiksalab.setString(1,TNoRw.getText());
             rsperiksalab=psperiksalab.executeQuery();
             
-            psdetaillab.setString(1,TNoRw.getText());
-            rsdetaillab=psdetaillab.executeQuery();
             if(rsperiksalab.next()){
                    tabModeRwJlDr.addRow(new Object[]{true,x+". Pemeriksaan Lab",":","","","","","","Ranap Paramedis"}); 
                    x++;
             }
             rsperiksalab.beforeFirst();
             while(rsperiksalab.next()){
+                psdetaillab.setString(1,TNoRw.getText());
+                psdetaillab.setString(2,rsperiksalab.getString("kd_jenis_prw"));
+                rsdetaillab=psdetaillab.executeQuery();
+                lab=0;
+                while(rsdetaillab.next()){  
+                    lab=rsdetaillab.getDouble("total");               
+                }
                 tabModeRwJlDr.addRow(new Object[]{true,"                           ",rsperiksalab.getString("nm_perawatan"),":",
-                              rsperiksalab.getString("biaya"),rsperiksalab.getString("jml"),"",rsperiksalab.getString("total"),"Ranap Paramedis"});
-                subttl=subttl+rsperiksalab.getDouble("total");
-            }
-            rsdetaillab.beforeFirst();
-            while(rsdetaillab.next()){
-                if(rsdetaillab.getDouble("total")>0){
-                    tabModeRwJlDr.addRow(new Object[]{true,"                           ","Laboratorium",":",
-                                rsdetaillab.getDouble("total"),"1","",rsdetaillab.getDouble("total"),"Ranap Paramedis"});
-                    subttl=subttl+rsdetaillab.getDouble("total");
-                }                
+                              rsperiksalab.getString("biaya"),rsperiksalab.getString("jml"),""+Math.round(lab),""+Math.round(rsperiksalab.getDouble("total")+lab),"Ranap Paramedis"});
+                subttl=subttl+rsperiksalab.getDouble("total")+lab;
             }
             
             if(subttl>1){

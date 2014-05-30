@@ -148,7 +148,7 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
         KdRw = new widget.TextBox();
         TPasien = new widget.TextBox();
         BtnSeek2 = new widget.Button();
-        BtnCari1 = new widget.Button();
+        BtnCari = new widget.Button();
 
         TKd.setForeground(new java.awt.Color(255, 255, 255));
         TKd.setName("TKd"); // NOI18N
@@ -357,22 +357,22 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
         });
         panelisi4.add(BtnSeek2);
 
-        BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari1.setMnemonic('2');
-        BtnCari1.setToolTipText("Alt+2");
-        BtnCari1.setName("BtnCari1"); // NOI18N
-        BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
+        BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('2');
+        BtnCari.setToolTipText("Alt+2");
+        BtnCari.setName("BtnCari"); // NOI18N
+        BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCari1ActionPerformed(evt);
+                BtnCariActionPerformed(evt);
             }
         });
-        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnCari1KeyPressed(evt);
+                BtnCariKeyPressed(evt);
             }
         });
-        panelisi4.add(BtnCari1);
+        panelisi4.add(BtnCari);
 
         internalFrame1.add(panelisi4, java.awt.BorderLayout.PAGE_START);
 
@@ -407,10 +407,10 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
-            //Valid.pindah(evt, BtnCari, BtnPrint);
+            Valid.pindah(evt, KdRw, BtnPrint);
         }
 }//GEN-LAST:event_BtnHapusKeyPressed
 
@@ -453,7 +453,7 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
@@ -465,7 +465,7 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TKd);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -477,7 +477,7 @@ public final class DlgLhtBiaya extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
@@ -513,10 +513,12 @@ private void KdRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdRw
             Sequel.cariIsi("select concat(pasien.no_rkm_medis,' ',pasien.nm_pasien) from "+
                               "pasien inner join reg_periksa on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                               "where no_rawat=? ",TPasien,KdRw.getText());
+            Tgl2.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select concat(pasien.no_rkm_medis,' ',pasien.nm_pasien) from "+
                               "pasien inner join reg_periksa on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
                               "where no_rawat=? ",TPasien,KdRw.getText());
+            BtnHapus.requestFocus();
         }
 }//GEN-LAST:event_KdRwKeyPressed
 
@@ -535,17 +537,17 @@ private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     Valid.pindah(evt,Tgl2,TKd);
 }//GEN-LAST:event_BtnSeek2KeyPressed
 
-private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCari1ActionPerformed
+}//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
+private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             tampil();
         }else{
             Valid.pindah(evt, TKd, BtnAll);
         }
-}//GEN-LAST:event_BtnCari1KeyPressed
+}//GEN-LAST:event_BtnCariKeyPressed
 
 private void MnLaporanBiayaRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanBiayaRalanActionPerformed
      if(tabMode.getRowCount()==0){
@@ -574,7 +576,7 @@ private void MnLaporanBiayaRalanActionPerformed(java.awt.event.ActionEvent evt) 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
-    private widget.Button BtnCari1;
+    private widget.Button BtnCari;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;

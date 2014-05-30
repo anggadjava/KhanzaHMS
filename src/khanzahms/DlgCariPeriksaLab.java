@@ -18,13 +18,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import khanzahms.DlgPasien;
 
 public class DlgCariPeriksaLab extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
@@ -38,6 +35,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
     private int i;
     private PreparedStatement ps,ps2,ps3,ps4;
     private ResultSet rs,rs2,rs3;
+    private String kamar,namakamar;
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -120,7 +118,11 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                     "periksa_lab.dokter_perujuk,periksa_lab.dokter_pj from periksa_lab inner join reg_periksa inner join pasien inner join petugas "+
                     "on periksa_lab.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and periksa_lab.nip=petugas.nip where "+
                     "periksa_lab.tgl_periksa between ? and ? and periksa_lab.no_rawat like ? and reg_periksa.no_rkm_medis like ? "+
-                    "and petugas.nip like ? group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam)");
+                    "and petugas.nip like ? and pasien.nm_pasien like ? or "+
+                    "periksa_lab.tgl_periksa between ? and ? and periksa_lab.no_rawat like ? and reg_periksa.no_rkm_medis like ? "+
+                    "and petugas.nip like ? and petugas.nama like ? or "+
+                    "periksa_lab.tgl_periksa between ? and ? and periksa_lab.no_rawat like ? and reg_periksa.no_rkm_medis like ? "+
+                    "and petugas.nip like ? and reg_periksa.no_rkm_medis like ? group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam)");
             ps2=koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan from periksa_lab inner join jns_perawatan_lab "+
                     "on periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw where periksa_lab.no_rawat=? and periksa_lab.tgl_periksa=? "+
@@ -131,7 +133,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
                     "where detail_periksa_lab.no_rawat=? and detail_periksa_lab.kd_jenis_prw=? and detail_periksa_lab.tgl_periksa=? and detail_periksa_lab.jam=?");
             ps4=koneksi.prepareStatement(
                     "select periksa_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur,petugas.nama,periksa_lab.tgl_periksa,periksa_lab.jam,"+
-                    "periksa_lab.dokter_perujuk,periksa_lab.dokter_pj,periksa_lab.tgl_periksa,periksa_lab.jam from periksa_lab inner join reg_periksa inner join pasien inner join petugas "+
+                    "periksa_lab.dokter_perujuk,periksa_lab.dokter_pj,periksa_lab.tgl_periksa,periksa_lab.jam,pasien.alamat from periksa_lab inner join reg_periksa inner join pasien inner join petugas "+
                     "on periksa_lab.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and periksa_lab.nip=petugas.nip where "+
                     "periksa_lab.tgl_periksa=? and periksa_lab.jam=? and periksa_lab.no_rawat=? group by concat(periksa_lab.no_rawat,periksa_lab.tgl_periksa,periksa_lab.jam)");
         } catch (SQLException e) {
@@ -514,13 +516,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdmemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdmemKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", nmmem,kdmem.getText());
-            Tgl1.requestFocus();            
+            Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", nmmem,kdmem.getText());      
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", nmmem,kdmem.getText());
             NoNota.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", nmmem,kdmem.getText());
+            Tgl1.requestFocus();      
         }
     }//GEN-LAST:event_kdmemKeyPressed
 
@@ -531,12 +533,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?", nmptg,kdptg.getText());
-            NoNota.requestFocus();            
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama from petugas where nip=?", nmptg,kdptg.getText());
             Tgl2.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama from petugas where nip=?", nmptg,kdptg.getText());
+            NoNota.requestFocus();            
         }
     }//GEN-LAST:event_kdptgKeyPressed
 
@@ -547,7 +549,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -555,7 +561,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -573,7 +579,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
@@ -606,7 +612,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnAll,BtnAll);
@@ -618,7 +624,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,NoNota);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -646,7 +652,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_BtnHapusActionPerformed
 
 private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari,BtnAll);
@@ -687,6 +693,16 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 ps4.setString(3,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                 rs=ps4.executeQuery();
                 while(rs.next()){
+                    kamar=Sequel.cariIsi("select ifnull(kd_kamar,'') from kamar_inap where no_rawat='"+rs.getString("no_rawat")+"' order by tgl_masuk desc limit 1");
+                    if(!kamar.equals("")){
+                        namakamar=Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar on bangsal.kd_bangsal=kamar.kd_bangsal "+
+                                " where kamar.kd_kamar='"+kamar+"' ");            
+                        kamar="Kamar";
+                    }else if(kamar.equals("")){
+                        kamar="Poli";
+                        namakamar=Sequel.cariIsi("select nm_poli from poliklinik inner join reg_periksa on poliklinik.kd_poli=reg_periksa.kd_poli "+
+                                "where reg_periksa.no_rawat='"+rs.getString("no_rawat")+"'");
+                    }
                     Map<String, Object> param = new HashMap<>();
                     param.put("noperiksa",rs.getString("no_rawat"));
                     param.put("norm",rs.getString("no_rkm_medis"));
@@ -698,6 +714,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     param.put("penjab",rs.getString("dokter_pj"));
                     param.put("petugas",rs.getString("nama"));
                     param.put("jam",rs.getString("jam"));
+                    param.put("alamat",rs.getString("Alamat"));
+                    param.put("kamar",kamar);
+                    param.put("namakamar",namakamar);
                     
                     Sequel.queryu("delete from temporary");
                     koneksi.setAutoCommit(false);
@@ -780,13 +799,25 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     public void tampil() {
         try {
-            Valid.tabelKosong(tabMode);
-            
+            Valid.tabelKosong(tabMode);            
             ps.setString(1,Tgl1.getSelectedItem().toString());
             ps.setString(2,Tgl2.getSelectedItem().toString());
             ps.setString(3,"%"+NoNota.getText()+"%");
             ps.setString(4,"%"+kdmem.getText()+"%");
             ps.setString(5,"%"+kdptg.getText()+"%");
+            ps.setString(6,"%"+TCari.getText().trim()+"%");
+            ps.setString(7,Tgl1.getSelectedItem().toString());
+            ps.setString(8,Tgl2.getSelectedItem().toString());
+            ps.setString(9,"%"+NoNota.getText()+"%");
+            ps.setString(10,"%"+kdmem.getText()+"%");
+            ps.setString(11,"%"+kdptg.getText()+"%");
+            ps.setString(12,"%"+TCari.getText().trim()+"%");
+            ps.setString(13,Tgl1.getSelectedItem().toString());
+            ps.setString(14,Tgl2.getSelectedItem().toString());
+            ps.setString(15,"%"+NoNota.getText()+"%");
+            ps.setString(16,"%"+kdmem.getText()+"%");
+            ps.setString(17,"%"+kdptg.getText()+"%");
+            ps.setString(18,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
             while(rs.next()){
                 tabMode.addRow(new Object[]{rs.getString("no_rawat"),rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien"),

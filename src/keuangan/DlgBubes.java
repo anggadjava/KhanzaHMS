@@ -1,5 +1,4 @@
 package keuangan;
-import keuangan.Jurnal;
 import fungsi.WarnaTable;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -9,7 +8,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -286,7 +284,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt,Tahun,BtnKeluar);
@@ -298,7 +296,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,Tahun);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -308,7 +306,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tahun, BtnPrint);
@@ -319,7 +317,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             kdrek.setText(rekening.getTextField().getText());
             Sequel.cariIsi("select nm_rek from rekening where kd_rek='"+kdrek.getText()+"'",nmrek);
-            BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kdrek.setText(rekening.getTextField().getText());
             Sequel.cariIsi("select nm_rek from rekening where kd_rek='"+kdrek.getText()+"'",nmrek);
@@ -327,6 +324,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kdrek.setText(rekening.getTextField().getText());
             Sequel.cariIsi("select nm_rek from rekening where kd_rek='"+kdrek.getText()+"'",nmrek);
+            BtnKeluar.requestFocus();
         }
     }//GEN-LAST:event_kdrekKeyPressed
 

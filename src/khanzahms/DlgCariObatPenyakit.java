@@ -34,8 +34,6 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import khanzahms.DlgObatPenyakit;
-import khanzahms.DlgObatPenyakit;
 
 /**
  *
@@ -455,10 +453,10 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
-           // Valid.pindah(evt, TCari, BtnAll);
+           Valid.pindah(evt, PenyakitCari, BtnAll);
         }
 }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -468,7 +466,7 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, PenyakitCari);

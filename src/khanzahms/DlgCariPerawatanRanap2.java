@@ -19,8 +19,6 @@ import fungsi.validasi;
 import fungsi.var;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -28,12 +26,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -43,33 +39,43 @@ import widget.Button;
  *
  * @author dosen
  */
-public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
+public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement psjenisperawatan,psinputrawatdr,psinputrawatpr,pstampil;
-    private ResultSet rs;
+    private PreparedStatement psjenisperawatan,psinputrawatdr,psinputrawatpr,pstampil,pstindakan,pstindakan2,pshapustindakan,pshapustindakan2;
+    private ResultSet rs,rstindakan;
+    private String pilihtable="",kd_pj="",kd_bangsal="";
+    private boolean[] pagi,siang,sore,malam; 
+    private boolean pg=false,sg=false,sr=false,mlm=false;
+    private double biaya=0;
+    private String[] kode,nama,kategori,totaldr,totalpr;
+    private int jml=0,i=0,index=0;
+    public  DlgCariDokter dokter=new DlgCariDokter(null,false);
+    public  DlgCariPetugas petugas=new DlgCariPetugas(null,false);
+    public  DlgCariPenyakit dlgpnykt=new DlgCariPenyakit(null,false);
+    public  DlgJnsPerawatanRanap perawatan=new DlgJnsPerawatanRanap(null,false);
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
-    public DlgCariPerawatanRanap(java.awt.Frame parent, boolean modal) {
+    public DlgCariPerawatanRanap2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Pilih","Kode","Nama Perawatan","Kategori Perawatan","Tarif Dokter","Tarif Perawat"};
+        Object[] row={"Pagi","Siang","Sore","Malam","Kode","Nama Perawatan","Kategori Perawatan","Tarif Dokter","Tarif Perawat"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if (colIndex==0) {
+                if ((colIndex==0)||(colIndex==1)||(colIndex==2)||(colIndex==3)) {
                     a=true;
                 }
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Boolean.class,java.lang.Boolean.class,java.lang.Boolean.class,java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class
              };
@@ -97,15 +103,21 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                 column.setPreferredWidth(150);
             }
         }*/
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 9; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(40);
             }else if(i==1){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(40);
             }else if(i==2){
-                column.setPreferredWidth(450);
+                column.setPreferredWidth(40);
             }else if(i==3){
+                column.setPreferredWidth(40);
+            }else if(i==4){
+                column.setPreferredWidth(90);
+            }else if(i==5){
+                column.setPreferredWidth(450);
+            }else if(i==6){
                 column.setPreferredWidth(150);
             }else{
                 column.setPreferredWidth(120);
@@ -187,7 +199,6 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             @Override
             public void mouseExited(MouseEvent e) {}
         });
-        jam();
         
         try{
              psjenisperawatan=koneksi.prepareStatement("select total_byrdr,total_byrpr from jns_perawatan_inap where kd_jenis_prw=?");   
@@ -201,21 +212,21 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                     " jns_perawatan_inap.kd_pj=? and jns_perawatan_inap.kd_bangsal=? and kategori_perawatan.nm_kategori like ? order by jns_perawatan_inap.nm_perawatan");
              psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
              psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
+             pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
+                    "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
+             pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
+                    "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
+             pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? and "+
+                    "rawat_inap_dr.tgl_perawatan=? ");
+             pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? and "+
+                    "rawat_inap_pr.tgl_perawatan=? ");
         }catch(SQLException e){
             System.out.println(e);
         }
         
         TCari.requestFocus();
     }
-    private String pilihtable="",kd_pj="",kd_bangsal="";
-    private boolean[] pilih; 
-    private double biaya=0;
-    private String[] kode,nama,kategori,totaldr,totalpr;
-    private int jml=0,i=0,index=0;
-    public  DlgCariDokter dokter=new DlgCariDokter(null,false);
-    public  DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    public  DlgCariPenyakit dlgpnykt=new DlgCariPenyakit(null,false);
-    public  DlgJnsPerawatanRanap perawatan=new DlgJnsPerawatanRanap(null,false);
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -255,18 +266,15 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         TPrkmbngn = new widget.TextBox();
         jLabel9 = new widget.Label();
         DTPTgl = new widget.Tanggal();
-        cmbJam = new widget.ComboBox();
-        cmbMnt = new widget.ComboBox();
-        cmbDtk = new widget.ComboBox();
         jLabel12 = new widget.Label();
         TKdPny = new widget.TextBox();
         BtnSeek2 = new widget.Button();
         TNmPny = new widget.TextBox();
-        ChkJln = new widget.CekBox();
         jLabel5 = new widget.Label();
         KdDok = new widget.TextBox();
         TDokter = new widget.TextBox();
         BtnSeekDokter = new widget.Button();
+        jLabel10 = new widget.Label();
 
         Popup.setName("Popup"); // NOI18N
 
@@ -533,7 +541,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-10" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-26" }));
         DTPTgl.setDisplayFormat("yyyy-MM-dd");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -543,43 +551,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(DTPTgl);
-        DTPTgl.setBounds(522, 10, 100, 23);
-
-        cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        cmbJam.setName("cmbJam"); // NOI18N
-        cmbJam.setOpaque(false);
-        cmbJam.setPreferredSize(new java.awt.Dimension(55, 28));
-        cmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbJamKeyPressed(evt);
-            }
-        });
-        FormInput.add(cmbJam);
-        cmbJam.setBounds(625, 10, 50, 23);
-
-        cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        cmbMnt.setName("cmbMnt"); // NOI18N
-        cmbMnt.setOpaque(false);
-        cmbMnt.setPreferredSize(new java.awt.Dimension(55, 28));
-        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbMntKeyPressed(evt);
-            }
-        });
-        FormInput.add(cmbMnt);
-        cmbMnt.setBounds(677, 10, 50, 23);
-
-        cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        cmbDtk.setName("cmbDtk"); // NOI18N
-        cmbDtk.setOpaque(false);
-        cmbDtk.setPreferredSize(new java.awt.Dimension(55, 28));
-        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbDtkKeyPressed(evt);
-            }
-        });
-        FormInput.add(cmbDtk);
-        cmbDtk.setBounds(729, 10, 50, 23);
+        DTPTgl.setBounds(625, 10, 130, 23);
 
         jLabel12.setText("Penyakit :");
         jLabel12.setName("jLabel12"); // NOI18N
@@ -619,24 +591,6 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         FormInput.add(TNmPny);
         TNmPny.setBounds(194, 40, 290, 23);
 
-        ChkJln.setBackground(new java.awt.Color(235, 255, 235));
-        ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkJln.setForeground(new java.awt.Color(153, 0, 51));
-        ChkJln.setSelected(true);
-        ChkJln.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
-        ChkJln.setBorderPainted(true);
-        ChkJln.setBorderPaintedFlat(true);
-        ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ChkJln.setName("ChkJln"); // NOI18N
-        ChkJln.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChkJlnActionPerformed(evt);
-            }
-        });
-        FormInput.add(ChkJln);
-        ChkJln.setBounds(781, 10, 23, 23);
-
         jLabel5.setText("Dokter :");
         jLabel5.setName("jLabel5"); // NOI18N
         FormInput.add(jLabel5);
@@ -670,6 +624,11 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         FormInput.add(BtnSeekDokter);
         BtnSeekDokter.setBounds(486, 10, 28, 23);
 
+        jLabel10.setText("Tanggal :");
+        jLabel10.setName("jLabel10"); // NOI18N
+        FormInput.add(jLabel10);
+        jLabel10.setBounds(543, 10, 80, 23);
+
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
@@ -681,12 +640,12 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            tbKamar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            tbKamar.requestFocus();
         }
 }//GEN-LAST:event_TCariKeyPressed
 
@@ -785,54 +744,155 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }else{
             try {          
                 if(pilihtable.equals("rawat_inap_dr")||pilihtable.equals("rawat_inap_pr")){
-                    koneksi.setAutoCommit(false);                              
-                    for(i=0;i<tbKamar.getRowCount();i++){ 
-                        if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                            psjenisperawatan.setString(1,tbKamar.getValueAt(i,1).toString());
+                    koneksi.setAutoCommit(false);
+                    if(pilihtable.equals("rawat_inap_dr")){                        
+                        pshapustindakan.setString(1,TNoRw.getText());
+                        pshapustindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pshapustindakan.executeUpdate();
+                    }else if(pilihtable.equals("rawat_inap_pr")){
+                        pshapustindakan2.setString(1,TNoRw.getText());
+                        pshapustindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pshapustindakan2.executeUpdate();
+                    }                    
+                    
+                    for(i=0;i<tbKamar.getRowCount();i++){                                                              
+                        if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
+                            psjenisperawatan.setString(1,tbKamar.getValueAt(i,4).toString());
                             rs=psjenisperawatan.executeQuery();
                             if(rs.next()){
                                 switch (pilihtable) {
                                     case "rawat_inap_dr":
                                         biaya=rs.getDouble(1);
-                                        psinputrawatdr.setString(1,TNoRw.getText());
-                                        psinputrawatdr.setString(2,TKdPny.getText());
-                                        psinputrawatdr.setString(3,tbKamar.getValueAt(i,1).toString());
-                                        psinputrawatdr.setString(4,KdDok.getText());
-                                        psinputrawatdr.setString(5,TSuhu.getText());
-                                        psinputrawatdr.setString(6,TTensi.getText());
-                                        psinputrawatdr.setString(7,THasil.getText());
-                                        psinputrawatdr.setString(8,TPrkmbngn.getText());
-                                        psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
-                                        psinputrawatdr.setString(10,cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
-                                        psinputrawatdr.setDouble(11,biaya);
-                                        psinputrawatdr.executeUpdate();
+                                        if(tbKamar.getValueAt(i,0).toString().equals("true")){
+                                            psinputrawatdr.setString(1,TNoRw.getText());
+                                            psinputrawatdr.setString(2,TKdPny.getText());
+                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatdr.setString(4,KdDok.getText());
+                                            psinputrawatdr.setString(5,TSuhu.getText());
+                                            psinputrawatdr.setString(6,TTensi.getText());
+                                            psinputrawatdr.setString(7,THasil.getText());
+                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatdr.setString(10,"07:00:00");
+                                            psinputrawatdr.setDouble(11,biaya);
+                                            psinputrawatdr.executeUpdate();
+                                        }
+                                        
+                                        if(tbKamar.getValueAt(i,1).toString().equals("true")){
+                                            psinputrawatdr.setString(1,TNoRw.getText());
+                                            psinputrawatdr.setString(2,TKdPny.getText());
+                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatdr.setString(4,KdDok.getText());
+                                            psinputrawatdr.setString(5,TSuhu.getText());
+                                            psinputrawatdr.setString(6,TTensi.getText());
+                                            psinputrawatdr.setString(7,THasil.getText());
+                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatdr.setString(10,"12:00:00");
+                                            psinputrawatdr.setDouble(11,biaya);
+                                            psinputrawatdr.executeUpdate();
+                                        }
+                                        
+                                        if(tbKamar.getValueAt(i,2).toString().equals("true")){
+                                            psinputrawatdr.setString(1,TNoRw.getText());
+                                            psinputrawatdr.setString(2,TKdPny.getText());
+                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatdr.setString(4,KdDok.getText());
+                                            psinputrawatdr.setString(5,TSuhu.getText());
+                                            psinputrawatdr.setString(6,TTensi.getText());
+                                            psinputrawatdr.setString(7,THasil.getText());
+                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatdr.setString(10,"16:00:00");
+                                            psinputrawatdr.setDouble(11,biaya);
+                                            psinputrawatdr.executeUpdate();
+                                        }
+                                        
+                                        if(tbKamar.getValueAt(i,3).toString().equals("true")){
+                                            psinputrawatdr.setString(1,TNoRw.getText());
+                                            psinputrawatdr.setString(2,TKdPny.getText());
+                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatdr.setString(4,KdDok.getText());
+                                            psinputrawatdr.setString(5,TSuhu.getText());
+                                            psinputrawatdr.setString(6,TTensi.getText());
+                                            psinputrawatdr.setString(7,THasil.getText());
+                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatdr.setString(10,"20:00:00");
+                                            psinputrawatdr.setDouble(11,biaya);
+                                            psinputrawatdr.executeUpdate();
+                                        }
+                                        
                                         break;
                                     case "rawat_inap_pr":
-                                        biaya=rs.getDouble(2);
-                                        psinputrawatpr.setString(1,TNoRw.getText());
-                                        psinputrawatpr.setString(2,TKdPny.getText());
-                                        psinputrawatpr.setString(3,tbKamar.getValueAt(i,1).toString());
-                                        psinputrawatpr.setString(4,KdDok.getText());
-                                        psinputrawatpr.setString(5,TSuhu.getText());
-                                        psinputrawatpr.setString(6,TTensi.getText());
-                                        psinputrawatpr.setString(7,THasil.getText());
-                                        psinputrawatpr.setString(8,TPrkmbngn.getText());
-                                        psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
-                                        psinputrawatpr.setString(10,cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
-                                        psinputrawatpr.setDouble(11,biaya);  
-                                        psinputrawatpr.executeUpdate();
+                                        biaya=rs.getDouble(2);                                        
+                                        if(tbKamar.getValueAt(i,0).toString().equals("true")){
+                                            psinputrawatpr.setString(1,TNoRw.getText());
+                                            psinputrawatpr.setString(2,TKdPny.getText());
+                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatpr.setString(4,KdDok.getText());
+                                            psinputrawatpr.setString(5,TSuhu.getText());
+                                            psinputrawatpr.setString(6,TTensi.getText());
+                                            psinputrawatpr.setString(7,THasil.getText());
+                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatpr.setString(10,"07:00:00");
+                                            psinputrawatpr.setDouble(11,biaya);  
+                                            psinputrawatpr.executeUpdate();
+                                        }
+                                        
+                                        if(tbKamar.getValueAt(i,1).toString().equals("true")){
+                                            psinputrawatpr.setString(1,TNoRw.getText());
+                                            psinputrawatpr.setString(2,TKdPny.getText());
+                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatpr.setString(4,KdDok.getText());
+                                            psinputrawatpr.setString(5,TSuhu.getText());
+                                            psinputrawatpr.setString(6,TTensi.getText());
+                                            psinputrawatpr.setString(7,THasil.getText());
+                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatpr.setString(10,"12:00:00");
+                                            psinputrawatpr.setDouble(11,biaya);  
+                                            psinputrawatpr.executeUpdate();
+                                        }
+                                        
+                                        if(tbKamar.getValueAt(i,2).toString().equals("true")){
+                                            psinputrawatpr.setString(1,TNoRw.getText());
+                                            psinputrawatpr.setString(2,TKdPny.getText());
+                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatpr.setString(4,KdDok.getText());
+                                            psinputrawatpr.setString(5,TSuhu.getText());
+                                            psinputrawatpr.setString(6,TTensi.getText());
+                                            psinputrawatpr.setString(7,THasil.getText());
+                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatpr.setString(10,"16:00:00");
+                                            psinputrawatpr.setDouble(11,biaya);  
+                                            psinputrawatpr.executeUpdate();
+                                        }       
+                                        
+                                        if(tbKamar.getValueAt(i,3).toString().equals("true")){
+                                            psinputrawatpr.setString(1,TNoRw.getText());
+                                            psinputrawatpr.setString(2,TKdPny.getText());
+                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            psinputrawatpr.setString(4,KdDok.getText());
+                                            psinputrawatpr.setString(5,TSuhu.getText());
+                                            psinputrawatpr.setString(6,TTensi.getText());
+                                            psinputrawatpr.setString(7,THasil.getText());
+                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                            psinputrawatpr.setString(10,"20:00:00");
+                                            psinputrawatpr.setDouble(11,biaya);  
+                                            psinputrawatpr.executeUpdate();
+                                        } 
                                         break;
                                 }
-                            } 
-                            //if(!biaya.equals("0")){
-                            //}else{
-                            //     JOptionPane.showMessageDialog(null,"Maaf, tindakan "+tbKamar.getValueAt(r,2).toString()+" tidak bisa dimasukkan,\ntidak sesuai antara rawat paramedis/rawat dokter ..!!!");
-                            //}                                   
+                            }                                  
                         }                           
                     } 
                     koneksi.setAutoCommit(true);
                 }  
-                dispose();
+                tampil2();
             } catch (SQLException ex) {
                 System.out.println(ex);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
@@ -863,23 +923,11 @@ private void TPrkmbngnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_TPrkmbngnKeyPressed
 
 private void DTPTglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTglKeyPressed
-       Valid.pindah(evt,TTensi,cmbJam);
+      // Valid.pindah(evt,TTensi,cmbJam);
 }//GEN-LAST:event_DTPTglKeyPressed
 
-private void cmbJamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJamKeyPressed
-        Valid.pindah(evt,DTPTgl,cmbMnt);
-}//GEN-LAST:event_cmbJamKeyPressed
-
-private void cmbMntKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMntKeyPressed
-        Valid.pindah(evt,cmbJam,cmbDtk);
-}//GEN-LAST:event_cmbMntKeyPressed
-
-private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
-        Valid.pindah(evt,cmbMnt,TPrkmbngn);
-}//GEN-LAST:event_cmbDtkKeyPressed
-
 private void TKdPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdPnyKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_penyakit from penyakit where kd_penyakit=? ",TNmPny,TKdPny.getText());
         }else{            
             Valid.pindah(evt,TNoRw,THasil);
@@ -900,12 +948,8 @@ private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         Valid.pindah(evt,TKdPny,THasil);
 }//GEN-LAST:event_BtnSeek2KeyPressed
 
-private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_ChkJlnActionPerformed
-
 private void KdDokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdDokKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             switch (pilihtable) {
                 case "rawat_inap_dr":
                     Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",TDokter,KdDok.getText());
@@ -961,7 +1005,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgCariPerawatanRanap dialog = new DlgCariPerawatanRanap(new javax.swing.JFrame(), true);
+            DlgCariPerawatanRanap2 dialog = new DlgCariPerawatanRanap2(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -980,7 +1024,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Button BtnSeekDokter;
     private widget.Button BtnSimpan;
     private widget.Button BtnTambah;
-    private widget.CekBox ChkJln;
     private widget.Tanggal DTPTgl;
     private widget.PanelBiasa FormInput;
     private widget.TextBox Kd2;
@@ -997,10 +1040,8 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.TextBox TPrkmbngn;
     private widget.TextBox TSuhu;
     private widget.TextBox TTensi;
-    private widget.ComboBox cmbDtk;
-    private widget.ComboBox cmbJam;
-    private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel10;
     private widget.Label jLabel12;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
@@ -1020,13 +1061,20 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         try{  
             jml=0;
             for(i=0;i<tbKamar.getRowCount();i++){
-                if(tbKamar.getValueAt(i,0).toString().equals("true")){
+                if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||
+                        tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
                     jml++;
                 }
             }
 
-            pilih=null;
-            pilih=new boolean[jml]; 
+            pagi=null;
+            pagi=new boolean[jml]; 
+            siang=null;
+            siang=new boolean[jml];
+            sore=null;
+            sore=new boolean[jml];
+            malam=null;
+            malam=new boolean[jml];
             kode=null;
             kode=new String[jml];
             nama=null;
@@ -1038,23 +1086,27 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             totalpr=null;
             totalpr=new String[jml];    
 
+            
             index=0;        
             for(i=0;i<tbKamar.getRowCount();i++){
-                if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                    pilih[index]=true;
-                    kode[index]=tbKamar.getValueAt(i,1).toString();
-                    nama[index]=tbKamar.getValueAt(i,2).toString();
-                    kategori[index]=tbKamar.getValueAt(i,3).toString();
-                    totaldr[index]=tbKamar.getValueAt(i,4).toString();
-                    totalpr[index]=tbKamar.getValueAt(i,5).toString();
-                    index++;
-                }
-            }       
+                    if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
+                        pagi[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,0).toString());
+                        siang[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,1).toString());
+                        sore[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,2).toString());
+                        malam[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,3).toString());
+                        kode[index]=tbKamar.getValueAt(i,4).toString();
+                        nama[index]=tbKamar.getValueAt(i,5).toString();
+                        kategori[index]=tbKamar.getValueAt(i,6).toString();
+                        totaldr[index]=tbKamar.getValueAt(i,7).toString();
+                        totalpr[index]=tbKamar.getValueAt(i,8).toString();
+                        index++;
+                    }
+            }                  
 
             Valid.tabelKosong(tabMode);
 
             for(i=0;i<jml;i++){
-                tabMode.addRow(new Object[] {pilih[i],kode[i],nama[i],kategori[i],totaldr[i],totalpr[i]});
+                tabMode.addRow(new Object[] {pagi[i],siang[i],sore[i],malam[i],kode[i],nama[i],kategori[i],totaldr[i],totalpr[i]});
             }
             pstampil.setString(1,kd_pj);
             pstampil.setString(2,kd_bangsal.trim());
@@ -1067,7 +1119,217 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             pstampil.setString(9,"%"+TCari.getText().trim()+"%");
             rs=pstampil.executeQuery();
             while(rs.next()){
-                tabMode.addRow(new Object[] {false,rs.getString(1),
+                pg=false;
+                sg=false;
+                sr=false;
+                mlm=false;
+                switch (pilihtable) {
+                    case "rawat_inap_dr":
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"00:00:01");
+                        pstindakan.setString(5,"10:00:00");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            pg=true;
+                        }
+                        
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"10:00:01");
+                        pstindakan.setString(5,"15:00:00");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            sg=true;
+                        }
+                        
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"15:00:01");
+                        pstindakan.setString(5,"19:00:00");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            sr=true;
+                        }
+                        
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"19:00:01");
+                        pstindakan.setString(5,"23:59:59");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            mlm=true;
+                        }
+                        break;
+                    case "rawat_inap_pr":
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"00:00:01");
+                        pstindakan2.setString(5,"10:00:00");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            pg=true;
+                        }
+                        
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"10:00:01");
+                        pstindakan2.setString(5,"15:00:00");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            sg=true;
+                        }
+                        
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"15:00:01");
+                        pstindakan2.setString(5,"19:00:00");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            sr=true;
+                        }
+                        
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"19:00:01");
+                        pstindakan2.setString(5,"23:59:59");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            mlm=true;
+                        }
+                        break;
+                }
+                index=0;
+                for(i=0;i<jml;i++){
+                    if(kode[i].equals(rs.getString(1))){
+                        index++;
+                    }
+                }
+                if(index==0){
+                    tabMode.addRow(new Object[] {pg,sg,sr,mlm,rs.getString(1),
+                               rs.getString(2),
+                               rs.getString(3),
+                               Valid.SetAngka(rs.getDouble(4)),
+                               Valid.SetAngka(rs.getDouble(5))});
+                }
+            }
+        }catch(SQLException e){
+            System.out.println("Error : "+e);
+        }
+        LCount.setText(""+tbKamar.getRowCount());
+    }
+    
+    public void tampil2() { 
+        try{ 
+            Valid.tabelKosong(tabMode);
+            pstampil.setString(1,kd_pj);
+            pstampil.setString(2,kd_bangsal.trim());
+            pstampil.setString(3,"%"+TCari.getText().trim()+"%");
+            pstampil.setString(4,kd_pj);
+            pstampil.setString(5,kd_bangsal.trim());
+            pstampil.setString(6,"%"+TCari.getText().trim()+"%");
+            pstampil.setString(7,kd_pj);
+            pstampil.setString(8,kd_bangsal.trim());
+            pstampil.setString(9,"%"+TCari.getText().trim()+"%");
+            rs=pstampil.executeQuery();
+            while(rs.next()){
+                pg=false;
+                sg=false;
+                sr=false;
+                mlm=false;
+                switch (pilihtable) {
+                    case "rawat_inap_dr":
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"00:00:01");
+                        pstindakan.setString(5,"10:00:00");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            pg=true;
+                        }
+                        
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"10:00:01");
+                        pstindakan.setString(5,"15:00:00");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            sg=true;
+                        }
+                        
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"15:00:01");
+                        pstindakan.setString(5,"19:00:00");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            sr=true;
+                        }
+                        
+                        pstindakan.setString(1,TNoRw.getText());
+                        pstindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan.setString(3,rs.getString(1));
+                        pstindakan.setString(4,"19:00:01");
+                        pstindakan.setString(5,"23:59:59");
+                        rstindakan=pstindakan.executeQuery();
+                        if(rstindakan.next()){
+                            mlm=true;
+                        }
+                        break;
+                    case "rawat_inap_pr":
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"00:00:01");
+                        pstindakan2.setString(5,"10:00:00");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            pg=true;
+                        }
+                        
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"10:00:01");
+                        pstindakan2.setString(5,"15:00:00");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            sg=true;
+                        }
+                        
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"15:00:01");
+                        pstindakan2.setString(5,"19:00:00");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            sr=true;
+                        }
+                        
+                        pstindakan2.setString(1,TNoRw.getText());
+                        pstindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                        pstindakan2.setString(3,rs.getString(1));
+                        pstindakan2.setString(4,"19:00:01");
+                        pstindakan2.setString(5,"23:59:59");
+                        rstindakan=pstindakan2.executeQuery();
+                        if(rstindakan.next()){
+                            mlm=true;
+                        }
+                        break;
+                }
+                tabMode.addRow(new Object[] {pg,sg,sr,mlm,rs.getString(1),
                                rs.getString(2),
                                rs.getString(3),
                                Valid.SetAngka(rs.getDouble(4)),
@@ -1084,6 +1346,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         LCount.setText(""+tbKamar.getRowCount());
     }
 
+
     public void emptTeks() {
         Kd2.setText("");  
         TCari.setText("");
@@ -1096,21 +1359,24 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private void getData() {
         if(tbKamar.getSelectedRow()!= -1){
             Kd2.setText("");
-            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
+            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString());
             if(TNoRw.getText().trim().equals("")||TKdPny.getText().trim().equals("")||KdDok.getText().trim().equals("")){
                 Valid.textKosong(TCari,"Penyakit & Dokter/Paramedis");
                 for(i=0;i<tbKamar.getRowCount();i++){ 
                     tbKamar.setValueAt(false,i,0);
+                    tbKamar.setValueAt(false,i,1);
+                    tbKamar.setValueAt(false,i,2);
+                    tbKamar.setValueAt(false,i,3);
                 }
             }else{               
                     if(pilihtable.equals("rawat_inap_dr")||pilihtable.equals("rawat_inap_pr")){
-                         if(tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString().equals("true")){
+                         if(tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString().equals("true")||tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString().equals("true")||tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString().equals("true")||tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString().equals("true")){
                              switch (pilihtable) {
                                  case "rawat_inap_dr":
-                                     biaya=Sequel.cariIsiAngka("select total_byrdr from jns_perawatan_inap where kd_jenis_prw=?",tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
+                                     biaya=Sequel.cariIsiAngka("select total_byrdr from jns_perawatan_inap where kd_jenis_prw=?",tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString());
                                      break;
                                  case "rawat_inap_pr":                             
-                                     biaya=Sequel.cariIsiAngka("select total_byrpr from jns_perawatan_inap where kd_jenis_prw=?",tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
+                                     biaya=Sequel.cariIsiAngka("select total_byrpr from jns_perawatan_inap where kd_jenis_prw=?",tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString());
                                      break;
                              }
                          }  
@@ -1154,11 +1420,14 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 break;
         }
         DTPTgl.setDate(tanggal);
-        cmbJam.setSelectedItem(jam);
-        cmbMnt.setSelectedItem(menit);
-        cmbDtk.setSelectedItem(detik);
-        ChkJln.setSelected(status);
         TCari.requestFocus();
+        
+        for(i=0;i<tbKamar.getRowCount();i++){ 
+                    tbKamar.setValueAt(false,i,0);
+                    tbKamar.setValueAt(false,i,1);
+                    tbKamar.setValueAt(false,i,2);
+                    tbKamar.setValueAt(false,i,3);
+        }
     }
     
     public void setPetugas(String kode, String nama,String suhu,String tensi, String Hasil, String perkembangan){
@@ -1170,58 +1439,5 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         TPrkmbngn.setText(perkembangan);
     }
     
-    private void jam(){
-        ActionListener taskPerformer = new ActionListener(){
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                // Membuat Date
-                //Date dt = new Date();
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if(ChkJln.isSelected()==true){
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }else if(ChkJln.isSelected()==false){
-                    nilai_jam =cmbJam.getSelectedIndex();
-                    nilai_menit =cmbMnt.getSelectedIndex();
-                    nilai_detik =cmbDtk.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9) {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                cmbJam.setSelectedItem(jam);
-                cmbMnt.setSelectedItem(menit);
-                cmbDtk.setSelectedItem(detik);
-            }
-        };
-        // Timer
-        new Timer(1000, taskPerformer).start();
-    }
+    
 }

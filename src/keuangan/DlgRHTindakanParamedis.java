@@ -396,7 +396,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt,Tgl2,BtnKeluar);
@@ -408,20 +408,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,Tgl1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void kdbangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbangsalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nama_brng from databarang where kode_brng='"+kdbangsal.getText()+"'", nmbangsal);
-           // TCari.requestFocus();
+            Sequel.cariIsi("select nama from petugas where nip='"+bangsal.getTextField().getText()+"'",nmbangsal);  
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            Sequel.cariIsi("select nama_brng from databarang where kode_brng='"+kdbangsal.getText()+"'", nmbangsal);
-            //TCari.requestFocus();
+            Sequel.cariIsi("select nama from petugas where nip='"+bangsal.getTextField().getText()+"'",nmbangsal);  
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Sequel.cariIsi("select nama_brng from databarang where kode_brng='"+kdbangsal.getText()+"'", nmbangsal);
+            Sequel.cariIsi("select nama from petugas where nip='"+bangsal.getTextField().getText()+"'",nmbangsal);  
         }
     }//GEN-LAST:event_kdbangsalKeyPressed
 
@@ -433,7 +431,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
@@ -459,10 +457,10 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnCariActionPerformed
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
-            //Valid.pindah(evt, TCari, BtnAll);
+            Valid.pindah(evt, kdbangsal, BtnAll);
         }
 }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -548,10 +546,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                while(rs4.next()){
                    tabMode.addRow(new Object[]{
                        "","",a+". "+rs4.getString("tgl_periksa")+" "+rs4.getString("jam"),rs4.getString("nm_pasien"),
-                       rs4.getString("nm_perawatan"),Valid.SetAngka(rs4.getDouble("tarif_tindakanpr"))
+                       rs4.getString("nm_perawatan"),Valid.SetAngka(rs4.getDouble("tarif_tindakan_petugas"))
                    });                   
                    a++;
-                   total=total+rs4.getDouble("tarif_tindakanpr");
+                   total=total+rs4.getDouble("tarif_tindakan_petugas");
                }
                //rs4.close();
                

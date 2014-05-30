@@ -288,7 +288,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="2014-05-15"/>
+                        <StringItem index="0" value="2014-05-28"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="yyyy-MM-dd"/>
@@ -317,7 +317,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="2014-05-15"/>
+                        <StringItem index="0" value="2014-05-28"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="yyyy-MM-dd"/>
@@ -516,9 +516,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="TDokter" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TDokterKeyPressed"/>
-                      </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="206" y="10" width="520" height="23"/>
@@ -654,9 +651,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="TPerawat" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TPerawatKeyPressed"/>
-                      </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="206" y="10" width="520" height="23"/>
@@ -798,9 +792,6 @@
                     </Property>
                     <Property name="name" type="java.lang.String" value="TNoRM" noResource="true"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNoRMKeyPressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="253" y="12" width="140" height="23"/>
@@ -896,9 +887,6 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="TNmPrw" noResource="true"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNmPrwKeyPressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="200" y="72" width="330" height="23"/>
@@ -1010,9 +998,6 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="TNmPny" noResource="true"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNmPnyKeyPressed"/>
-                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="200" y="42" width="330" height="23"/>

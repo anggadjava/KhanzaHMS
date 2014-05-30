@@ -639,7 +639,7 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,Sisa,BtnKeluar);
@@ -657,7 +657,7 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnKeluar, BtnAll);
@@ -669,7 +669,7 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -692,7 +692,7 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
@@ -702,7 +702,11 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -710,7 +714,7 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -755,7 +759,6 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             if(!Cicilan.getText().equals("")){                           
                  Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
             }
-            BtnSimpan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sisa.setText(Valid.SetAngka(sisapiutang));
             if(!Cicilan.getText().equals("")){                           
@@ -767,6 +770,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             if(!Cicilan.getText().equals("")){                           
                  Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
             }
+            BtnSimpan.requestFocus();
         }
     }//GEN-LAST:event_CicilanKeyPressed
 
@@ -782,8 +786,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             if(!Cicilan.getText().equals("")){                           
                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
             }
-            Sequel.cariIsi("select no_rawat from reg_periksa where no_rkm_medis=? order by tgl_registrasi desc limit 1", NoRawat,Kdmem.getText());
-            NoRawat.requestFocus();
+            Sequel.cariIsi("select no_rawat from reg_periksa where no_rkm_medis=? order by tgl_registrasi desc limit 1", NoRawat,Kdmem.getText());            
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", Nmmem,Kdmem.getText());
             sisapiutang=Sequel.cariIsiAngka("SELECT ifnull(SUM(piutang_pasien.sisapiutang),0) FROM piutang_pasien where piutang_pasien.no_rkm_medis=?",Kdmem.getText())
@@ -809,11 +812,12 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
             }
             Sequel.cariIsi("select no_rawat from reg_periksa where no_rkm_medis=? order by tgl_registrasi desc limit 1", NoRawat,Kdmem.getText());
+            NoRawat.requestFocus();
         }
     }//GEN-LAST:event_KdmemKeyPressed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, TCari);
@@ -839,12 +843,6 @@ private void ppNotaPiutangBtnPrintActionPerformed(java.awt.event.ActionEvent evt
             tbKamar.requestFocus();
         }else if(tabMode.getRowCount()!=0){  
             Sequel.queryu("delete from temporary");
-            //System.out.println(tabMode.getValueAt(tbKamar.getSelectedRow(),0).toString());
-            //System.out.println(tabMode.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            //System.out.println(tabMode.getValueAt(tbKamar.getSelectedRow(),2).toString());
-            //System.out.println(tabMode.getValueAt(tbKamar.getSelectedRow(),3).toString());
-            //System.out.println(tabMode.getValueAt(tbKamar.getSelectedRow(),4).toString());
-            //System.out.println(tabMode.getValueAt(tbKamar.getSelectedRow(),5).toString());
             Sequel.menyimpan("temporary","'0','No.Rawat',': "+tabMode.getValueAt(tbKamar.getSelectedRow(),5).toString() +"','','','','','','','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
             Sequel.menyimpan("temporary","'0','Tgl.Bayar',': "+tabMode.getValueAt(tbKamar.getSelectedRow(),0).toString() +"','','','','','','','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
             Sequel.menyimpan("temporary","'0','No.Rekam Medik',': "+tabMode.getValueAt(tbKamar.getSelectedRow(),1).toString() +"','','','','','','','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 

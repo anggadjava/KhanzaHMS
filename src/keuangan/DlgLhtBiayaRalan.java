@@ -49,16 +49,8 @@ public final class DlgLhtBiayaRalan extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] rowRwJlDr={"No.RM",
-                            "Nama Pasien",
-                            "Administrasi",
-                            "Jasa Medis",
-                            "Obat",
-                            "Tindakan",
-                            "Oksigen",
-                            "Total",
-                            "Dokter",
-                            "Keterangan"};
+        Object[] rowRwJlDr={"No.RM","Nama Pasien","Administrasi","Jasa Medis","Obat",
+                            "Tindakan","Oksigen","Total","Dokter","Keterangan"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -105,7 +97,7 @@ public final class DlgLhtBiayaRalan extends javax.swing.JDialog {
             ps2=koneksi.prepareStatement(
                         "select billing.nm_perawatan,billing.totalbiaya,billing.status from billing where no_rawat=? ");
             ps3=koneksi.prepareStatement("select sum(jns_perawatan.total_byrdr) from jns_perawatan inner join rawat_jl_dr "+
-                                    "on rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw where no_rawat=? ");
+                        "on rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw where no_rawat=? ");
         }catch(SQLException e){
             System.out.println(e);
         }
@@ -330,7 +322,7 @@ public final class DlgLhtBiayaRalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             //Valid.pindah(evt, BtnHapus, BtnAll);
@@ -342,7 +334,7 @@ public final class DlgLhtBiayaRalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TKd);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -382,7 +374,7 @@ private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_BtnCari1ActionPerformed
 
 private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
             tampil();
             this.setCursor(Cursor.getDefaultCursor());
@@ -462,7 +454,6 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             break;
                     }
                 }
-                //rs2.close();
                 
                 if(total>0){
                     Keterangan="Lunas";
@@ -473,17 +464,10 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 if(rs3.next()){
                     Jasamedis=rs3.getDouble(1);
                 }
-                //rs3.close();
-                
-
                 tabMode.addRow(new Object[] {rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),
                                     Valid.SetAngka(Registrasi),Valid.SetAngka(Jasamedis),Valid.SetAngka(Obat),Valid.SetAngka(Ralan_Dokter+Ralan_Paramedis),
                                     "",Valid.SetAngka(total),Dokter,Keterangan});
             }
-            //ps2.close();
-            //ps3.close();
-            //rs.close();
-            //ps.close();
             LCount.setText(Valid.SetAngka(all));
             this.setCursor(Cursor.getDefaultCursor());
         }catch(SQLException e){

@@ -9,7 +9,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -609,7 +608,7 @@ public class DlgJurnal extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnTambahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnTambahKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnTambahActionPerformed(null);
         }else{
             Valid.pindah(evt,kredit, BtnHapus);
@@ -628,7 +627,7 @@ public class DlgJurnal extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnTambah, BtnCari);
@@ -652,7 +651,7 @@ public class DlgJurnal extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
             dispose();              
         }else{Valid.pindah(evt,BtnBatal,kdrek);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -722,7 +721,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,kdrek,BtnBatal);
@@ -736,7 +735,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
     }//GEN-LAST:event_BtnBatalKeyPressed
@@ -758,8 +757,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     saldoawal.setText(rekening.getSaldo().getText());
             } catch (SQLException ex) {
                     System.out.println("error barang : "+ex);
-            }
-            debet.requestFocus();            
+            }           
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             try {
                     Statement stat=koneksi.createStatement();
@@ -787,11 +785,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             } catch (SQLException ex) {
                     System.out.println("error barang : "+ex);
             }
+            debet.requestFocus(); 
         }
     }//GEN-LAST:event_kdrekKeyPressed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             //BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, kdrek);

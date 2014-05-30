@@ -29,32 +29,22 @@ import khanzahms.DlgPetugas;
  * @author perpustakaan
  */
 public class DlgSirkulasi extends javax.swing.JDialog {
-    private DefaultTableModel tabMode;
+    private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
 
-    /** Creates new form DlgKamarInap */
+    /** Creates new form DlgKamarInap
+     * @param parent
+     * @param modal */
     public DlgSirkulasi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
 
-        Object[] row={"No.Inventaris",
-                      "Kode Barang",
-                      "Nama Barang",
-                      "Produsen",
-                      "Type/Merk",
-                      "Thn.Produksi",
-                      "ISBN",
-                      "inventaris_kategori Barang",
-                      "Jenis Barang",
-                      "Peminjam",
-                      "Tlp.Peminjam",
-                      "Tgl.Pinjam",
-                      "Tgl.Kembali",
-                      "Petugas"
+        Object[] row={"No.Inventaris","Kode Barang","Nama Barang","Produsen","Type/Merk","Thn.Produksi",
+                      "ISBN","Kategori Barang","Jenis Barang","Peminjam","Tlp.Peminjam","Tgl.Pinjam","Tgl.Kembali","Petugas"
         };
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -783,7 +773,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnInActionPerformed
 
     private void BtnInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnInKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnInActionPerformed(null);
         }else{
             Valid.pindah(evt,TCari,BtnOut);
@@ -814,7 +804,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnOutActionPerformed
 
     private void BtnOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnOutKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnOutActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnIn,BtnHapus);
@@ -843,7 +833,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnOut,BtnPrint);
@@ -856,7 +846,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
@@ -920,7 +910,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
@@ -929,8 +919,12 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            tampil();
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+            BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -938,7 +932,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -952,7 +946,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, BtnIn);
@@ -968,7 +962,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseInActionPerformed
 
     private void BtnCloseInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCloseInKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
         }else{Valid.pindah(evt, BtnBatal, no_inventaris);}
     }//GEN-LAST:event_BtnCloseInKeyPressed
@@ -1024,7 +1018,7 @@ public class DlgSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnCloseIn);}
     }//GEN-LAST:event_BtnBatalKeyPressed
@@ -1095,7 +1089,7 @@ private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnSeek2KeyPressed
 
 private void InventarisCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InventarisCariKeyPressed
-         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             tampil();
         }else{Valid.pindah(evt, TglPinjam2, TCari);}
 }//GEN-LAST:event_InventarisCariKeyPressed
@@ -1113,12 +1107,12 @@ private void StatusCariItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
 private void no_inventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_inventarisKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
         isInventaris();
-        peminjam.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         isInventaris();
         BtnCloseIn.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         isInventaris();
+        peminjam.requestFocus();
     } 
 }//GEN-LAST:event_no_inventarisKeyPressed
 
@@ -1140,12 +1134,12 @@ private void BtnPglInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void nipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
         Sequel.cariIsi("select nama from petugas where nip='"+nip.getText()+"'",nama_petugas);
-        BtnSimpan.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select nama from petugas where nip='"+nip.getText()+"'",nama_petugas);
         tlp.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         Sequel.cariIsi("select nama from petugas where nip='"+nip.getText()+"'",nama_petugas);
+        BtnSimpan.requestFocus();
     }
 }//GEN-LAST:event_nipKeyPressed
 
@@ -1171,16 +1165,15 @@ private void tlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlpKe
     * @param args the command line arguments
     */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DlgSirkulasi dialog = new DlgSirkulasi(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            DlgSirkulasi dialog = new DlgSirkulasi(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 

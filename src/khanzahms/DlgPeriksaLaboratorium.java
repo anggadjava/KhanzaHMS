@@ -53,7 +53,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private boolean[] pilih; 
     private String[] kode,nama,total;
     private int jml=0,i=0,index=0;
-    private String kodeperiksa;
+    private String kamar,namakamar;
+    
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -69,7 +70,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                     boolean a = false;
-                    if ((colIndex==1)||(colIndex==4)) {
+                    if ((colIndex==1)||(colIndex==3)||(colIndex==4)||(colIndex==6)) {
                         a=true;
                     }
                     return a;
@@ -97,7 +98,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(8);
             }else if(i==6){
-                column.setPreferredWidth(8);
+                column.setPreferredWidth(90);
             }
         }
         
@@ -107,7 +108,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         tabMode2=new DefaultTableModel(null,row2){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if (colIndex==0) {
+                if ((colIndex==0)||(colIndex==3)) {
                     a=true;
                 }
                 return a;
@@ -205,6 +206,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         Jk = new widget.TextBox();
         Umur = new widget.TextBox();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        Alamat = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbPemeriksaan = new widget.Table();
@@ -263,6 +265,10 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         Umur.setEditable(false);
         Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
+
+        Alamat.setEditable(false);
+        Alamat.setHighlighter(null);
+        Alamat.setName("Alamat"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -438,22 +444,12 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRMKeyPressed(evt);
-            }
-        });
         PanelInput.add(TNoRM);
         TNoRM.setBounds(245, 12, 125, 23);
 
         TPasien.setEditable(false);
         TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
-        TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPasienKeyPressed(evt);
-            }
-        });
         PanelInput.add(TPasien);
         TPasien.setBounds(372, 12, 400, 23);
 
@@ -505,11 +501,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                 BtnSeek2ActionPerformed(evt);
             }
         });
-        BtnSeek2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek2KeyPressed(evt);
-            }
-        });
         PanelInput.add(BtnSeek2);
         BtnSeek2.setBounds(744, 42, 28, 23);
 
@@ -525,7 +516,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-14" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         Tanggal.setDisplayFormat("yyyy-MM-dd");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -537,21 +528,18 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         PanelInput.add(Tanggal);
         Tanggal.setBounds(400, 72, 110, 23);
 
-        CmbJam.setBackground(new java.awt.Color(245, 250, 240));
         CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         CmbJam.setName("CmbJam"); // NOI18N
         CmbJam.setOpaque(false);
         PanelInput.add(CmbJam);
         CmbJam.setBounds(591, 72, 50, 23);
 
-        CmbMenit.setBackground(new java.awt.Color(245, 250, 240));
         CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbMenit.setName("CmbMenit"); // NOI18N
         CmbMenit.setOpaque(false);
         PanelInput.add(CmbMenit);
         CmbMenit.setBounds(643, 72, 50, 23);
 
-        CmbDetik.setBackground(new java.awt.Color(245, 250, 240));
         CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbDetik.setName("CmbDetik"); // NOI18N
         CmbDetik.setOpaque(false);
@@ -675,10 +663,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-       // Valid.pindah(evt, TNm, BtnSimpan);
-}//GEN-LAST:event_TNoRMKeyPressed
-
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         jml=0;
         for(i=0;i<tbTarif.getRowCount();i++){
@@ -745,10 +729,10 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
-               // Valid.pindah(evt,kdptg,BtnBatal);
+               Valid.pindah(evt,Pemeriksaan,BtnBatal);
         }
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
@@ -757,7 +741,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnPrint);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -803,6 +787,9 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             param.put("tanggal",Tanggal.getSelectedItem());
             param.put("penjab",Dokterpj.getText());
             param.put("petugas",NmPtg.getText());
+            param.put("alamat",Alamat.getText());
+            param.put("kamar",kamar);
+            param.put("namakamar",namakamar);
             param.put("jam",CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem());
             Valid.MyReport("rptPeriksaLab.jrxml","report","::[ Pemeriksaan Laboratorium ]::",
                     "select no, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14, temp14, temp15, temp16 from temporary order by no asc",param);            
@@ -812,7 +799,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
            // Valid.pindah(evt, BtnHapus, BtnAll);
@@ -824,17 +811,13 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        /*if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
-        }else{Valid.pindah(evt,BtnPrint,TCari);}*/
+        }else{Valid.pindah(evt,BtnPrint,Pemeriksaan);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
-    private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TPasienKeyPressed
-
 private void PemeriksaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PemeriksaanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampiltarif();
         }else{
             Valid.pindah(evt,Tanggal,BtnSimpan);
@@ -842,7 +825,7 @@ private void PemeriksaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_PemeriksaanKeyPressed
 
 private void KdPtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPtgKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",NmPtg,petugas.getTextField().getText());
         }else{            
             Valid.pindah(evt,Dokterpj,Dokterperujuk);
@@ -858,10 +841,6 @@ private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         petugas.setVisible(true);
 }//GEN-LAST:event_BtnSeek2ActionPerformed
 
-private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
-        //Valid.pindah(evt,KdPtg,TKdPrw);
-}//GEN-LAST:event_BtnSeek2KeyPressed
-
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
     DlgCariPeriksaLab form=new DlgCariPeriksaLab(null,false);
@@ -874,9 +853,11 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            //BtnEditActionPerformed(null);
-        }else{
-            //Valid.pindah(evt, BtnHapus, kdbar);
+            BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
         }
 }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -963,6 +944,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.TextBox Alamat;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnCari1;
@@ -1078,12 +1060,26 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='"+TNoRw.getText()+"' ",TNoRM);
         Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat='"+TNoRw.getText()+"' ",Penjab);
         Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=(select kd_dokter from reg_periksa where no_rawat='"+TNoRw.getText()+"') ",Dokterperujuk);
+        
+        kamar=Sequel.cariIsi("select ifnull(kd_kamar,'') from kamar_inap where no_rawat='"+TNoRw.getText()+"' order by tgl_masuk desc limit 1");
+        if(!kamar.equals("")){
+            namakamar=Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar on bangsal.kd_bangsal=kamar.kd_bangsal "+
+                    " where kamar.kd_kamar='"+kamar+"' ");            
+            kamar="Kamar";
+        }else if(kamar.equals("")){
+            kamar="Poli";
+            namakamar=Sequel.cariIsi("select nm_poli from poliklinik inner join reg_periksa on poliklinik.kd_poli=reg_periksa.kd_poli "+
+                    "where reg_periksa.no_rawat='"+TNoRw.getText()+"'");
+        }
+        
+        
     }
 
     private void isPsien(){
-        Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
-        Sequel.cariIsi("select jk from pasien where no_rkm_medis='"+TNoRM.getText()+"' ",Jk);
-        Sequel.cariIsi("select umur from pasien where no_rkm_medis='"+TNoRM.getText()+"' ",Umur);
+        Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=? ",TPasien,TNoRM.getText());
+        Sequel.cariIsi("select jk from pasien where no_rkm_medis=? ",Jk,TNoRM.getText());
+        Sequel.cariIsi("select umur from pasien where no_rkm_medis=?",Umur,TNoRM.getText());
+        Sequel.cariIsi("select alamat from pasien where no_rkm_medis=? ",Alamat,TNoRM.getText());
     }
     
     private void jam(){

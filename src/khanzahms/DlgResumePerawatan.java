@@ -322,10 +322,10 @@ public final class DlgResumePerawatan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
-           // Valid.pindah(evt, BtnHapus, BtnAll);
+           Valid.pindah(evt, BtnCari1, BtnAll);
         }
 }//GEN-LAST:event_BtnPrintKeyPressed
 
@@ -334,7 +334,7 @@ public final class DlgResumePerawatan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TKd);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -362,12 +362,12 @@ public final class DlgResumePerawatan extends javax.swing.JDialog {
 private void KdRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isPasien();
-           // TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isPasien();
-            //TCari.requestFocus();
+            BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isPasien();
+            BtnPrint.requestFocus();
         }
 }//GEN-LAST:event_KdRwKeyPressed
 
@@ -404,7 +404,7 @@ private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 }//GEN-LAST:event_BtnAllActionPerformed
 
 private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);

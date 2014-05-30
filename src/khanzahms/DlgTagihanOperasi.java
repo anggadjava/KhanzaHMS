@@ -1294,9 +1294,9 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
             dispose();              
-        }//else{Valid.pindah(evt,BtnBatal,kdbar);}
+        }else{Valid.pindah(evt,TCariPaket,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
@@ -1386,7 +1386,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
            Valid.pindah(evt,kdprwluar,BtnKeluar);
@@ -1394,15 +1394,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            //BtnEditActionPerformed(null);
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnCariActionPerformed(null);
         }else{
-            //Valid.pindah(evt, BtnHapus, kdbar);
+            Valid.pindah(evt, BtnSimpan, BtnKeluar);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
 private void kdoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",nmoperator1,kdoperator1.getText());
         }else{
             Valid.pindah(evt,TKdPny,kdoperator2);
@@ -1430,7 +1430,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_ppBersihkanActionPerformed
 
 private void TKdPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdPnyKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_penyakit from penyakit where kd_penyakit=? ",TNmPny,TKdPny.getText());
         }else{            
             Valid.pindah(evt,TNoRw,kdoperator1);
@@ -1455,7 +1455,7 @@ private void BtnSeek1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnSeek1KeyPressed
 
 private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select concat(pasien.no_rkm_medis,', ',pasien.nm_pasien) from reg_periksa inner join pasien "+
                         " on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat=? ",TPasien,TNoRw.getText());
         }else{            
@@ -1472,7 +1472,7 @@ private void jenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jen
 }//GEN-LAST:event_jenisKeyPressed
 
 private void kdasistoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator1KeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",nmasistoperator1,kdasistoperator1.getText());            
         }else{
             Valid.pindah(evt,kdbidan,kdoperator2);
@@ -1491,10 +1491,12 @@ private void BtnPtg3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            
-        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            tbObat.requestFocus();
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+            BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
 private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
@@ -1502,8 +1504,8 @@ private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_BtnCari1ActionPerformed
 
 private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            BtnCariActionPerformed(null);
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnCari1ActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
@@ -1515,7 +1517,7 @@ private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 }//GEN-LAST:event_BtnAllActionPerformed
 
 private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, TCari);
@@ -1635,7 +1637,7 @@ private void tbtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 }//GEN-LAST:event_tbtindakanKeyPressed
 
 private void kdoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator2KeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",nmoperator2,kdoperator2.getText());
         }else{
             Valid.pindah(evt,kdoperator1,kdoperator3);
@@ -1652,7 +1654,7 @@ private void BtnOperator2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_BtnOperator2ActionPerformed
 
 private void kdoperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator3KeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",nmoperator3,kdoperator3.getText());
         }else{
             Valid.pindah(evt,kdoperator2,kdanestesi);
@@ -1669,7 +1671,7 @@ private void BtnOperator3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_BtnOperator3ActionPerformed
 
 private void kdanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdanestesiKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",nmanestesi,kdanestesi.getText());
         }else{
             Valid.pindah(evt,kdoperator3,kddranak);
@@ -1686,7 +1688,7 @@ private void BtnOperator4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_BtnOperator4ActionPerformed
 
 private void kddranakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddranakKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",nmdranak,kddranak.getText());
         }else{
             Valid.pindah(evt,kdanestesi,kdbidan);
@@ -1712,7 +1714,7 @@ private void BtnPtg4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnPtg4ActionPerformed
 
 private void kdasistoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator2KeyPressed
-     if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",nmasistoperator2,kdasistoperator2.getText());            
         }else{
             Valid.pindah(evt,kdoperator1,kdoperator3);
@@ -1729,7 +1731,7 @@ private void BtnPtg5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnPtg5ActionPerformed
 
 private void kdasistoperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistoperator3KeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip='"+kdasistoperator3.getText()+"'",nmasistoperator3);            
         }else{
             Valid.pindah(evt,kdasistoperator2,kdasistanestesi);
@@ -1746,7 +1748,7 @@ private void BtnPtg6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnPtg6ActionPerformed
 
 private void kdprwresustKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdprwresustKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",nmprwresust,kdprwresust.getText());            
         }else{
             Valid.pindah(evt,kdasistanestesi,kdprwluar);
@@ -1754,7 +1756,7 @@ private void kdprwresustKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_kdprwresustKeyPressed
 
 private void kdasistanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistanestesiKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",nmasistanestesi,kdasistanestesi.getText());            
         }else{
             Valid.pindah(evt,kdoperator3,kdprwresust);
@@ -1771,7 +1773,7 @@ private void BtnPtg8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnPtg8ActionPerformed
 
 private void kdbidanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbidanKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",nmbidan,kdbidan.getText());            
         }else{
             Valid.pindah(evt,kddranak,kdasistoperator1);
@@ -1788,7 +1790,7 @@ private void BtnOperator6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_BtnOperator6ActionPerformed
 
 private void kdprwluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdprwluarKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",nmprwluar,kdprwluar.getText());            
         }else{
             Valid.pindah(evt,kdprwresust,BtnSimpan);

@@ -25,7 +25,7 @@ import keuangan.Jurnal;
 import khanzahms.DlgCariBangsal;
 
 public class DlgPiutang extends javax.swing.JDialog {
-    private DefaultTableModel tabMode;
+    private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -37,20 +37,14 @@ public class DlgPiutang extends javax.swing.JDialog {
     private double ttljual=0;
     private String tanggallimit="0000-00-00";
 
-    /** Creates new form DlgProgramStudi */
+    /** Creates new form DlgProgramStudi
+     * @param parent */
     public DlgPiutang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        Object[] row={"Kode Barang",
-                    "Nama Barang",
-                    "Satuan",
-                    "Harga(Rp)",
-                    "Jumlah",
-                    "Subtotal(Rp)",
-                    "Diskon(%)",
-                    "Besar Diskon(Rp)",
-                    "Total(Rp)"};
+        Object[] row={"Kode Barang","Nama Barang","Satuan","Harga(Rp)","Jumlah",
+                    "Subtotal(Rp)","Diskon(%)","Besar Diskon(Rp)","Total(Rp)"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -1052,7 +1046,7 @@ public class DlgPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnTambahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnTambahKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnTambahActionPerformed(null);
         }else{
             Valid.pindah(evt,Disc, BtnHapus);
@@ -1071,7 +1065,7 @@ public class DlgPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnTambah, BtnCari);
@@ -1094,7 +1088,7 @@ public class DlgPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
             dispose();              
         }else{Valid.pindah(evt,BtnBatal,kdbar);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -1296,7 +1290,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,kdbar,BtnBatal);
@@ -1313,7 +1307,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
     }//GEN-LAST:event_BtnBatalKeyPressed
@@ -1321,12 +1315,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void kdpasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpasienKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", nmpasien,kdpasien.getText());
-            catatan.requestFocus();            
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", nmpasien,kdpasien.getText());
             TglJual.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", nmpasien,kdpasien.getText());
+            catatan.requestFocus();            
         }
     }//GEN-LAST:event_kdpasienKeyPressed
 
@@ -1336,13 +1330,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nama from petugas where nip=?", nmptg,kdptg.getText());
-            kdbar.requestFocus();            
+            Sequel.cariIsi("select nama from petugas where nip=?", nmptg,kdptg.getText());    
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama from petugas where nip=?", nmptg,kdptg.getText());
             Jenisjual.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama from petugas where nip=?", nmptg,kdptg.getText());
+            kdbar.requestFocus();        
         }
     }//GEN-LAST:event_kdptgKeyPressed
 
@@ -1367,8 +1361,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     Stok.setText(Double.toString(Sequel.cariIsiAngka("select stok from gudangbarang where kd_bangsal='"+kdgudang.getText()+"' and kode_brng='"+kdbar.getText()+"'")));
             } catch (SQLException ex) {
                     System.out.println("error barang : "+ex);
-            }
-            Tambah.requestFocus();            
+            }           
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             try {
                     ResultSet rs=koneksi.createStatement().executeQuery(
@@ -1409,6 +1402,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                     }
                     Stok.setText(Double.toString(Sequel.cariIsiAngka("select stok from gudangbarang where kd_bangsal='"+kdgudang.getText()+"' and kode_brng='"+kdbar.getText()+"'")));
+                    Tambah.requestFocus(); 
             } catch (SQLException ex) {
                     System.out.println("error barang : "+ex);
             }
@@ -1417,18 +1411,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void JmljualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JmljualKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nama from petugas where nip=?",nmptg,kdptg.getText());
-            Kurang.requestFocus();            
+            Sequel.cariIsi("select nama from petugas where nip=?",nmptg,kdptg.getText());  
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama from petugas where nip=?",nmptg,kdptg.getText());
             Disc.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama from petugas where nip=?",nmptg,kdptg.getText());
+            Kurang.requestFocus();          
         }
     }//GEN-LAST:event_JmljualKeyPressed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             //BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, kdbar);
@@ -1542,8 +1536,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
         Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
-        Stok.setText(Double.toString(Sequel.cariIsiAngka("select stok from gudangbarang where kd_bangsal='"+kdgudang.getText()+"' and kode_brng='"+kdbar.getText()+"'")));
-        BtnSimpan.requestFocus();
+        Stok.setText(Double.toString(Sequel.cariIsiAngka("select stok from gudangbarang where kd_bangsal='"+kdgudang.getText()+"' and kode_brng='"+kdbar.getText()+"'")));        
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
         Stok.setText(Double.toString(Sequel.cariIsiAngka("select stok from gudangbarang where kd_bangsal='"+kdgudang.getText()+"' and kode_brng='"+kdbar.getText()+"'")));
@@ -1551,6 +1544,7 @@ private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
         Stok.setText(Double.toString(Sequel.cariIsiAngka("select stok from gudangbarang where kd_bangsal='"+kdgudang.getText()+"' and kode_brng='"+kdbar.getText()+"'")));
+        BtnSimpan.requestFocus();
     }
 }//GEN-LAST:event_kdgudangKeyPressed
 

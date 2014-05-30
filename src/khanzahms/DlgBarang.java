@@ -1021,9 +1021,13 @@ public class DlgBarang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -1031,7 +1035,7 @@ public class DlgBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -1084,7 +1088,7 @@ public class DlgBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnEdit);
@@ -1129,7 +1133,7 @@ public class DlgBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -1176,7 +1180,7 @@ public class DlgBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnEdit,BtnAll);
@@ -1201,7 +1205,7 @@ public class DlgBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
             dispose();              
         }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -1247,7 +1251,7 @@ public class DlgBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,stok,BtnBatal);
@@ -1261,7 +1265,7 @@ public class DlgBarang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
             ChkInput.setSelected(true);
             isForm(); 
@@ -1286,13 +1290,13 @@ private void hdistributorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
 
 private void kdsatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdsatKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select satuan from kodesatuan where kode_sat='"+kdsat.getText()+"'", nmsat);
-            kdjns.requestFocus();            
+            Sequel.cariIsi("select satuan from kodesatuan where kode_sat='"+kdsat.getText()+"'", nmsat);           
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select satuan from kodesatuan where kode_sat='"+kdsat.getText()+"'", nmsat);
             Kapasitas.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select satuan from kodesatuan where kode_sat='"+kdsat.getText()+"'", nmsat);
+            kdjns.requestFocus(); 
         }
 }//GEN-LAST:event_kdsatKeyPressed
 
@@ -1312,12 +1316,12 @@ private void stokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok
     private void kdjnsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdjnsKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from jenis where kdjns='"+kdjns.getText()+"'", nmjns);
-            hbeli.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama from jenis where kdjns='"+kdjns.getText()+"'", nmjns);
             kdsat.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama from jenis where kdjns='"+kdjns.getText()+"'", nmjns);
+            hbeli.requestFocus();
         }
     }//GEN-LAST:event_kdjnsKeyPressed
 

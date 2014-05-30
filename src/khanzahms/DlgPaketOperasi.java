@@ -787,26 +787,38 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_TNmKeyPressed
 
     private void TOperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TNm,TOperator2);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TNm.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TOperator2.requestFocus();
         }
 }//GEN-LAST:event_TOperator1KeyPressed
 
     private void TAsisOperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisOperator1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TBagianRS,TAsisOperator2);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TBagianRS.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAsisOperator2.requestFocus();
         }
 }//GEN-LAST:event_TAsisOperator1KeyPressed
 
     private void TAlatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAlatKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TBidan,TSewaOK);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TBidan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TSewaOK.requestFocus();
         }
 }//GEN-LAST:event_TAlatKeyPressed
 
@@ -862,10 +874,10 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
-
+            Valid.pindah(evt,TOmloop,BtnBatal);
         }
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
@@ -876,7 +888,7 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -888,7 +900,7 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
@@ -948,7 +960,7 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -960,7 +972,7 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -984,7 +996,7 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
@@ -994,7 +1006,11 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -1002,7 +1018,7 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -1015,11 +1031,11 @@ public final class DlgPaketOperasi extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
             TCari.setText("");
         }else{
-
+            Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
 }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -1048,114 +1064,170 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_ChkInputActionPerformed
 
 private void TSewaOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TSewaOKKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TAlat,TPerawatLuar);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAlat.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TPerawatLuar.requestFocus();
         }
 }//GEN-LAST:event_TSewaOKKeyPressed
 
 private void TAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAnastesiKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TOperator3,TAnak);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TOperator3.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAnak.requestFocus();
         }
 }//GEN-LAST:event_TAnastesiKeyPressed
 
 private void TAsisAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisAnastesiKeyPressed
-         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TAnastesi,TPerawatLuar);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAnastesi.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TResusitas.requestFocus();
         }
 }//GEN-LAST:event_TAsisAnastesiKeyPressed
 
 private void TPerawatLuarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPerawatLuarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TSewaOK,TOmloop);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TSewaOK.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TOmloop.requestFocus();
         }
 }//GEN-LAST:event_TPerawatLuarKeyPressed
 
 private void TOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator2KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TOperator1,TOperator3);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TOperator1.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TOperator3.requestFocus();
         }
 }//GEN-LAST:event_TOperator2KeyPressed
 
 private void TOperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOperator3KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TOperator2,TAnastesi);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TOperator2.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAnastesi.requestFocus();
         }
 }//GEN-LAST:event_TOperator3KeyPressed
 
 private void TAsisOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisOperator2KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TAsisOperator1,TAsisOperator3);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAsisOperator1.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAsisOperator3.requestFocus();
         }
 }//GEN-LAST:event_TAsisOperator2KeyPressed
 
 private void TAsisOperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisOperator3KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TAsisOperator2,TAsisAnastesi);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAsisOperator2.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAsisAnastesi.requestFocus();
         }
 }//GEN-LAST:event_TAsisOperator3KeyPressed
 
 private void TAnakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAnakKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TAnastesi,TBagianRS);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAnastesi.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TBagianRS.requestFocus();
         }
 }//GEN-LAST:event_TAnakKeyPressed
 
 private void TResusitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TResusitasKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TAsisAnastesi,TSewaVk);
-        }   
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAsisAnastesi.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TSewaVk.requestFocus();
+        } 
 }//GEN-LAST:event_TResusitasKeyPressed
 
 private void TBidanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBidanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TSewaVk,TAlat);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TSewaVk.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAlat.requestFocus();
         }
 }//GEN-LAST:event_TBidanKeyPressed
 
 private void TBagianRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBagianRSKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TAnak,TAsisOperator1);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAnak.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAsisOperator1.requestFocus();
         }
 }//GEN-LAST:event_TBagianRSKeyPressed
 
 private void TSewaVkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TSewaVkKeyPressed
-  if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TResusitas,TBidan);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TResusitas.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TBidan.requestFocus();
         }
 }//GEN-LAST:event_TSewaVkKeyPressed
 
 private void TOmloopKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOmloopKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TPerawatLuar,BtnSimpan);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TPerawatLuar.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            BtnSimpan.requestFocus();
         }
 }//GEN-LAST:event_TOmloopKeyPressed
 

@@ -33,7 +33,6 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import khanzahms.DlgJnsPerawatanRalan;
 import widget.Button;
 
 /**
@@ -197,9 +196,9 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                    "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr "+
                    "from jns_perawatan inner join kategori_perawatan "+
                    "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori  "+
-                   "where jns_perawatan.kd_pj like ? and jns_perawatan.kd_poli like ? and jns_perawatan.kd_jenis_prw like ? or "+
-                    " jns_perawatan.kd_pj like ? and jns_perawatan.kd_poli like ? and jns_perawatan.nm_perawatan like ? or "+
-                    " jns_perawatan.kd_pj like ? and jns_perawatan.kd_poli like ? and kategori_perawatan.nm_kategori like ? order by jns_perawatan.nm_perawatan ");          
+                   "where jns_perawatan.kd_pj=? and jns_perawatan.kd_poli=? and jns_perawatan.kd_jenis_prw like ? or "+
+                    " jns_perawatan.kd_pj=? and jns_perawatan.kd_poli=? and jns_perawatan.nm_perawatan like ? or "+
+                    " jns_perawatan.kd_pj=? and jns_perawatan.kd_poli=? and kategori_perawatan.nm_kategori like ? order by jns_perawatan.nm_perawatan ");          
             pscaribiaya=koneksi.prepareStatement("select total_byrdr,total_byrpr from jns_perawatan where kd_jenis_prw=?");
             pssimpandokter=koneksi.prepareStatement("insert into rawat_jl_dr values(?,?,?,?,?,?,?,?,?)");
             pssimpanperawat=koneksi.prepareStatement("insert into rawat_jl_pr values(?,?,?,?,?,?,?,?,?)");
@@ -611,7 +610,11 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             BtnCariTindakanActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbTindakan.requestFocus();
-        }else{Valid.pindah(evt, BtnKeluar, BtnCariTindakan);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCariTindakan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariTindakanKeyPressed
 
     private void BtnCariTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariTindakanActionPerformed
@@ -619,7 +622,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariTindakanActionPerformed
 
     private void BtnCariTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariTindakanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariTindakanActionPerformed(null);
         }else{
             Valid.pindah(evt, TCariTindakan, BtnAllTindakan);
@@ -632,7 +635,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllTindakanActionPerformed
 
     private void BtnAllTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllTindakanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllTindakanActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCariTindakan, TCariTindakan);
@@ -776,7 +779,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_ppBersihkanActionPerformed
 
 private void KdPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPnyKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_penyakit from penyakit where kd_penyakit=? ",NmPenyakit,KdPny.getText());
         }else{            
             Valid.pindah(evt,TNoRw,THasil);
@@ -798,7 +801,7 @@ private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnSeek2KeyPressed
 
 private void KdPtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPtgKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             switch (pilihtable) {
                 case "rawat_jl_dr":
                     Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",NmDokter,KdPtg.getText());
@@ -946,14 +949,14 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 TabModeTindakan.addRow(new Object[] {pilih[i],kode[i],nama[i],kategori[i],totaldr[i],totalpr[i]});
             }
             
-            pstindakan.setString(1,"%"+kd_pj.trim()+"%");
-            pstindakan.setString(2,"%"+kd_poli.trim()+"%");
+            pstindakan.setString(1,kd_pj.trim());
+            pstindakan.setString(2,kd_poli.trim());
             pstindakan.setString(3,"%"+TCariTindakan.getText().trim()+"%");
-            pstindakan.setString(4,"%"+kd_pj.trim()+"%");
-            pstindakan.setString(5,"%"+kd_poli.trim()+"%");
+            pstindakan.setString(4,kd_pj.trim());
+            pstindakan.setString(5,kd_poli.trim());
             pstindakan.setString(6,"%"+TCariTindakan.getText().trim()+"%");
-            pstindakan.setString(7,"%"+kd_pj.trim()+"%");
-            pstindakan.setString(8,"%"+kd_poli.trim()+"%");
+            pstindakan.setString(7,kd_pj.trim());
+            pstindakan.setString(8,kd_poli.trim());
             pstindakan.setString(9,"%"+TCariTindakan.getText().trim()+"%");
             rstindakan=pstindakan.executeQuery();
             while(rstindakan.next()){

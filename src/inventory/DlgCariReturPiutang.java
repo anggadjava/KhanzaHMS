@@ -585,13 +585,13 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
 
     private void KdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdptgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);
-            NoNota.requestFocus();            
+            Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);           
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);
             TglRetur1.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);
+            NoNota.requestFocus(); 
         }
     }//GEN-LAST:event_KdptgKeyPressed
 
@@ -602,7 +602,11 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -610,7 +614,7 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -628,7 +632,7 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
@@ -667,7 +671,7 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnAll,BtnAll);
@@ -679,7 +683,7 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -687,12 +691,12 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     private void kdsatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdsatKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select satuan from kodesatuan where kode_sat='"+kdsat.getText()+"'", nmsat);
-            kdbar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select satuan from kodesatuan where kode_sat='"+kdsat.getText()+"'", nmsat);
             Kdptg.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select satuan from kodesatuan where kode_sat='"+kdsat.getText()+"'", nmsat);
+            kdbar.requestFocus();
         }
     }//GEN-LAST:event_kdsatKeyPressed
 
@@ -712,12 +716,12 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     private void kdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama_brng from databarang where kode_brng='"+kdbar.getText()+"'", nmbar);
-            TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama_brng from databarang where kode_brng='"+kdbar.getText()+"'", nmbar);
             kdsat.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama_brng from databarang where kode_brng='"+kdbar.getText()+"'", nmbar);
+            TCari.requestFocus();
         }
     }//GEN-LAST:event_kdbarKeyPressed
 
@@ -793,16 +797,15 @@ private void tbReturMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     * @param args the command line arguments
     */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DlgCariReturPiutang dialog = new DlgCariReturPiutang(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            DlgCariReturPiutang dialog = new DlgCariReturPiutang(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 

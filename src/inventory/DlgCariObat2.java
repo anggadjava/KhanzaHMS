@@ -52,7 +52,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement psobat,psobat2,psobatsimpan,psobatsimpan2,psobatsimpan3,pscarikapasitas;
+    private PreparedStatement psobat,psobatsimpan,psobatsimpan2,psobatsimpan3,pscarikapasitas;
     private ResultSet rsobat,carikapasitas;
     /** Creates new form DlgPenyakit
      * @param parent
@@ -154,18 +154,14 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             psobatsimpan= koneksi.prepareStatement("insert into detail_pemberian_obat values(?,?,?,?,?,?,?,?,?,?)");
             psobatsimpan2= koneksi.prepareStatement("insert into gudangbarang values(?,?,?)");
             psobatsimpan3= koneksi.prepareStatement("update gudangbarang set stok=stok-? where kode_brng=? and kd_bangsal=?");
-            psobat2=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat, detail_pemberian_obat.biaya_obat,"+
-                " databarang.letak_barang,(select stok from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=databarang.kode_brng) as stok,detail_pemberian_obat.jml "+
-                " from databarang inner join kodesatuan inner join jenis inner join detail_pemberian_obat "+
-                " on databarang.kode_sat=kodesatuan.kode_sat and databarang.kdjns=jenis.kdjns and "+
-                " detail_pemberian_obat.kode_brng=databarang.kode_brng where detail_pemberian_obat.no_rawat=? group by databarang.kode_brng order by databarang.kode_brng ");
             
             psobat=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,databarang.h_retail,databarang.h_distributor,databarang.h_grosir,"+
-                    " databarang.letak_barang,(select stok from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=databarang.kode_brng) as stok from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
+                    " databarang.letak_barang,(select stok from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=databarang.kode_brng) as stok "+
+                    " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                     " where databarang.kode_brng like ? or "+
                     " databarang.nama_brng like ? or "+
                     " jenis.nama like ? order by databarang.nama_brng");
-            pscarikapasitas= koneksi.prepareStatement("select IFNULL(kapasitas,0) from databarang where kode_brng=?");                                               
+            pscarikapasitas= koneksi.prepareStatement("select IFNULL(kapasitas,1) from databarang where kode_brng=?");                                               
         }catch(SQLException ex){
             System.out.println(ex);
         }
@@ -540,9 +536,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbObat.requestFocus();
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -550,7 +550,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -563,7 +563,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, TCari);
@@ -681,7 +681,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                    psobatsimpan2.setString(2,bangsal2);
                                    psobatsimpan2.setDouble(3,-Double.parseDouble(tbObat.getValueAt(i,1).toString()));
                                    psobatsimpan2.executeUpdate();
-                                }catch(SQLException | NumberFormatException ex){
+                                }catch(Exception ex){
                                     psobatsimpan3.setDouble(1,Double.parseDouble(tbObat.getValueAt(i,1).toString()));
                                     psobatsimpan3.setString(2,tbObat.getValueAt(i,2).toString());
                                     psobatsimpan3.setString(3,bangsal2);
@@ -869,25 +869,7 @@ private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             tabMode.addRow(new Object[] {pilih[i],jumlah[i],kodebarang[i],namabarang[i],
                            kodesatuan[i],letakbarang[i],harga[i],stok[i],namajenis[i]});
         }
-        
-        try{       
-            psobat2.setString(1,var.getBangsal());
-            psobat2.setString(2,TNoRw.getText());
-            rsobat=psobat2.executeQuery();
-            while(rsobat.next()){
-                tabMode.addRow(new Object[] {false,"",
-                               rsobat.getString("kode_brng"),
-                               rsobat.getString("nama_brng"),
-                               rsobat.getString("kode_sat"),
-                               rsobat.getString("letak_barang"),
-                               rsobat.getDouble("biaya_obat"),
-                               rsobat.getDouble("stok"),
-                               rsobat.getString("nama")});
-            }    
-        }catch(SQLException e){
-            System.out.println("Error : "+e);
-        }
-        
+                
         try{
             psobat.setString(1,"%"+var.getBangsal()+"%");
             psobat.setString(2,"%"+TCari.getText().trim()+"%");

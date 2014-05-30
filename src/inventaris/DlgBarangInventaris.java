@@ -434,6 +434,9 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCariKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BtnCariKeyReleased(evt);
+            }
         });
         panelGlass9.add(BtnCari);
 
@@ -730,7 +733,7 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,id_jenis,BtnBatal);
@@ -744,7 +747,7 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -756,7 +759,7 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
@@ -792,7 +795,7 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -804,9 +807,9 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
-        }else{Valid.pindah(evt,BtnEdit,TCari);}
+        }else{Valid.pindah(evt,BtnAll,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -838,17 +841,21 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
-            Valid.pindah(evt, BtnEdit, BtnKeluar);
+            Valid.pindah(evt, BtnEdit, BtnAll);
         }
 }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -856,7 +863,7 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -869,7 +876,7 @@ public final class DlgBarangInventaris extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
             TCari.setText("");
         }else{
@@ -934,13 +941,13 @@ private void thn_produksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
 
 private void kode_produsenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_produsenKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen='"+kode_produsen.getText()+"'",nama_produsen);
-        id_merk.requestFocus();
+        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen='"+kode_produsen.getText()+"'",nama_produsen);        
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen='"+kode_produsen.getText()+"'",nama_produsen);
         thn_produksi.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen='"+kode_produsen.getText()+"'",nama_produsen);
+        id_merk.requestFocus();
     }
 }//GEN-LAST:event_kode_produsenKeyPressed
 
@@ -955,13 +962,13 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void id_merkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_merkKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk='"+id_merk.getText()+"'",nm_merk);
-        isbn.requestFocus();
+        Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk='"+id_merk.getText()+"'",nm_merk);        
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk='"+id_merk.getText()+"'",nm_merk);
         kode_produsen.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk='"+id_merk.getText()+"'",nm_merk);
+        isbn.requestFocus();
     }
 }//GEN-LAST:event_id_merkKeyPressed
 
@@ -976,13 +983,13 @@ private void BtnSatuan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void id_kategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_kategoriKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
-        id_jenis.requestFocus();
+        Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);       
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
         isbn.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
+        id_jenis.requestFocus();
     }
 }//GEN-LAST:event_id_kategoriKeyPressed
 
@@ -998,13 +1005,13 @@ private void BtnSatuan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void id_jenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_jenisKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis='"+id_jenis.getText()+"'",nm_jenis);
-        BtnSimpan.requestFocus();
+        Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis='"+id_jenis.getText()+"'",nm_jenis);       
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis='"+id_jenis.getText()+"'",nm_jenis);
         id_kategori.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
         Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis='"+id_jenis.getText()+"'",nm_jenis);
+        BtnSimpan.requestFocus();
     }
 }//GEN-LAST:event_id_jenisKeyPressed
 
@@ -1017,6 +1024,10 @@ private void BtnSatuan3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     jenis.setAlwaysOnTop(false);
     jenis.setVisible(true);
 }//GEN-LAST:event_BtnSatuan3ActionPerformed
+
+    private void BtnCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnCariKeyReleased
 
     /**
     * @param args the command line arguments

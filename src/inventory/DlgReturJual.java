@@ -842,7 +842,7 @@ public class DlgReturJual extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void BtnTambahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnTambahKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnTambahActionPerformed(null);
         }else{
             Valid.pindah(evt,Hargaretur, BtnHapus);
@@ -861,7 +861,7 @@ public class DlgReturJual extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnTambah, BtnCari);
@@ -883,7 +883,7 @@ public class DlgReturJual extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
             dispose();              
         }else{Valid.pindah(evt,BtnBatal,Kdbar);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -1011,7 +1011,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,Kdbar,BtnBatal);
@@ -1025,7 +1025,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
     }//GEN-LAST:event_BtnBatalKeyPressed
@@ -1036,18 +1036,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void KdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdptgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);
-            NoFaktur.requestFocus();            
+            Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);          
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);
             TglRetur.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nama from petugas where nip='"+Kdptg.getText()+"'", Nmptg);
+            NoFaktur.requestFocus();  
         }
     }//GEN-LAST:event_KdptgKeyPressed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             //BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, Kdbar);
@@ -1081,8 +1081,7 @@ private void KdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kdb
                     }
             } catch (SQLException ex) {
                     System.out.println("error barang : "+ex);
-            }
-            Jmlretur.requestFocus();            
+            }        
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             try {
                     ResultSet rs=koneksi.createStatement().executeQuery(
@@ -1122,6 +1121,7 @@ private void KdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kdb
             } catch (SQLException ex) {
                     System.out.println("error barang : "+ex);
             }
+            Jmlretur.requestFocus();    
         }
 }//GEN-LAST:event_KdbarKeyPressed
 
@@ -1146,13 +1146,13 @@ private void BtnKnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 private void satuanreturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_satuanreturKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            isHitung();
-            BtnSimpan.requestFocus();            
+            isHitung();           
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isHitung();
             Jmlretur.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isHitung();
+            BtnSimpan.requestFocus(); 
         }
 }//GEN-LAST:event_satuanreturKeyPressed
 
@@ -1162,13 +1162,13 @@ private void JmlreturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
 private void kdmemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdmemKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='"+kdmem.getText()+"'", nmmem);
-            Kdptg.requestFocus();            
+            Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='"+kdmem.getText()+"'", nmmem);      
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='"+kdmem.getText()+"'", nmmem);
             TglRetur.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='"+kdmem.getText()+"'", nmmem);
+            Kdptg.requestFocus();      
         }
 }//GEN-LAST:event_kdmemKeyPressed
 
@@ -1258,12 +1258,12 @@ private void ppCetakNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
         Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+kdgudang.getText()+"'",nmgudang);
-        BtnSimpan.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
         Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+kdgudang.getText()+"'",nmgudang);
         Kdptg.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+kdgudang.getText()+"'",nmgudang);       
+        Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+kdgudang.getText()+"'",nmgudang);  
+        BtnSimpan.requestFocus();     
     }
 }//GEN-LAST:event_kdgudangKeyPressed
 

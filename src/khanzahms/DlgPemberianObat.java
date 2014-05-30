@@ -68,20 +68,8 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row={"Tgl.Pemberian",
-                    "Jam Pemberian",
-                    "No.Rawat",
-                    "No.Rekam Medis",
-                    "Nama Pasien",
-                    "Kode Penyakit",
-                    "Nama Penyakit",
-                    "Diagnosa",
-                    "Kode Obat",
-                    "Obat Penyakit",
-                    "Tambahan",
-                    "Jumlah",
-                    "Biaya Obat",
-                    "Total"};
+        Object[] row={"Tgl.Pemberian","Jam Pemberian","No.Rawat","No.Rekam Medis","Nama Pasien","Kode Penyakit",
+                    "Nama Penyakit","Diagnosa","Kode Obat","Obat Penyakit","Tambahan","Jumlah","Biaya Obat","Total"};
         tabModePO=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -159,6 +147,23 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 TKdOb.setText(dlgobt.getTextField().getText());    
+                isOb();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+        
+        dlgobt2.getTable().addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                TKdOb.setText(dlgobt2.getTextField().getText());    
                 isOb();
             }
 
@@ -457,7 +462,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-13" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari1.setDisplayFormat("yyyy-MM-dd");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -471,7 +476,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-13" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari2.setDisplayFormat("yyyy-MM-dd");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -578,11 +583,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRMKeyPressed(evt);
-            }
-        });
         FormInput.add(TNoRM);
         TNoRM.setBounds(258, 12, 143, 23);
 
@@ -590,11 +590,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.setPreferredSize(new java.awt.Dimension(25, 28));
-        TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPasienKeyPressed(evt);
-            }
-        });
         FormInput.add(TPasien);
         TPasien.setBounds(403, 12, 425, 23);
 
@@ -656,27 +651,17 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                 BtnSeek1ActionPerformed(evt);
             }
         });
-        BtnSeek1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek1KeyPressed(evt);
-            }
-        });
         FormInput.add(BtnSeek1);
         BtnSeek1.setBounds(800, 42, 28, 23);
 
         TNmPny.setEditable(false);
         TNmPny.setName("TNmPny"); // NOI18N
-        TNmPny.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNmPnyKeyPressed(evt);
-            }
-        });
         FormInput.add(TNmPny);
         TNmPny.setBounds(201, 42, 260, 23);
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-13" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPBeri.setDisplayFormat("yyyy-MM-dd");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -712,21 +697,11 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                 BtnSeek2ActionPerformed(evt);
             }
         });
-        BtnSeek2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek2KeyPressed(evt);
-            }
-        });
         FormInput.add(BtnSeek2);
         BtnSeek2.setBounds(545, 102, 28, 23);
 
         TNmOb.setEditable(false);
         TNmOb.setName("TNmOb"); // NOI18N
-        TNmOb.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNmObKeyPressed(evt);
-            }
-        });
         FormInput.add(TNmOb);
         TNmOb.setBounds(173, 102, 288, 23);
 
@@ -747,11 +722,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 
         TCiriPny.setEditable(false);
         TCiriPny.setName("TCiriPny"); // NOI18N
-        TCiriPny.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TCiriPnyKeyPressed(evt);
-            }
-        });
         FormInput.add(TCiriPny);
         TCiriPny.setBounds(463, 42, 335, 23);
 
@@ -764,11 +734,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                 BtnSeek3ActionPerformed(evt);
             }
         });
-        BtnSeek3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek3KeyPressed(evt);
-            }
-        });
         FormInput.add(BtnSeek3);
         BtnSeek3.setBounds(408, 72, 28, 23);
 
@@ -777,7 +742,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(607, 72, 40, 23);
 
-        cmbJam.setBackground(new java.awt.Color(245, 250, 240));
         cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam.setName("cmbJam"); // NOI18N
         cmbJam.setOpaque(false);
@@ -789,7 +753,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         FormInput.add(cmbJam);
         cmbJam.setBounds(650, 72, 48, 23);
 
-        cmbMnt.setBackground(new java.awt.Color(245, 250, 240));
         cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt.setName("cmbMnt"); // NOI18N
         cmbMnt.setOpaque(false);
@@ -801,7 +764,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         FormInput.add(cmbMnt);
         cmbMnt.setBounds(700, 72, 48, 23);
 
-        cmbDtk.setBackground(new java.awt.Color(245, 250, 240));
         cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk.setName("cmbDtk"); // NOI18N
         cmbDtk.setOpaque(false);
@@ -881,11 +843,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                 BtnSeek5ActionPerformed(evt);
             }
         });
-        BtnSeek5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek5KeyPressed(evt);
-            }
-        });
         FormInput.add(BtnSeek5);
         BtnSeek5.setBounds(173, 132, 28, 23);
 
@@ -896,11 +853,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         BtnSeek6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSeek6ActionPerformed(evt);
-            }
-        });
-        BtnSeek6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek6KeyPressed(evt);
             }
         });
         FormInput.add(BtnSeek6);
@@ -939,7 +891,11 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -947,7 +903,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -958,28 +914,24 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         Valid.pindah(evt,TCari,TKdPny);
 }//GEN-LAST:event_TNoRwKeyPressed
 
-    private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-        // Valid.pindah(evt, TNm, BtnSimpan);
-}//GEN-LAST:event_TNoRMKeyPressed
-
-    private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
-        // TODO add your handling code here:
-}//GEN-LAST:event_TPasienKeyPressed
-
     private void TDiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TDiagnosaKeyPressed
         Valid.pindah(evt,TKdPny,DTPBeri);
 }//GEN-LAST:event_TDiagnosaKeyPressed
 
     private void TJumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlahKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{            
-            Valid.pindah(evt,TKdOb,TTambahan);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TKdOb.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TTambahan.requestFocus();
         }
 }//GEN-LAST:event_TJumlahKeyPressed
 
     private void TKdPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdPnyKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isPny();
         }else{            
             Valid.pindah(evt,TNoRw,TDiagnosa);
@@ -995,20 +947,12 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         dlgobtpny.penyakit.setVisible(true);
 }//GEN-LAST:event_BtnSeek1ActionPerformed
 
-    private void BtnSeek1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek1KeyPressed
-        Valid.pindah(evt,TKdPny,TDiagnosa);
-}//GEN-LAST:event_BtnSeek1KeyPressed
-
-    private void TNmPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmPnyKeyPressed
-        // TODO add your handling code here:
-}//GEN-LAST:event_TNmPnyKeyPressed
-
     private void DTPBeriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPBeriKeyPressed
         Valid.pindah(evt,TDiagnosa,cmbJam);
 }//GEN-LAST:event_DTPBeriKeyPressed
 
     private void TKdObKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdObKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isOb();
         }else{            
             Valid.pindah(evt,cmbDtk,TJumlah);
@@ -1031,25 +975,17 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         }        
     }//GEN-LAST:event_BtnSeek2ActionPerformed
 
-    private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
-        Valid.pindah(evt,TKdOb,TJumlah);
-    }//GEN-LAST:event_BtnSeek2KeyPressed
-
-    private void TNmObKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmObKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TNmObKeyPressed
-
     private void TTambahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTambahanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-        }else{            
-            Valid.pindah(evt,TJumlah,BtnSimpan);
+            BtnSimpan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TJumlah.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isjml();
         }
     }//GEN-LAST:event_TTambahanKeyPressed
-
-    private void TCiriPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCiriPnyKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TCiriPnyKeyPressed
 
     private void BtnSeek3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek3ActionPerformed
         dlgobtpny.setNoRm(TNoRw.getText(),TNmPny.getText());
@@ -1060,10 +996,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         dlgobtpny.setLocationRelativeTo(internalFrame1);
         dlgobtpny.setVisible(true);
     }//GEN-LAST:event_BtnSeek3ActionPerformed
-
-    private void BtnSeek3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek3KeyPressed
-        Valid.pindah(evt,TDiagnosa,TKdOb);
-    }//GEN-LAST:event_BtnSeek3KeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         bangsal=Sequel.cariIsi("select kamar.kd_bangsal from kamar inner join kamar_inap "+
@@ -1106,7 +1038,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,TTambahan,BtnBatal);
@@ -1120,7 +1052,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -1155,7 +1087,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnPrint);
@@ -1198,7 +1130,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
@@ -1210,7 +1142,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -1222,7 +1154,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
@@ -1232,7 +1164,11 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private void TCariPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariPasienKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             tampilPO();
-        }else{Valid.pindah(evt,DTPCari2, BtnSeek4);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnSeek4.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            DTPCari2.requestFocus();
+        }
     }//GEN-LAST:event_TCariPasienKeyPressed
 
     private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek4ActionPerformed
@@ -1308,10 +1244,6 @@ private void BtnSeek5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     carikonversi.setVisible(true);
 }//GEN-LAST:event_BtnSeek5ActionPerformed
 
-private void BtnSeek5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek5KeyPressed
-// TODO add your handling code here:
-}//GEN-LAST:event_BtnSeek5KeyPressed
-
 private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
 bangsal=Sequel.cariIsi("select kamar.kd_bangsal from kamar inner join kamar_inap "+
                 "on kamar.kd_kamar=kamar_inap.kd_kamar where kamar_inap.no_rawat=? "+
@@ -1367,7 +1299,7 @@ if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
 }//GEN-LAST:event_BtnEditActionPerformed
 
 private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -1387,10 +1319,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             dlgobt2.setVisible(true);
         } 
     }//GEN-LAST:event_BtnSeek6ActionPerformed
-
-    private void BtnSeek6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek6KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnSeek6KeyPressed
 
     /**
     * @param args the command line arguments

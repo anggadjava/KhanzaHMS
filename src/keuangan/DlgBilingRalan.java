@@ -49,7 +49,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     public  DlgCariPoli poli=new DlgCariPoli(null,false);    
     public  DlgCariObat dlgobt=new DlgCariObat(null,false);
     public  DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
-    private double ttl=0,y=0,subttl=0,uangmuka=0,sisapiutang=0,obat=0,ralandokter=0,ranapdokter=0,ralanparamedis=0,ranapparamedis=0, kamar=0,bayar=0,total=0;
+    private double ttl=0,y=0,subttl=0,uangmuka=0,sisapiutang=0,obat=0,ralandokter=0,ralanparamedis=0, kamar=0,bayar=0,total=0;
     private int i,r;
     private String biaya="",tambahan="",totals="",kdptg="",nmptg="";
     private PreparedStatement pscekbilling,pscarirm,pscaripasien,psreg,pscaripoli,pscarialamat,
@@ -283,10 +283,11 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                                            "on rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw where "+
                                            "rawat_jl_pr.no_rawat=? group by jns_perawatan.nm_perawatan ");
             pscarilab=koneksi.prepareStatement("select jns_perawatan_lab.nm_perawatan, count(periksa_lab.kd_jenis_prw) as jml,jns_perawatan_lab.total_byr as biaya, "+
-                    "sum(periksa_lab.biaya) as total "+
+                    "sum(periksa_lab.biaya) as total,jns_perawatan_lab.kd_jenis_prw "+
                     " from periksa_lab inner join jns_perawatan_lab on jns_perawatan_lab.kd_jenis_prw=periksa_lab.kd_jenis_prw where "+
                     " periksa_lab.no_rawat=? group by periksa_lab.kd_jenis_prw  ");
-            psdetaillab=koneksi.prepareStatement("select sum(detail_periksa_lab.biaya_item) as total from detail_periksa_lab where detail_periksa_lab.no_rawat=? ");
+            psdetaillab=koneksi.prepareStatement("select sum(detail_periksa_lab.biaya_item) as total from detail_periksa_lab where detail_periksa_lab.no_rawat=? "+
+                    "and detail_periksa_lab.kd_jenis_prw=?");
             pscariobat=koneksi.prepareStatement("select databarang.nama_brng,detail_pemberian_obat.biaya_obat,"+
                                            "sum(detail_pemberian_obat.jml) as jml,sum(detail_pemberian_obat.tambahan) as tambahan,"+
                                            "sum(detail_pemberian_obat.total) as total "+
@@ -1298,7 +1299,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnView,BtnSimpan);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -1537,7 +1538,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnKeluar,BtnView);
@@ -1587,7 +1588,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnViewActionPerformed
 
     private void BtnViewKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnViewKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnViewActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnSimpan,BtnKeluar);
@@ -1820,7 +1821,7 @@ private void BtnSimpan1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 }//GEN-LAST:event_BtnSimpan1KeyPressed
 
 private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",TDokter,kddokter.getText());
         }else{
             Valid.pindah(evt,BtnCloseIn1,BtnSimpan1);
@@ -1859,7 +1860,7 @@ private void BtnCloseInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_BtnCloseInActionPerformed
 
 private void BtnCloseInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCloseInKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
         }else{Valid.pindah(evt, BtnSimpan, TotalObat);}
 }//GEN-LAST:event_BtnCloseInKeyPressed
@@ -1890,7 +1891,7 @@ private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnBatal1ActionPerformed
 
 private void BtnBatal1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatal1KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnBatal1ActionPerformed(null);
         }else{Valid.pindah(evt, BtnSimpan, BtnCloseIn);}
 }//GEN-LAST:event_BtnBatal1KeyPressed
@@ -1957,7 +1958,7 @@ private void BtnSimpan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_BtnSimpan4ActionPerformed
 
 private void kdpoliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpoliKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_poli from poliklinik where kd_poli=?", nmpoli,kdpoli.getText());
         }else{
             Valid.pindah(evt,BtnCloseIn4,BtnSimpan4);
@@ -2001,7 +2002,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnCariActionPerformed
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TNoRw,DTPTgl);
@@ -2360,20 +2361,18 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             rscarilab=pscarilab.executeQuery();
             subttl=0;
             while(rscarilab.next()){
+                psdetaillab.setString(1,TNoRw.getText());
+                psdetaillab.setString(2,rscarilab.getString("kd_jenis_prw"));
+                rsdetaillab=psdetaillab.executeQuery();
+                ralanparamedis=0;
+                while(rsdetaillab.next()){  
+                    ralanparamedis=rsdetaillab.getDouble("total");               
+                }
                 tabModeRwJlDr.addRow(new Object[]{true,"",rscarilab.getString("nm_perawatan"),":",
-                               rscarilab.getString("biaya"),rscarilab.getString("jml"),"",rscarilab.getString("total"),"Ralan Paramedis"});
-                subttl=subttl+rscarilab.getDouble("total");
-            }
+                               rscarilab.getString("biaya"),rscarilab.getString("jml"),Math.round(ralanparamedis),Math.round(rscarilab.getDouble("total")+ralanparamedis),"Ralan Paramedis"});
+                subttl=subttl+rscarilab.getDouble("total")+ralanparamedis;
+            }            
             
-            psdetaillab.setString(1,TNoRw.getText());
-            rsdetaillab=psdetaillab.executeQuery();
-            while(rsdetaillab.next()){  
-                if(rsdetaillab.getDouble("total")>0){
-                    tabModeRwJlDr.addRow(new Object[]{true,"","Laboratorium",":",
-                               rsdetaillab.getDouble("total"),"1","0",rsdetaillab.getDouble("total"),"Ralan Paramedis"});
-                    subttl=subttl+rsdetaillab.getDouble("total");
-                }                
-            }
             //rs.close();
         }catch(SQLException e){
             System.out.println("Error : "+e);
@@ -2468,9 +2467,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
             obat=0;
             ralandokter=0;
-            ranapdokter=0;
             ralanparamedis=0;
-            ranapparamedis=0;
             kamar=0;
             for(r=0;r<tabModeRwJlDr.getRowCount();r++){ 
                 if(!tabModeRwJlDr.getValueAt(r,7).toString().isEmpty()){
@@ -2482,15 +2479,9 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         case "Ralan Dokter":
                             ralandokter=ralandokter+Double.parseDouble(tabModeRwJlDr.getValueAt(r,7).toString());
                             break;
-                        case "Ranap Dokter":
-                            ranapdokter=ranapdokter+Double.parseDouble(tabModeRwJlDr.getValueAt(r,7).toString());
-                            break;
                         case "Ralan Paramedis":
                             ralanparamedis=ralanparamedis+Double.parseDouble(tabModeRwJlDr.getValueAt(r,7).toString());
-                            break;      
-                        case "Ranap Paramedis":
-                            ranapparamedis=ranapparamedis+Double.parseDouble(tabModeRwJlDr.getValueAt(r,7).toString());
-                            break;
+                            break; 
                         case "Kamar":
                             kamar=kamar+Double.parseDouble(tabModeRwJlDr.getValueAt(r,7).toString());
                             break;
@@ -2503,12 +2494,6 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 switch (tabModeRwJlDr.getValueAt(r,8).toString()) {
                     case "TtlObat":
                         tabModeRwJlDr.setValueAt(Valid.SetAngka(obat),r,2);
-                        break;
-                    case "TtlRanap Dokter":
-                        tabModeRwJlDr.setValueAt(Valid.SetAngka(ranapdokter),r,2);
-                        break;
-                    case "TtlRanap Paramedis":
-                        tabModeRwJlDr.setValueAt(Valid.SetAngka(ranapparamedis),r,2);
                         break;
                     case "TtlRalan Dokter":
                         tabModeRwJlDr.setValueAt(Valid.SetAngka(ralandokter),r,2);

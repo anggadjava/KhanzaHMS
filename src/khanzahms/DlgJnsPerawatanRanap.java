@@ -725,7 +725,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_KdKtgActionPerformed
 
     private void KdKtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKtgKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isktg();
         }else{
             Valid.pindah(evt,TNm,kdpnj);
@@ -733,10 +733,14 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_KdKtgKeyPressed
 
     private void BagianRsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BagianRsKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,KdKtg,TTndDr);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            KdKamar.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+            isjml();
+            TTndDr.requestFocus();
         }
 }//GEN-LAST:event_BagianRsKeyPressed
 
@@ -766,18 +770,26 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSeekKeyPressed
 
     private void TTndDrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTndDrKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,BagianRs,TTndPr);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TTndPr.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+            isjml();
+            BagianRs.requestFocus();
         }
 }//GEN-LAST:event_TTndDrKeyPressed
 
     private void TTndPrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTndPrKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isjml();
-        }else{
-            Valid.pindah(evt,TTndDr,BtnSimpan);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            BtnSimpan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+            isjml();
+            TTndPr.requestFocus();
         }
 }//GEN-LAST:event_TTndPrKeyPressed
 
@@ -815,7 +827,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,TJmlPr,BtnBatal);
@@ -829,7 +841,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -841,7 +853,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
@@ -879,7 +891,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -891,7 +903,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -931,7 +943,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
@@ -941,7 +953,11 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -949,7 +965,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -962,7 +978,7 @@ public final class DlgJnsPerawatanRanap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
             TCari.setText("");
         }else{
@@ -1005,7 +1021,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_ChkInputActionPerformed
 
 private void KdKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKamarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){            
               Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?", NmKamar,KdKamar.getText());
         }else{
             Valid.pindah(evt,kdpnj,BagianRs);
@@ -1023,12 +1039,12 @@ private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void kdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpnjKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());
-            KdKamar.requestFocus();            
+            Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());        
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());
             KdKtg.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            KdKamar.requestFocus();    
             Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,kdpnj.getText());
         }
 }//GEN-LAST:event_kdpnjKeyPressed

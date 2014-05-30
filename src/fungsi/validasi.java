@@ -433,7 +433,7 @@ public final class validasi {
 
 
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -441,7 +441,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextArea kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -449,7 +449,7 @@ public final class validasi {
     }
 
     public void pindah(KeyEvent evt, JComboBox kiri, JTextArea kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -457,7 +457,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JButton kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -465,7 +465,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JButton kiri,JTextField kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -473,7 +473,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JButton kiri,JButton kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -481,7 +481,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JComboBox kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -489,7 +489,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JTextArea kiri,JComboBox kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -497,7 +497,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JComboBox kiri,JTextField kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -505,7 +505,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JComboBox kiri,JDateTimePicker kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -513,7 +513,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JDateTimePicker kiri,JTextField kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -521,7 +521,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JComboBox kiri,JComboBox kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -529,7 +529,7 @@ public final class validasi {
     }
 
     public void pindah(java.awt.event.KeyEvent evt,JComboBox kiri,JButton kanan){
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -537,7 +537,7 @@ public final class validasi {
     }
 
     public void pindah(KeyEvent evt, JButton kiri, JComboBox kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -545,7 +545,7 @@ public final class validasi {
     }
 
     /*public void pindah(KeyEvent evt, JComboBox kiri, DateChooserCombo kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -553,7 +553,7 @@ public final class validasi {
     }*/
 
     public void pindah(KeyEvent evt, JTextArea kiri, JButton kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();
@@ -561,7 +561,7 @@ public final class validasi {
     }
 
     public void pindah(KeyEvent evt, JTextArea kiri, JTextField kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             kiri.requestFocus();

@@ -158,10 +158,7 @@ public class DlgPasien extends javax.swing.JDialog {
         Kelurahan2.setDocument(new batasInput((byte)60).getFilter(Kelurahan2));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         
-
-        
         ChkInput.setSelected(false);
-       // isForm(); 
         
         penjab.getTable().addMouseListener(new MouseListener() {
             @Override
@@ -240,21 +237,6 @@ public class DlgPasien extends javax.swing.JDialog {
             public void mouseExited(MouseEvent e) {}
         });
         
-       /* TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-
-            public void insertUpdate(DocumentEvent e) {
-                tampil();
-            }
-
-            public void removeUpdate(DocumentEvent e) {
-                tampil();
-            }
-
-            public void changedUpdate(DocumentEvent e) {
-                tampil();
-            }
-
-        });*/
         try{
             ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                    "pasien.tmp_lahir, pasien.tgl_lahir, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
@@ -1225,8 +1207,9 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 110, 23);
 
+        DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-14" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-30" }));
         DTPLahir.setDisplayFormat("yyyy-MM-dd");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -1358,8 +1341,9 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(753, 102, 120, 23);
 
+        DTPDaftar.setEditable(false);
         DTPDaftar.setForeground(new java.awt.Color(50, 70, 50));
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-14" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-30" }));
         DTPDaftar.setDisplayFormat("yyyy-MM-dd");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -1685,7 +1669,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
 private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,TSaudara,BtnBatal);
@@ -1699,7 +1683,7 @@ private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_BtnBatalActionPerformed
 
 private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -1711,7 +1695,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_BtnHapusActionPerformed
 
 private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
@@ -1772,7 +1756,7 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnEditActionPerformed
 
 private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -1812,7 +1796,7 @@ private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_BtnPrintActionPerformed
 
 private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
@@ -1826,7 +1810,7 @@ private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 }//GEN-LAST:event_BtnAllActionPerformed
 
 private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
@@ -1839,7 +1823,7 @@ private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
 private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -1847,7 +1831,11 @@ private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -1855,7 +1843,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnCariActionPerformed
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -1875,11 +1863,13 @@ private void CmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cmb
 }//GEN-LAST:event_CmbJkKeyPressed
 
 private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             TCari.setText(TNm.getText());
             tampil();
-        }else{            
-            Valid.pindah(evt,TNo,CmbJk);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            CmbJk.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+            TNo.requestFocus();  
         }
 }//GEN-LAST:event_TNmKeyPressed
 
@@ -1892,7 +1882,7 @@ private void DTPLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_DTPLahirKeyPressed
 
 private void cmbAgamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAgamaKeyPressed
-   Valid.pindah(evt,TAlmt,CmbStts);
+   Valid.pindah(evt,Kabupaten,CmbStts);
 }//GEN-LAST:event_cmbAgamaKeyPressed
 
 private void CmbSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbSttsKeyPressed
@@ -1904,7 +1894,7 @@ private void TPkjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPkj
 }//GEN-LAST:event_TPkjKeyPressed
 
 private void TAlmtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAlmtKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Kelurahan.getText().equals("KELURAHAN")){
            Kelurahan.setText("");
        }
@@ -1919,11 +1909,13 @@ private void TTlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTlp
 }//GEN-LAST:event_TTlpKeyPressed
 
 private void TNoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             TCari.setText(TNo.getText());
             tampil();
-        }else{            
-            Valid.pindah(evt,TCari,TNm);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            TNm.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){   
+            TCari.requestFocus();  
         }
 }//GEN-LAST:event_TNoKeyPressed
 
@@ -1940,7 +1932,7 @@ private void TUmurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TUm
 }//GEN-LAST:event_TUmurKeyPressed
 
 private void CMbPndKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbPndKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(TAlmt.getText().equals("ALAMAT")){
            TAlmt.setText("");
        }
@@ -1951,8 +1943,7 @@ private void CMbPndKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CM
 }//GEN-LAST:event_CMbPndKeyPressed
 
 private void TSaudaraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TSaudaraKeyPressed
-        
-    Valid.pindah(evt,TKtp,BtnSimpan);
+   Valid.pindah(evt,TKtp,BtnSimpan);
 }//GEN-LAST:event_TSaudaraKeyPressed
 
 private void MnBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBarcodeActionPerformed
@@ -2010,12 +2001,12 @@ private void DTPLahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST
 private void KdpnjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdpnjKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,Kdpnj.getText());
-            TTlp.requestFocus();            
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,Kdpnj.getText());
             CmbStts.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select png_jawab from penjab where kd_pj=?",nmpnj,Kdpnj.getText());
+            TTlp.requestFocus();            
         }
 }//GEN-LAST:event_KdpnjKeyPressed
 
@@ -2226,9 +2217,15 @@ private void MnLaporanAnestesiaActionPerformed(java.awt.event.ActionEvent evt) {
 }//GEN-LAST:event_MnLaporanAnestesiaActionPerformed
 
 private void CarialamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CarialamatKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCariActionPerformed(null);
+            BtnKeluar.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){          
+            BtnCariActionPerformed(null);
+            BtnCari.requestFocus();
+        }
 }//GEN-LAST:event_CarialamatKeyPressed
 
 private void MnKartu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartu1ActionPerformed
@@ -2266,7 +2263,7 @@ private void MnKartu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_MnKartu2ActionPerformed
 
 private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelurahanKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Kecamatan.getText().equals("KECAMATAN")){
            Kecamatan.setText("");
        }
@@ -2280,7 +2277,7 @@ private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_KelurahanKeyPressed
 
 private void KecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KecamatanKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Kabupaten.getText().equals("KABUPATEN")){
            Kabupaten.setText("");
        }
@@ -2294,8 +2291,8 @@ private void KecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_KecamatanKeyPressed
 
 private void KabupatenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KabupatenKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-       BtnSimpan.requestFocus();
+   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       cmbAgama.requestFocus();
    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
        if(Kecamatan.getText().equals("KECAMATAN")){
           Kecamatan.setText("");

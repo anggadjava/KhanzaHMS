@@ -551,7 +551,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-04" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari1.setDisplayFormat("yyyy-MM-dd");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -566,7 +566,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-04" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari2.setDisplayFormat("yyyy-MM-dd");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -677,11 +677,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TDokter.setEditable(false);
         TDokter.setHighlighter(null);
         TDokter.setName("TDokter"); // NOI18N
-        TDokter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TDokterKeyPressed(evt);
-            }
-        });
         panelGlass7.add(TDokter);
         TDokter.setBounds(206, 10, 520, 23);
 
@@ -750,11 +745,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TPerawat.setBackground(new java.awt.Color(202, 202, 202));
         TPerawat.setHighlighter(null);
         TPerawat.setName("TPerawat"); // NOI18N
-        TPerawat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPerawatKeyPressed(evt);
-            }
-        });
         panelGlass10.add(TPerawat);
         TPerawat.setBounds(206, 10, 520, 23);
 
@@ -826,11 +816,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRMKeyPressed(evt);
-            }
-        });
         FormInput.add(TNoRM);
         TNoRM.setBounds(253, 12, 140, 23);
 
@@ -888,11 +873,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         TNmPrw.setEditable(false);
         TNmPrw.setName("TNmPrw"); // NOI18N
-        TNmPrw.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNmPrwKeyPressed(evt);
-            }
-        });
         FormInput.add(TNmPrw);
         TNmPrw.setBounds(200, 72, 330, 23);
 
@@ -960,11 +940,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         TNmPny.setEditable(false);
         TNmPny.setName("TNmPny"); // NOI18N
-        TNmPny.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNmPnyKeyPressed(evt);
-            }
-        });
         FormInput.add(TNmPny);
         TNmPny.setBounds(200, 42, 330, 23);
 
@@ -993,7 +968,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
         }else{            
@@ -1004,10 +979,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private void TSuhuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TSuhuKeyPressed
         Valid.pindah(evt,THasil,TTensi);
 }//GEN-LAST:event_TSuhuKeyPressed
-
-    private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-       // Valid.pindah(evt, TNm, BtnSimpan);
-}//GEN-LAST:event_TNoRMKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -1056,7 +1027,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             if(TabRawat.getSelectedIndex()==0){
@@ -1074,7 +1045,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -1116,7 +1087,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnPrint);
@@ -1194,7 +1165,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
@@ -1206,9 +1177,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        /*if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             dispose();
-        }else{Valid.pindah(evt,BtnPrint,TCari);}*/
+        }else{Valid.pindah(evt,BtnPrint,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
@@ -1221,7 +1192,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
@@ -1229,9 +1200,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -1243,7 +1218,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -1309,7 +1284,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_tbRawatPrKeyPressed
 
 private void KdDokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdDokKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",TDokter,KdDok.getText());
         }else{            
             Valid.pindah(evt,TPrkmbngn,BtnSimpan);
@@ -1325,12 +1300,8 @@ private void BtnSeekDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         dokter.setVisible(true);
 }//GEN-LAST:event_BtnSeekDokterActionPerformed
 
-private void TDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TDokterKeyPressed
-        //Valid.pindah(evt,TKd,TSpek);
-}//GEN-LAST:event_TDokterKeyPressed
-
 private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip=?",TPerawat,kdptg.getText());
         }else{
             Valid.pindah(evt,TPrkmbngn,BtnSimpan);
@@ -1346,12 +1317,8 @@ private void BtnSeekPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GE
         petugas.setVisible(true);
 }//GEN-LAST:event_BtnSeekPetugasActionPerformed
 
-private void TPerawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPerawatKeyPressed
-        // TODO add your handling code here:
-}//GEN-LAST:event_TPerawatKeyPressed
-
 private void TKdPrwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdPrwKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isJns();
         }else{            
             Valid.pindah(evt,TKdPny,THasil);
@@ -1386,10 +1353,6 @@ private void BtnSeek1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         Valid.pindah(evt,TKdPrw,THasil);
 }//GEN-LAST:event_BtnSeek1KeyPressed
 
-private void TNmPrwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmPrwKeyPressed
-        // TODO add your handling code here:
-}//GEN-LAST:event_TNmPrwKeyPressed
-
 private void THasilKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_THasilKeyPressed
         Valid.pindah(evt,TKdPrw,TSuhu);
 }//GEN-LAST:event_THasilKeyPressed
@@ -1403,7 +1366,7 @@ private void TPrkmbngnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_TPrkmbngnKeyPressed
 
 private void TKdPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdPnyKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isPny();
         }else{            
             Valid.pindah(evt,TNoRw,TKdPrw);
@@ -1422,10 +1385,6 @@ private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
         Valid.pindah(evt,TKdPny,TKdPrw);
 }//GEN-LAST:event_BtnSeek2KeyPressed
-
-private void TNmPnyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmPnyKeyPressed
-        // TODO add your handling code here:
-}//GEN-LAST:event_TNmPnyKeyPressed
 
 private void TglRawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglRawatKeyPressed
 // TODO add your handling code here:
@@ -1478,7 +1437,7 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnEditActionPerformed
 
 private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);

@@ -20,8 +20,6 @@ import fungsi.validasi;
 import fungsi.var;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,11 +37,11 @@ import javax.swing.table.TableColumn;
  * @author perpustakaan
  */
 public final class DlgRujukMasuk extends javax.swing.JDialog {
-    private DefaultTableModel tabMode;
+    private DefaultTableModel tabMode,tabMode2;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement pstampil,pskamin,psoperator;
+    private PreparedStatement pstampil,pskamin,psoperator,psperujuk;
     private ResultSet rs,rs2;
     /** Creates new form DlgRujuk
      * @param parent
@@ -114,11 +112,33 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        //Perujuk
+        Object[] row2={"Perujuk","Alamat Perujuk"};
+        tabMode2=new DefaultTableModel(null,row2){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        tbPerujuk.setModel(tabMode2);
+
+        //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
+        tbPerujuk.setPreferredScrollableViewportSize(new Dimension(500,500));
+        tbPerujuk.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int i = 0; i < 2; i++) {
+            TableColumn column = tbPerujuk.getColumnModel().getColumn(i);
+            if(i==0){
+                column.setPreferredWidth(200);
+            }else if(i==1){
+                column.setPreferredWidth(400);
+            }
+        }
+        tbPerujuk.setDefaultRenderer(Object.class, new WarnaTable());
 
         TRujukan.setDocument(new batasInput((byte)60).getKata(TRujukan));
         TAlamat.setDocument(new batasInput((byte)70).getKata(TAlamat));
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        TCariPerujuk.setDocument(new batasInput((byte)100).getKata(TCariPerujuk));           
         
         try{
             pstampil=koneksi.prepareStatement(
@@ -135,6 +155,9 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             pskamin=koneksi.prepareStatement("select ifnull(kamar_inap.tgl_keluar,''),ifnull(kamar_inap.diagnosa_awal,''),ifnull(kamar_inap.diagnosa_akhir,''),ifnull(kamar_inap.stts_pulang,'') from kamar_inap where no_rawat=? "+
                     "order by kamar_inap.tgl_keluar desc limit 1");
             psoperator=koneksi.prepareStatement("select ifnull(biayaoperator1,'0'),ifnull((biayaoperator1*0.1),'0') from operasi where no_rawat=? ");
+            
+            psperujuk=koneksi.prepareStatement("select rujuk_masuk.perujuk,rujuk_masuk.alamat from rujuk_masuk where "+
+                    "rujuk_masuk.perujuk like ? or rujuk_masuk.alamat like ? group by rujuk_masuk.perujuk order by rujuk_masuk.perujuk");
         }catch(SQLException e){
             System.out.println(e);
         }
@@ -152,6 +175,18 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        WindowInput5 = new javax.swing.JDialog();
+        internalFrame6 = new widget.InternalFrame();
+        scrollPane2 = new widget.ScrollPane();
+        tbPerujuk = new widget.Table();
+        panelisi2 = new widget.panelisi();
+        label9 = new widget.Label();
+        TCariPerujuk = new widget.TextBox();
+        BtnCari1 = new widget.Button();
+        BtnAll1 = new widget.Button();
+        label10 = new widget.Label();
+        LCount1 = new widget.Label();
+        BtnKeluar1 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -183,6 +218,125 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         TNoRM = new widget.TextBox();
         TAlamat = new widget.TextBox();
         jLabel13 = new widget.Label();
+        BtnSeek2 = new widget.Button();
+
+        WindowInput5.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        WindowInput5.setName("WindowInput5"); // NOI18N
+        WindowInput5.setUndecorated(true);
+        WindowInput5.setResizable(false);
+
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perujuk ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame6.setName("internalFrame6"); // NOI18N
+        internalFrame6.setLayout(new java.awt.BorderLayout(1, 1));
+
+        scrollPane2.setName("scrollPane2"); // NOI18N
+        scrollPane2.setOpaque(true);
+
+        tbPerujuk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tbPerujuk.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbPerujuk.setName("tbPerujuk"); // NOI18N
+        tbPerujuk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPerujukMouseClicked(evt);
+            }
+        });
+        tbPerujuk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbPerujukKeyPressed(evt);
+            }
+        });
+        scrollPane2.setViewportView(tbPerujuk);
+
+        internalFrame6.add(scrollPane2, java.awt.BorderLayout.CENTER);
+
+        panelisi2.setName("panelisi2"); // NOI18N
+        panelisi2.setPreferredSize(new java.awt.Dimension(100, 43));
+        panelisi2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        label9.setText("Key Word :");
+        label9.setName("label9"); // NOI18N
+        label9.setPreferredSize(new java.awt.Dimension(68, 23));
+        panelisi2.add(label9);
+
+        TCariPerujuk.setName("TCariPerujuk"); // NOI18N
+        TCariPerujuk.setPreferredSize(new java.awt.Dimension(312, 23));
+        TCariPerujuk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariPerujukKeyPressed(evt);
+            }
+        });
+        panelisi2.add(TCariPerujuk);
+
+        BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari1.setMnemonic('1');
+        BtnCari1.setToolTipText("Alt+1");
+        BtnCari1.setName("BtnCari1"); // NOI18N
+        BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCari1ActionPerformed(evt);
+            }
+        });
+        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCari1KeyPressed(evt);
+            }
+        });
+        panelisi2.add(BtnCari1);
+
+        BtnAll1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll1.setMnemonic('2');
+        BtnAll1.setToolTipText("2Alt+2");
+        BtnAll1.setName("BtnAll1"); // NOI18N
+        BtnAll1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnAll1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAll1ActionPerformed(evt);
+            }
+        });
+        BtnAll1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnAll1KeyPressed(evt);
+            }
+        });
+        panelisi2.add(BtnAll1);
+
+        label10.setText("Record :");
+        label10.setName("label10"); // NOI18N
+        label10.setPreferredSize(new java.awt.Dimension(60, 23));
+        panelisi2.add(label10);
+
+        LCount1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LCount1.setText("0");
+        LCount1.setName("LCount1"); // NOI18N
+        LCount1.setPreferredSize(new java.awt.Dimension(50, 23));
+        panelisi2.add(LCount1);
+
+        BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar1.setMnemonic('4');
+        BtnKeluar1.setToolTipText("Alt+4");
+        BtnKeluar1.setName("BtnKeluar1"); // NOI18N
+        BtnKeluar1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnKeluar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluar1ActionPerformed(evt);
+            }
+        });
+        panelisi2.add(BtnKeluar1);
+
+        internalFrame6.add(panelisi2, java.awt.BorderLayout.PAGE_END);
+
+        WindowInput5.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -361,7 +515,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-04" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-29" }));
         DTPCari1.setDisplayFormat("yyyy-MM-dd");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -376,7 +530,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-04" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-29" }));
         DTPCari2.setDisplayFormat("yyyy-MM-dd");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -441,7 +595,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TRujukan);
-        TRujukan.setBounds(83, 12, 152, 23);
+        TRujukan.setBounds(83, 12, 190, 23);
 
         jLabel4.setText("No.Rawat :");
         jLabel4.setName("jLabel4"); // NOI18N
@@ -488,12 +642,29 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TAlamat);
-        TAlamat.setBounds(359, 12, 368, 23);
+        TAlamat.setBounds(427, 12, 300, 23);
 
         jLabel13.setText("Alamat Perujuk :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
-        jLabel13.setBounds(246, 12, 110, 23);
+        jLabel13.setBounds(314, 12, 110, 23);
+
+        BtnSeek2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSeek2.setMnemonic('2');
+        BtnSeek2.setToolTipText("Alt+2");
+        BtnSeek2.setName("BtnSeek2"); // NOI18N
+        BtnSeek2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSeek2ActionPerformed(evt);
+            }
+        });
+        BtnSeek2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSeek2KeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnSeek2);
+        BtnSeek2.setBounds(275, 12, 28, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -507,7 +678,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_TRujukanKeyPressed
 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
         }else{            
@@ -530,7 +701,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
             Valid.pindah(evt,TPasien,BtnBatal);
@@ -542,7 +713,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
@@ -554,7 +725,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
@@ -577,7 +748,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnEditActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -589,7 +760,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -627,7 +798,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
@@ -637,7 +808,11 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -645,7 +820,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -658,7 +833,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
             TCari.setText("");
         }else{
@@ -694,6 +869,79 @@ private void TAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
 // TODO add your handling code here:
 }//GEN-LAST:event_TAlamatKeyPressed
 
+    private void TCariPerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariPerujukKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCari1ActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari1.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar1.requestFocus();
+        }
+    }//GEN-LAST:event_TCariPerujukKeyPressed
+
+    private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        tampil2();
+    }//GEN-LAST:event_BtnCari1ActionPerformed
+
+    private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnCariActionPerformed(null);
+        }else{
+            Valid.pindah(evt, TCari, BtnAll);
+        }
+    }//GEN-LAST:event_BtnCari1KeyPressed
+
+    private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
+        TCariPerujuk.setText("");
+        tampil2();
+    }//GEN-LAST:event_BtnAll1ActionPerformed
+
+    private void BtnAll1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAll1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnAllActionPerformed(null);
+        }else{
+            Valid.pindah(evt, BtnCari, TCari);
+        }
+    }//GEN-LAST:event_BtnAll1KeyPressed
+
+    private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
+        WindowInput5.dispose();
+    }//GEN-LAST:event_BtnKeluar1ActionPerformed
+
+    private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
+        tampil2();
+        WindowInput5.setSize(this.getWidth()-40,this.getHeight()-40);
+        WindowInput5.setLocationRelativeTo(internalFrame1);
+        WindowInput5.setVisible(true);
+    }//GEN-LAST:event_BtnSeek2ActionPerformed
+
+    private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
+        
+    }//GEN-LAST:event_BtnSeek2KeyPressed
+
+    private void tbPerujukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPerujukMouseClicked
+        if(tabMode2.getRowCount()!=0){
+            try {
+                getData2();
+            } catch (java.lang.NullPointerException e) {
+            }  
+            WindowInput5.dispose();
+            
+        }
+    }//GEN-LAST:event_tbPerujukMouseClicked
+
+    private void tbPerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPerujukKeyPressed
+        if(tabMode2.getRowCount()!=0){
+            if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
+                try {
+                    getData2();
+                } catch (java.lang.NullPointerException e) {
+                }
+            }
+                       
+        }
+    }//GEN-LAST:event_tbPerujukKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -712,25 +960,33 @@ private void TAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
+    private widget.Button BtnAll1;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
+    private widget.Button BtnCari1;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
+    private widget.Button BtnKeluar1;
     private widget.Button BtnPrint;
+    private widget.Button BtnSeek2;
     private widget.Button BtnSimpan;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.PanelBiasa FormInput;
     private widget.Label LCount;
+    private widget.Label LCount1;
     private widget.ScrollPane Scroll;
     private widget.TextBox TAlamat;
     private widget.TextBox TCari;
+    private widget.TextBox TCariPerujuk;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private widget.TextBox TRujukan;
+    private javax.swing.JDialog WindowInput5;
     private widget.InternalFrame internalFrame1;
+    private widget.InternalFrame internalFrame6;
     private widget.Label jLabel12;
     private widget.Label jLabel13;
     private widget.Label jLabel19;
@@ -739,9 +995,14 @@ private void TAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private javax.swing.JPanel jPanel3;
+    private widget.Label label10;
+    private widget.Label label9;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
+    private widget.panelisi panelisi2;
+    private widget.ScrollPane scrollPane2;
     private widget.Table tbObat;
+    private widget.Table tbPerujuk;
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {        
@@ -833,14 +1094,35 @@ private void TAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
         isRawat();
         isPsien();              
     }
-    
-   
+      
     
     public void isCek(){
         BtnSimpan.setEnabled(var.getrujuk());
         BtnHapus.setEnabled(var.getrujuk());
         BtnPrint.setEnabled(var.getrujuk());
         
+    }
+    
+    public void tampil2() {        
+        Valid.tabelKosong(tabMode2);
+        try{
+            psperujuk.setString(1,"%"+TCariPerujuk.getText()+"%");
+            psperujuk.setString(2,"%"+TCariPerujuk.getText()+"%");
+            rs=psperujuk.executeQuery();
+            while(rs.next()){                              
+                tabMode2.addRow(new Object[]{rs.getString(1),rs.getString(2)});
+            }
+        }catch(SQLException e){
+            System.out.println("Error : "+e);
+        }
+        LCount1.setText(""+tabMode2.getRowCount());
+    }
+    
+    private void getData2() {
+        if(tbPerujuk.getSelectedRow()!= -1){
+            TRujukan.setText(tbPerujuk.getValueAt(tbPerujuk.getSelectedRow(),0).toString());
+            TAlamat.setText(tbPerujuk.getValueAt(tbPerujuk.getSelectedRow(),1).toString());
+        }
     }
 
 }

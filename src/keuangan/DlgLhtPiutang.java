@@ -116,8 +116,10 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
         Scroll = new widget.ScrollPane();
         tbBangsal = new widget.Table();
         panelGlass5 = new widget.panelisi();
-        jLabel10 = new javax.swing.JLabel();
-        LCount = new javax.swing.JLabel();
+        label17 = new widget.Label();
+        TCari = new widget.TextBox();
+        BtnCari = new widget.Button();
+        jLabel11 = new javax.swing.JLabel();
         BtnHapus = new widget.Button();
         BtnPrint = new widget.Button();
         BtnAll = new widget.Button();
@@ -127,9 +129,8 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
         Tgl1 = new widget.Tanggal();
         label18 = new widget.Label();
         Tgl2 = new widget.Tanggal();
-        label17 = new widget.Label();
-        TCari = new widget.TextBox();
-        BtnCari = new widget.Button();
+        jLabel10 = new javax.swing.JLabel();
+        LCount = new javax.swing.JLabel();
 
         TKd.setForeground(new java.awt.Color(255, 255, 255));
         TKd.setName("TKd"); // NOI18N
@@ -197,23 +198,45 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
 
         panelGlass5.setName("panelGlass5"); // NOI18N
         panelGlass5.setPreferredSize(new java.awt.Dimension(55, 55));
-        panelGlass5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        panelGlass5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Total Tagihan Masuk :");
-        jLabel10.setName("jLabel10"); // NOI18N
-        jLabel10.setPreferredSize(new java.awt.Dimension(130, 30));
-        panelGlass5.add(jLabel10);
+        label17.setText("Key Word :");
+        label17.setName("label17"); // NOI18N
+        label17.setPreferredSize(new java.awt.Dimension(65, 23));
+        panelGlass5.add(label17);
 
-        LCount.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        LCount.setForeground(new java.awt.Color(153, 0, 51));
-        LCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        LCount.setText("0");
-        LCount.setName("LCount"); // NOI18N
-        LCount.setPreferredSize(new java.awt.Dimension(250, 30));
-        panelGlass5.add(LCount);
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(220, 23));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariKeyPressed(evt);
+            }
+        });
+        panelGlass5.add(TCari);
+
+        BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('2');
+        BtnCari.setToolTipText("Alt+2");
+        BtnCari.setName("BtnCari"); // NOI18N
+        BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCariActionPerformed(evt);
+            }
+        });
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCariKeyPressed(evt);
+            }
+        });
+        panelGlass5.add(BtnCari);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setName("jLabel11"); // NOI18N
+        jLabel11.setPreferredSize(new java.awt.Dimension(20, 30));
+        panelGlass5.add(jLabel11);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         BtnHapus.setMnemonic('H');
@@ -316,36 +339,21 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
         Tgl2.setPreferredSize(new java.awt.Dimension(100, 23));
         panelisi4.add(Tgl2);
 
-        label17.setText("Key Word :");
-        label17.setName("label17"); // NOI18N
-        label17.setPreferredSize(new java.awt.Dimension(80, 23));
-        panelisi4.add(label17);
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Total Tagihan Masuk :");
+        jLabel10.setName("jLabel10"); // NOI18N
+        jLabel10.setPreferredSize(new java.awt.Dimension(140, 23));
+        panelisi4.add(jLabel10);
 
-        TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(350, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TCariKeyPressed(evt);
-            }
-        });
-        panelisi4.add(TCari);
-
-        BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('2');
-        BtnCari.setToolTipText("Alt+2");
-        BtnCari.setName("BtnCari"); // NOI18N
-        BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCariActionPerformed(evt);
-            }
-        });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnCariKeyPressed(evt);
-            }
-        });
-        panelisi4.add(BtnCari);
+        LCount.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        LCount.setForeground(new java.awt.Color(153, 0, 51));
+        LCount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LCount.setText("0");
+        LCount.setName("LCount"); // NOI18N
+        LCount.setPreferredSize(new java.awt.Dimension(250, 23));
+        panelisi4.add(LCount);
 
         internalFrame1.add(panelisi4, java.awt.BorderLayout.PAGE_START);
 
@@ -379,7 +387,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -415,7 +423,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
@@ -427,7 +435,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TKd);}
 }//GEN-LAST:event_BtnKeluarKeyPressed
@@ -439,7 +447,7 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
@@ -507,7 +515,11 @@ public final class DlgLhtPiutang extends javax.swing.JDialog {
 private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -515,7 +527,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnCariActionPerformed
 
 private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
         }else{
             Valid.pindah(evt, TKd, BtnAll);
@@ -590,6 +602,7 @@ private void MnDetailCicilanActionPerformed(java.awt.event.ActionEvent evt) {//G
     private widget.Tanggal Tgl2;
     private widget.InternalFrame internalFrame1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.Label label11;
     private widget.Label label17;

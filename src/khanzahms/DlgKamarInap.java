@@ -1574,7 +1574,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-27" }));
         DTPCari1.setDisplayFormat("yyyy-MM-dd");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1599,7 +1599,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-27" }));
         DTPCari2.setDisplayFormat("yyyy-MM-dd");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1634,7 +1634,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari3.setEditable(false);
         DTPCari3.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-16" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-27" }));
         DTPCari3.setDisplayFormat("yyyy-MM-dd");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -1773,7 +1773,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void norawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norawatKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat=? ",TNoRM,norawat.getText());
             Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=? ",TPasien,TNoRM.getText());
         }else{
@@ -1782,11 +1782,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_norawatKeyPressed
 
     private void kdkamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdkamarKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             i=1;
             isKmr();
-        }else{
-            Valid.pindah(evt,norawat,CmbTahun);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            CmbTahun.requestFocus();
+            isKmr();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            norawat.requestFocus();
+            isKmr();
         }
 }//GEN-LAST:event_kdkamarKeyPressed
 
@@ -1842,7 +1846,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnInActionPerformed
 
     private void BtnInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnInKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnInActionPerformed(null);
         }else{
             Valid.pindah(evt,TCari,BtnOut);
@@ -1895,7 +1899,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnOutActionPerformed
 
     private void BtnOutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnOutKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnOutActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnIn,btnPindah);
@@ -1924,7 +1928,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, btnPindah,BtnPrint);
@@ -1937,7 +1941,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
@@ -2006,7 +2010,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnPrintActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
@@ -2016,7 +2020,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        }else{Valid.pindah(evt, BtnKeluar, BtnCari);}
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -2024,7 +2032,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari, BtnAll);
@@ -2038,7 +2046,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, BtnIn);
@@ -2070,7 +2078,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseInActionPerformed
 
     private void BtnCloseInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCloseInKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
         }else{Valid.pindah(evt, BtnBatal, norawat);}
     }//GEN-LAST:event_BtnCloseInKeyPressed
@@ -2104,7 +2112,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }else if(norawat.isEditable()==false){
                 Sequel.mengedit("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'","tgl_keluar='"+CmbTahun.getSelectedItem()+"-"+CmbBln.getSelectedItem()+"-"+CmbTgl.getSelectedItem()+
                         "',jam_keluar='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+
-                        "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='"+cmbStatus.getSelectedItem()+"'");                
+                        "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='"+cmbStatus.getSelectedItem()+"',diagnosa_akhir='"+diagnosaakhir.getText()+"'");                
                 if(cmbStatus.getSelectedItem().equals("Meninggal")){
                     Sequel.menyimpan("pasien_mati","'"+CmbTahun.getSelectedItem()+"-"+CmbBln.getSelectedItem()+"-"+CmbTgl.getSelectedItem()+"','"+
                                    cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"','"+diagnosaakhir.getText()+"'","pasien");
@@ -2141,7 +2149,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnCloseIn);}
     }//GEN-LAST:event_BtnBatalKeyPressed
@@ -2266,7 +2274,7 @@ private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnSeek2KeyPressed
 
 private void BangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BangsalCariKeyPressed
-         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
         }else{Valid.pindah(evt, DTPCari2, TCari);}
 }//GEN-LAST:event_BangsalCariKeyPressed
@@ -2568,7 +2576,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     }//GEN-LAST:event_btnPindahActionPerformed
 
     private void btnPindahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPindahKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnPindahActionPerformed(null);
         }else{
             Valid.pindah(evt,BtnOut,BtnHapus);
@@ -2576,11 +2584,17 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     }//GEN-LAST:event_btnPindahKeyPressed
 
     private void kdkamarpindahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdkamarpindahKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             i=2;
             isKmr();
-        }else{
-            Valid.pindah(evt,BtnSimpanpindah,CmbTahun);
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            CmbTahun.requestFocus();
+            i=2;
+            isKmr();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnSimpanpindah.requestFocus();
+            i=2;
+            isKmr();
         }
     }//GEN-LAST:event_kdkamarpindahKeyPressed
 
@@ -2669,13 +2683,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 "' and jam_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"'",
                                 "tgl_keluar='"+CmbTahunpindah.getSelectedItem()+"-"+CmbBlnpindah.getSelectedItem()+"-"+CmbTglpindah.getSelectedItem()+
                                 "',jam_keluar='"+cmbJampindah.getSelectedItem()+":"+cmbMntpindah.getSelectedItem()+":"+cmbDtkpindah.getSelectedItem()+
-                                "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='Pindah Kamar'");
-                        System.out.println("kamar_inap | no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString()+
-                                "' and kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+
-                                "' and tgl_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),9).toString()+
-                                "' and jam_masuk='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),10).toString()+"' | tgl_keluar='"+CmbTahunpindah.getSelectedItem()+"-"+CmbBlnpindah.getSelectedItem()+"-"+CmbTglpindah.getSelectedItem()+
-                                "',jam_keluar='"+cmbJampindah.getSelectedItem()+":"+cmbMntpindah.getSelectedItem()+":"+cmbDtkpindah.getSelectedItem()+
-                                "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='Pindah Kamar'");
+                                "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='Pindah Kamar'");                        
                         Sequel.mengedit("kamar","kd_kamar='"+Sequel.cariIsi("select kd_kamar from kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal where concat(kamar.kd_kamar,' ',bangsal.nm_bangsal)=? ",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),5).toString())+"'","status='KOSONG'");
                         Sequel.menyimpan("kamar_inap","'"+norawatpindah.getText()+"','"+
                                 kdkamarpindah.getText()+"','"+
@@ -2793,7 +2801,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     }//GEN-LAST:event_BtnSimpan4ActionPerformed
 
     private void kdpenjabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpenjabKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_poli from poliklinik where kd_poli=?", nmpenjab,kdpenjab.getText());
         }else{
             Valid.pindah(evt,BtnCloseIn4,BtnSimpan4);
