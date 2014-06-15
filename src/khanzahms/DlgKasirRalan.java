@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import keuangan.DlgRBObatPoli;
 import keuangan.DlgRBTindakanDokter;
 import keuangan.DlgRBTindakanParamedis;
 import keuangan.DlgRBTindakanPoli;
@@ -217,6 +218,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnRekapDokter1 = new javax.swing.JMenuItem();
         MnRekapParamedis1 = new javax.swing.JMenuItem();
         MnRekapHarianPoli = new javax.swing.JMenuItem();
+        MnRekapHarianObat = new javax.swing.JMenuItem();
         TNoRw = new widget.TextBox();
         WindowInput = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
@@ -542,6 +544,21 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnRekapHarianPoli);
+
+        MnRekapHarianObat.setBackground(new java.awt.Color(255, 255, 255));
+        MnRekapHarianObat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnRekapHarianObat.setForeground(java.awt.Color.darkGray);
+        MnRekapHarianObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnRekapHarianObat.setText("Rekap Harian Obat");
+        MnRekapHarianObat.setIconTextGap(5);
+        MnRekapHarianObat.setName("MnRekapHarianObat"); // NOI18N
+        MnRekapHarianObat.setPreferredSize(new java.awt.Dimension(250, 28));
+        MnRekapHarianObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnRekapHarianObatActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnRekapHarianObat);
 
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
@@ -919,7 +936,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel15);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-12" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari1.setDisplayFormat("yyyy-MM-dd");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -938,7 +955,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel17);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-12" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-28" }));
         DTPCari2.setDisplayFormat("yyyy-MM-dd");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1480,7 +1497,6 @@ private void MnRekapHarianPoliActionPerformed(java.awt.event.ActionEvent evt) {/
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgRBTindakanPoli rhtindakandokter=new DlgRBTindakanPoli(null,false);
         rhtindakandokter.prosesCari();
-        rhtindakandokter.isCek();    
         rhtindakandokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
         rhtindakandokter.setLocationRelativeTo(internalFrame1);
         rhtindakandokter.setVisible(true);
@@ -1502,6 +1518,16 @@ private void MnPemberianObat1ActionPerformed(java.awt.event.ActionEvent evt) {//
             dlgrwinap.setVisible(true);
         }
 }//GEN-LAST:event_MnPemberianObat1ActionPerformed
+
+    private void MnRekapHarianObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRekapHarianObatActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgRBObatPoli rhtindakandokter=new DlgRBObatPoli(null,false);
+        rhtindakandokter.prosesCari(); 
+        rhtindakandokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        rhtindakandokter.setLocationRelativeTo(internalFrame1);
+        rhtindakandokter.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnRekapHarianObatActionPerformed
 
     /**
     * @param args the command line arguments
@@ -1549,6 +1575,7 @@ private void MnPemberianObat1ActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JMenuItem MnRawatJalan;
     private javax.swing.JMenuItem MnRekapDokter;
     private javax.swing.JMenuItem MnRekapDokter1;
+    private javax.swing.JMenuItem MnRekapHarianObat;
     private javax.swing.JMenuItem MnRekapHarianPoli;
     private javax.swing.JMenuItem MnRekapParamedis;
     private javax.swing.JMenuItem MnRekapParamedis1;

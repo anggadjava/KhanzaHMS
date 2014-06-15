@@ -36,7 +36,7 @@ import javax.swing.table.TableColumn;
  *
  * @author dosen
  */
-public final class DlgStokPasien extends javax.swing.JDialog {
+public final class DlgReturObatPasien extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();  
@@ -46,13 +46,13 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
-    public DlgStokPasien(java.awt.Frame parent, boolean modal) {
+    public DlgReturObatPasien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10,2);
         setSize(628,674);
 
-        Object[] row={"Tanggal Beri","No.Rawat","Pasien","Barang","Jumlah","Asal Stok"};
+        Object[] row={"Tanggal Retur","No.Rawat","Pasien","Barang","Jml.Retur"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -61,7 +61,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -73,8 +73,6 @@ public final class DlgStokPasien extends javax.swing.JDialog {
                 column.setPreferredWidth(300);
             }else if(i==4){
                 column.setPreferredWidth(50);
-            }else if(i==5){
-                column.setPreferredWidth(200);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -82,16 +80,15 @@ public final class DlgStokPasien extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));                
                 
         try {
-            pstampil=koneksi.prepareStatement("select stok_obat_pasien.tanggal, stok_obat_pasien.no_rawat,concat(reg_periksa.no_rkm_medis,' ',pasien.nm_pasien),"+
-                  " concat(stok_obat_pasien.kode_brng,' ',databarang.nama_brng), stok_obat_pasien.jumlah, concat(stok_obat_pasien.kd_bangsal,' ',bangsal.nm_bangsal) "+
-                  "from stok_obat_pasien inner join reg_periksa inner join pasien inner join databarang inner join bangsal "+
-                  "on stok_obat_pasien.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                  "and stok_obat_pasien.kode_brng=databarang.kode_brng and stok_obat_pasien.kd_bangsal=bangsal.kd_bangsal "+
-                  "where stok_obat_pasien.tanggal between ? and ? and stok_obat_pasien.no_rawat like ? or "+
-                  "stok_obat_pasien.tanggal between ? and ? and reg_periksa.no_rkm_medis like ? or "+
-                  "stok_obat_pasien.tanggal between ? and ? and pasien.nm_pasien like ? or "+
-                  "stok_obat_pasien.tanggal between ? and ? and databarang.nama_brng like ? or "+
-                  "stok_obat_pasien.tanggal between ? and ? and bangsal.nm_bangsal like ? order by stok_obat_pasien.tanggal");
+            pstampil=koneksi.prepareStatement("select returpasien.tanggal, returpasien.no_rawat,concat(reg_periksa.no_rkm_medis,' ',pasien.nm_pasien),"+
+                  " concat(returpasien.kode_brng,' ',databarang.nama_brng), returpasien.jml "+
+                  "from returpasien inner join reg_periksa inner join pasien inner join databarang "+
+                  "on returpasien.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                  "and returpasien.kode_brng=databarang.kode_brng "+
+                  "where returpasien.tanggal between ? and ? and returpasien.no_rawat like ? or "+
+                  "returpasien.tanggal between ? and ? and reg_periksa.no_rkm_medis like ? or "+
+                  "returpasien.tanggal between ? and ? and pasien.nm_pasien like ? or "+
+                  "returpasien.tanggal between ? and ? and databarang.nama_brng like ? order by returpasien.tanggal");
         } catch (SQLException e) {
             System.out.println(e);
         }        
@@ -181,7 +178,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pemberian Stok Obat Pasien Di Ranap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Retur Obat Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -359,10 +356,9 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        Sequel.queryu("delete from stok_obat_pasien where tanggal='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()+"' "+
+        Sequel.queryu("delete from returpasien where tanggal='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString()+"' "+
                       "and no_rawat='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()+"' "+
-                      "and kode_brng='"+Sequel.cariIsi("select kode_brng from databarang where concat(kode_brng,' ',nama_brng)='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString()+"'")+"' "+
-                      "and kd_bangsal='"+Sequel.cariIsi("select kd_bangsal from bangsal where concat(kd_bangsal,' ',nm_bangsal)='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'")+"'");
+                      "and kode_brng='"+Sequel.cariIsi("select kode_brng from databarang where concat(kode_brng,' ',nama_brng)='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString()+"'")+"'");
         BtnCariActionPerformed(evt);
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -460,7 +456,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgStokPasien dialog = new DlgStokPasien(new javax.swing.JFrame(), true);
+            DlgReturObatPasien dialog = new DlgReturObatPasien(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -512,17 +508,13 @@ public final class DlgStokPasien extends javax.swing.JDialog {
             pstampil.setString(10,Tgl1.getSelectedItem().toString());
             pstampil.setString(11,Tgl2.getSelectedItem().toString());
             pstampil.setString(12,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(13,Tgl1.getSelectedItem().toString());
-            pstampil.setString(14,Tgl2.getSelectedItem().toString());
-            pstampil.setString(15,"%"+TCari.getText().trim()+"%");
             rstampil=pstampil.executeQuery();
             while(rstampil.next()){                
                 String[] data={rstampil.getString(1),
                                rstampil.getString(2),
                                rstampil.getString(3),
                                rstampil.getString(4),
-                               rstampil.getString(5),
-                               rstampil.getString(6)};
+                               rstampil.getString(5)};
                 tabMode.addRow(data);
             }
         }catch(SQLException e){
@@ -538,9 +530,9 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     
     
     public void isCek(){
-        BtnHapus.setEnabled(var.getstockopname());
-        BtnPrint.setEnabled(var.getstockopname());    
-        ppHapus.setEnabled(var.getstockopname());
-        ppCetak.setEnabled(var.getstockopname());
+        BtnHapus.setEnabled(var.getreturjual());
+        BtnPrint.setEnabled(var.getreturjual());    
+        ppHapus.setEnabled(var.getreturjual());
+        ppCetak.setEnabled(var.getreturjual());
     }
 }

@@ -238,7 +238,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
         label12.setPreferredSize(new java.awt.Dimension(50, 23));
         panelisi3.add(label12);
 
-        Jenisjual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ranap Umum", "Rawat Jalan", "Ranap JKM" }));
+        Jenisjual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ranap Umum", "Rawat Jalan", "Ranap BPJS" }));
         Jenisjual.setName("Jenisjual"); // NOI18N
         Jenisjual.setPreferredSize(new java.awt.Dimension(100, 23));
         panelisi3.add(Jenisjual);
@@ -299,7 +299,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-05-25" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014-06-08" }));
         Tanggal.setDisplayFormat("yyyy-MM-dd");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -413,7 +413,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             harga=rscariharga.getDouble("h_retail");
                         }else if(Jenisjual.getSelectedItem().equals("Rawat Jalan")){
                             harga=rscariharga.getDouble("h_distributor");
-                        }else if(Jenisjual.getSelectedItem().equals("Ranap JKM")){
+                        }else if(Jenisjual.getSelectedItem().equals("Ranap BPJS")){
                             harga=rscariharga.getDouble("h_grosir");
                         }  
                         if(rscariharga.getDouble("kapasitas")>0){
@@ -447,7 +447,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     }
                     retur=0;
                     try {
-                        retur=Double.parseDouble(tbObat.getValueAt(i,7).toString()); 
+                        retur=Double.parseDouble(tbObat.getValueAt(i,10).toString()); 
                     } catch (Exception e) {
                         retur=0;
                     } 

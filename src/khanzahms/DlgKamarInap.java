@@ -2986,9 +2986,9 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
     public void tampil() {
         if(R1.isSelected()==true){
-            kmr=" kamar_inap.tgl_keluar='0000:00:00' ";
+            kmr=" stts_pulang='-' ";
             if(!BangsalCari.getText().equals("")){
-                kmr=" kamar_inap.tgl_keluar='0000:00:00' and bangsal.nm_bangsal='"+BangsalCari.getText()+"' ";
+                kmr=" stts_pulang='-' and bangsal.nm_bangsal='"+BangsalCari.getText()+"' ";
             }
         }else if(R2.isSelected()==true){
             kmr=" kamar_inap.tgl_masuk between '"+DTPCari1.getSelectedItem()+"' and '"+DTPCari2.getSelectedItem()+"' ";

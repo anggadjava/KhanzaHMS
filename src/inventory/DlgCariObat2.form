@@ -308,7 +308,7 @@
                   <StringArray count="3">
                     <StringItem index="0" value="Ranap Umum"/>
                     <StringItem index="1" value="Rawat Jalan"/>
-                    <StringItem index="2" value="Ranap JKM"/>
+                    <StringItem index="2" value="Ranap BPJS"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="Jenisjual" noResource="true"/>
@@ -378,7 +378,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="2014-05-28"/>
+                    <StringItem index="0" value="2014-06-15"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="yyyy-MM-dd"/>

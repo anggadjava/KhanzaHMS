@@ -57,7 +57,8 @@ import uz.ncipro.calendar.JDateTimePicker;
  * @author Owner
  */
 public final class validasi {
-    private int a;
+    private int a,j,i;
+    String s,s1,auto;
     private final Connection connect=koneksiDB.condb();
     private final sekuel sek=new sekuel();
     private final java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
@@ -66,16 +67,16 @@ public final class validasi {
     private final DecimalFormat df3 = new DecimalFormat("######"); 
     private Statement stat;
     private ResultSet rs;
+    private Calendar now = Calendar.getInstance();
+    private int year=now.get(Calendar.YEAR);
     
     public validasi(){super();};
 
-    public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){
-        String s,s1;
-        Integer j;
+    public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
         s1="";
-        for(int i = 1;i<=pnj-j;i++){
+        for(i = 1;i<=pnj-j;i++){
             s1=s1+"0";
         }
         teks.setText(strAwal+s1+s);
@@ -86,19 +87,14 @@ public final class validasi {
             stat=connect.createStatement();
             rs=stat.executeQuery("select * from "+tabel);
             rs.last();
-            String s,s1;
-            Integer j;
             s=Integer.toString(rs.getRow()+1);
             j=s.length();
             s1="";
-            for(int i = 1;i<=pnj-j;i++){
+            for(i = 1;i<=pnj-j;i++){
                 s1=s1+"0";
             }
-            teks.setText(strAwal+s1+s);
-            //rs.close();
-            //stat.close();            
-             
-         }catch(SQLException e){
+            teks.setText(strAwal+s1+s);      
+         }catch(Exception e){
             System.out.println("Pesan Error : "+e);
             JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
          }
@@ -110,19 +106,14 @@ public final class validasi {
             stat=connect.createStatement();
             rs=stat.executeQuery(sql);
             rs.last();
-            String s,s1;
-            Integer j;
             s=Integer.toString(rs.getRow()+1);
             j=s.length();
             s1="";
-            for(int i = 1;i<=pnj-j;i++){
+            for(i = 1;i<=pnj-j;i++){
                 s1=s1+"0";
             }
             teks.setText(strAwal+s1+s);
-            //rs.close();
-            //stat.close();            
-             
-         }catch(SQLException e){
+         }catch(Exception e){
             System.out.println("Pesan Error : "+e);
             JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
          }
@@ -132,21 +123,18 @@ public final class validasi {
     public void autoNomer3(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try{   
             rs=connect.prepareStatement(sql).executeQuery();
-            String s="1",s1;
-            Integer j;
+            s="1";
             while(rs.next()){
                 s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
             }            
             
             j=s.length();
             s1="";
-            for(int i = 1;i<=pnj-j;i++){
+            for(i = 1;i<=pnj-j;i++){
                 s1=s1+"0";
             }
             teks.setText(strAwal+s1+s);
-            //rs.close();           
-             
-         }catch(SQLException | NumberFormatException e){
+         }catch(Exception e){
             System.out.println("Pesan Error : "+e);
             JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
          }
@@ -154,24 +142,19 @@ public final class validasi {
     }
     
     public String autoNomer(String tabel,String strAwal,Integer pnj){
-        String auto="";
-        try{            
+        try{    
+            auto="";
             stat=connect.createStatement();
             rs=stat.executeQuery("select * from "+tabel);
             rs.last();
-            String s,s1;
-            Integer j;
             s=Integer.toString(rs.getRow()+1);
             j=s.length();
             s1="";
-            for(int i = 1;i<=pnj-j;i++){
+            for(i = 1;i<=pnj-j;i++){
                 s1=s1+"0";
             }
-            //rs.close();
-            //stat.close(); 
-            auto=strAwal+s1+s;
-             
-         }catch(SQLException e){
+            auto=strAwal+s1+s;             
+         }catch(Exception e){
             System.out.println("Pesan Error : "+e);
             JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
          }
@@ -220,12 +203,12 @@ public final class validasi {
             WritableSheet sheet1 = workbook1.createSheet("First Sheet", 0); 
             model = (DefaultTableModel) table.getModel();
 
-            for (int i = 0; i < model.getColumnCount(); i++) {
+            for (i = 0; i < model.getColumnCount(); i++) {
                 Label column = new Label(i, 0, model.getColumnName(i));
                 sheet1.addCell(column);
             }
-            for (int i = 0; i < model.getRowCount(); i++) {
-                for (int j = 0; j < model.getColumnCount(); j++) {
+            for (i = 0; i < model.getRowCount(); i++) {
+                for (j = 0; j < model.getColumnCount(); j++) {
                     Label row = new Label(j, i + 1, 
                             model.getValueAt(i, j).toString());
                     sheet1.addCell(row);
@@ -271,29 +254,23 @@ public final class validasi {
                 String item=rs.getString(1);
                 cmb.addItem(item);
                 a++;
-            }
-            //rs.close();
-            //stat.close();            
-        }catch(SQLException e){
+            }          
+        }catch(Exception e){
             System.out.println("Error : "+e);
         }
     }
 
-    public void LoadTahun(JComboBox cmb){
-        Calendar now = Calendar.getInstance();
-        int year=now.get(Calendar.YEAR);
+    public void LoadTahun(JComboBox cmb){        
         cmb.removeAllItems();
-        for(int i =year;i>=2000;i--){
+        for(i =year;i>=2000;i--){
             cmb.addItem(i);
         }
         cmb.setSelectedItem(year);
     }
 
     public void LoadTahunAkd(JComboBox cmb){
-        Calendar now = Calendar.getInstance();
-        int year=now.get(Calendar.YEAR);
         cmb.removeAllItems();
-        for(int i = 1950;i<=year;i++){
+        for(i = 1950;i<=year;i++){
             cmb.addItem(i+"1");
             cmb.addItem(i+"2");
         }
@@ -357,7 +334,7 @@ public final class validasi {
                     JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
                 }
             }
-        } catch (SQLException | HeadlessException e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -409,7 +386,7 @@ public final class validasi {
                 jasperViewer.setLocationRelativeTo(null);
                 jasperViewer.setAlwaysOnTop(false);
                 jasperViewer.setVisible(true);
-            } catch (JRException | SecurityException | HeadlessException rptexcpt) {
+            } catch (Exception rptexcpt) {
                 System.out.println("Report Can't view because : " + rptexcpt);
                 JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
             }
@@ -426,7 +403,7 @@ public final class validasi {
                 jasperViewer.setAlwaysOnTop(false);
                 jasperViewer.setVisible(true);
                 //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
-        } catch (JRException | SecurityException ex) {
+        } catch (Exception ex) {
            System.out.println("Error : "+ex);
         } 
     }
@@ -544,14 +521,6 @@ public final class validasi {
         }
     }
 
-    /*public void pindah(KeyEvent evt, JComboBox kiri, DateChooserCombo kanan) {
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            kanan.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            kiri.requestFocus();
-        }
-    }*/
-
     public void pindah(KeyEvent evt, JTextArea kiri, JButton kanan) {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();
@@ -573,7 +542,7 @@ public final class validasi {
            Properties prop = new Properties();
            prop.loadFromXML(new FileInputStream("setting/database.xml"));            
            desktop.browse(new java.net.URI ("http://"+prop.getProperty("HOST")+"/"+url));
-        }catch ( java.io.IOException | java.net.URISyntaxException e) {
+        }catch (Exception e) {
            System.out.println(e);
         }
     }
@@ -583,15 +552,15 @@ public final class validasi {
            Properties prop = new Properties();
            prop.loadFromXML(new FileInputStream("setting/database.xml"));            
            desktop.print(new File(new java.net.URI("http://"+prop.getProperty("HOST")+"/"+url)));  
-        }catch (java.io.IOException e) {
+        }catch (Exception e) {
            System.out.println(e);
         }
     }
 
     public void SetTgl(DefaultTableModel tabMode,JTable table,JDateTimePicker dtp,int i){
-        int row=table.getSelectedRow();
+        j=table.getSelectedRow();
         try {
-           Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tabMode.getValueAt(row,i).toString());
+           Date dtpa = new SimpleDateFormat("yyyy-MM-dd").parse(tabMode.getValueAt(j,i).toString());
            dtp.setDate(dtpa);
         } catch (ParseException ex) {
           Logger.getLogger(validasi.class.getName()).log(Level.SEVERE, null, ex);
@@ -619,8 +588,8 @@ public final class validasi {
 
 
     public void tabelKosong(DefaultTableModel tabMode) {
-        int row=tabMode.getRowCount();
-        for(int i=0;i<row;i++){
+        j=tabMode.getRowCount();
+        for(i=0;i<j;i++){
             tabMode.removeRow(0);
         }
     }

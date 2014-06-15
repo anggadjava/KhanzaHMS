@@ -216,10 +216,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                     "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
              pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
                     "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-             pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? and "+
-                    "rawat_inap_dr.tgl_perawatan=? ");
-             pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? and "+
-                    "rawat_inap_pr.tgl_perawatan=? ");
+             pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
+                    "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
+             pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
+                    "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
         }catch(SQLException e){
             System.out.println(e);
         }
@@ -744,147 +744,209 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }else{
             try {          
                 if(pilihtable.equals("rawat_inap_dr")||pilihtable.equals("rawat_inap_pr")){
-                    koneksi.setAutoCommit(false);
-                    if(pilihtable.equals("rawat_inap_dr")){                        
-                        pshapustindakan.setString(1,TNoRw.getText());
-                        pshapustindakan.setString(2,DTPTgl.getSelectedItem().toString());
-                        pshapustindakan.executeUpdate();
-                    }else if(pilihtable.equals("rawat_inap_pr")){
-                        pshapustindakan2.setString(1,TNoRw.getText());
-                        pshapustindakan2.setString(2,DTPTgl.getSelectedItem().toString());
-                        pshapustindakan2.executeUpdate();
-                    }                    
-                    
+                    koneksi.setAutoCommit(false);   
                     for(i=0;i<tbKamar.getRowCount();i++){                                                              
                         if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
                             psjenisperawatan.setString(1,tbKamar.getValueAt(i,4).toString());
                             rs=psjenisperawatan.executeQuery();
                             if(rs.next()){
                                 switch (pilihtable) {
-                                    case "rawat_inap_dr":
+                                    case "rawat_inap_dr":    
                                         biaya=rs.getDouble(1);
                                         if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,TKdPny.getText());
-                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(4,KdDok.getText());
-                                            psinputrawatdr.setString(5,TSuhu.getText());
-                                            psinputrawatdr.setString(6,TTensi.getText());
-                                            psinputrawatdr.setString(7,THasil.getText());
-                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatdr.setString(10,"07:00:00");
-                                            psinputrawatdr.setDouble(11,biaya);
-                                            psinputrawatdr.executeUpdate();
+                                            try {                                                
+                                                psinputrawatdr.setString(1,TNoRw.getText());
+                                                psinputrawatdr.setString(2,TKdPny.getText());
+                                                psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatdr.setString(4,KdDok.getText());
+                                                psinputrawatdr.setString(5,TSuhu.getText());
+                                                psinputrawatdr.setString(6,TTensi.getText());
+                                                psinputrawatdr.setString(7,THasil.getText());
+                                                psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatdr.setString(10,"07:00:00");
+                                                psinputrawatdr.setDouble(11,biaya);
+                                                psinputrawatdr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }
+                                        }else{
+                                            pshapustindakan.setString(1,TNoRw.getText());
+                                            pshapustindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan.setString(4,"07:00:00");
+                                            pshapustindakan.executeUpdate();                                            
                                         }
                                         
                                         if(tbKamar.getValueAt(i,1).toString().equals("true")){
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,TKdPny.getText());
-                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(4,KdDok.getText());
-                                            psinputrawatdr.setString(5,TSuhu.getText());
-                                            psinputrawatdr.setString(6,TTensi.getText());
-                                            psinputrawatdr.setString(7,THasil.getText());
-                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatdr.setString(10,"12:00:00");
-                                            psinputrawatdr.setDouble(11,biaya);
-                                            psinputrawatdr.executeUpdate();
+                                            try {
+                                                psinputrawatdr.setString(1,TNoRw.getText());
+                                                psinputrawatdr.setString(2,TKdPny.getText());
+                                                psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatdr.setString(4,KdDok.getText());
+                                                psinputrawatdr.setString(5,TSuhu.getText());
+                                                psinputrawatdr.setString(6,TTensi.getText());
+                                                psinputrawatdr.setString(7,THasil.getText());
+                                                psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatdr.setString(10,"12:00:00");
+                                                psinputrawatdr.setDouble(11,biaya);
+                                                psinputrawatdr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }                                            
+                                        }else{
+                                            pshapustindakan.setString(1,TNoRw.getText());
+                                            pshapustindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan.setString(4,"12:00:00");
+                                            pshapustindakan.executeUpdate();                                            
                                         }
                                         
                                         if(tbKamar.getValueAt(i,2).toString().equals("true")){
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,TKdPny.getText());
-                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(4,KdDok.getText());
-                                            psinputrawatdr.setString(5,TSuhu.getText());
-                                            psinputrawatdr.setString(6,TTensi.getText());
-                                            psinputrawatdr.setString(7,THasil.getText());
-                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatdr.setString(10,"16:00:00");
-                                            psinputrawatdr.setDouble(11,biaya);
-                                            psinputrawatdr.executeUpdate();
+                                            try {
+                                                psinputrawatdr.setString(1,TNoRw.getText());
+                                                psinputrawatdr.setString(2,TKdPny.getText());
+                                                psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatdr.setString(4,KdDok.getText());
+                                                psinputrawatdr.setString(5,TSuhu.getText());
+                                                psinputrawatdr.setString(6,TTensi.getText());
+                                                psinputrawatdr.setString(7,THasil.getText());
+                                                psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatdr.setString(10,"16:00:00");
+                                                psinputrawatdr.setDouble(11,biaya);
+                                                psinputrawatdr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }
+                                        }else{
+                                            pshapustindakan.setString(1,TNoRw.getText());
+                                            pshapustindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan.setString(4,"16:00:00");
+                                            pshapustindakan.executeUpdate();                                            
                                         }
                                         
                                         if(tbKamar.getValueAt(i,3).toString().equals("true")){
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,TKdPny.getText());
-                                            psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(4,KdDok.getText());
-                                            psinputrawatdr.setString(5,TSuhu.getText());
-                                            psinputrawatdr.setString(6,TTensi.getText());
-                                            psinputrawatdr.setString(7,THasil.getText());
-                                            psinputrawatdr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatdr.setString(10,"20:00:00");
-                                            psinputrawatdr.setDouble(11,biaya);
-                                            psinputrawatdr.executeUpdate();
+                                            try {
+                                                psinputrawatdr.setString(1,TNoRw.getText());
+                                                psinputrawatdr.setString(2,TKdPny.getText());
+                                                psinputrawatdr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatdr.setString(4,KdDok.getText());
+                                                psinputrawatdr.setString(5,TSuhu.getText());
+                                                psinputrawatdr.setString(6,TTensi.getText());
+                                                psinputrawatdr.setString(7,THasil.getText());
+                                                psinputrawatdr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatdr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatdr.setString(10,"20:00:00");
+                                                psinputrawatdr.setDouble(11,biaya);
+                                                psinputrawatdr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }
+                                        }else{
+                                            pshapustindakan.setString(1,TNoRw.getText());
+                                            pshapustindakan.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan.setString(4,"20:00:00");
+                                            pshapustindakan.executeUpdate();                                            
                                         }
                                         
                                         break;
-                                    case "rawat_inap_pr":
+                                    case "rawat_inap_pr":                 
                                         biaya=rs.getDouble(2);                                        
                                         if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,TKdPny.getText());
-                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(4,KdDok.getText());
-                                            psinputrawatpr.setString(5,TSuhu.getText());
-                                            psinputrawatpr.setString(6,TTensi.getText());
-                                            psinputrawatpr.setString(7,THasil.getText());
-                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatpr.setString(10,"07:00:00");
-                                            psinputrawatpr.setDouble(11,biaya);  
-                                            psinputrawatpr.executeUpdate();
+                                            try {
+                                                psinputrawatpr.setString(1,TNoRw.getText());
+                                                psinputrawatpr.setString(2,TKdPny.getText());
+                                                psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatpr.setString(4,KdDok.getText());
+                                                psinputrawatpr.setString(5,TSuhu.getText());
+                                                psinputrawatpr.setString(6,TTensi.getText());
+                                                psinputrawatpr.setString(7,THasil.getText());
+                                                psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatpr.setString(10,"07:00:00");
+                                                psinputrawatpr.setDouble(11,biaya);  
+                                                psinputrawatpr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }                                            
+                                        }else{
+                                            pshapustindakan2.setString(1,TNoRw.getText());
+                                            pshapustindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan2.setString(4,"07:00:00");
+                                            pshapustindakan2.executeUpdate();                                            
                                         }
                                         
                                         if(tbKamar.getValueAt(i,1).toString().equals("true")){
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,TKdPny.getText());
-                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(4,KdDok.getText());
-                                            psinputrawatpr.setString(5,TSuhu.getText());
-                                            psinputrawatpr.setString(6,TTensi.getText());
-                                            psinputrawatpr.setString(7,THasil.getText());
-                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatpr.setString(10,"12:00:00");
-                                            psinputrawatpr.setDouble(11,biaya);  
-                                            psinputrawatpr.executeUpdate();
+                                            try {
+                                                psinputrawatpr.setString(1,TNoRw.getText());
+                                                psinputrawatpr.setString(2,TKdPny.getText());
+                                                psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatpr.setString(4,KdDok.getText());
+                                                psinputrawatpr.setString(5,TSuhu.getText());
+                                                psinputrawatpr.setString(6,TTensi.getText());
+                                                psinputrawatpr.setString(7,THasil.getText());
+                                                psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatpr.setString(10,"12:00:00");
+                                                psinputrawatpr.setDouble(11,biaya);  
+                                                psinputrawatpr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }
+                                        }else{
+                                            pshapustindakan2.setString(1,TNoRw.getText());
+                                            pshapustindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan2.setString(4,"12:00:00");
+                                            pshapustindakan2.executeUpdate();                                            
                                         }
                                         
                                         if(tbKamar.getValueAt(i,2).toString().equals("true")){
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,TKdPny.getText());
-                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(4,KdDok.getText());
-                                            psinputrawatpr.setString(5,TSuhu.getText());
-                                            psinputrawatpr.setString(6,TTensi.getText());
-                                            psinputrawatpr.setString(7,THasil.getText());
-                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatpr.setString(10,"16:00:00");
-                                            psinputrawatpr.setDouble(11,biaya);  
-                                            psinputrawatpr.executeUpdate();
+                                            try {
+                                                psinputrawatpr.setString(1,TNoRw.getText());
+                                                psinputrawatpr.setString(2,TKdPny.getText());
+                                                psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatpr.setString(4,KdDok.getText());
+                                                psinputrawatpr.setString(5,TSuhu.getText());
+                                                psinputrawatpr.setString(6,TTensi.getText());
+                                                psinputrawatpr.setString(7,THasil.getText());
+                                                psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatpr.setString(10,"16:00:00");
+                                                psinputrawatpr.setDouble(11,biaya);  
+                                                psinputrawatpr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }
+                                        }else{
+                                            pshapustindakan2.setString(1,TNoRw.getText());
+                                            pshapustindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan2.setString(4,"16:00:00");
+                                            pshapustindakan2.executeUpdate();                                            
                                         }       
                                         
                                         if(tbKamar.getValueAt(i,3).toString().equals("true")){
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,TKdPny.getText());
-                                            psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(4,KdDok.getText());
-                                            psinputrawatpr.setString(5,TSuhu.getText());
-                                            psinputrawatpr.setString(6,TTensi.getText());
-                                            psinputrawatpr.setString(7,THasil.getText());
-                                            psinputrawatpr.setString(8,TPrkmbngn.getText());
-                                            psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
-                                            psinputrawatpr.setString(10,"20:00:00");
-                                            psinputrawatpr.setDouble(11,biaya);  
-                                            psinputrawatpr.executeUpdate();
-                                        } 
+                                            try {
+                                                psinputrawatpr.setString(1,TNoRw.getText());
+                                                psinputrawatpr.setString(2,TKdPny.getText());
+                                                psinputrawatpr.setString(3,tbKamar.getValueAt(i,4).toString());
+                                                psinputrawatpr.setString(4,KdDok.getText());
+                                                psinputrawatpr.setString(5,TSuhu.getText());
+                                                psinputrawatpr.setString(6,TTensi.getText());
+                                                psinputrawatpr.setString(7,THasil.getText());
+                                                psinputrawatpr.setString(8,TPrkmbngn.getText());
+                                                psinputrawatpr.setString(9,DTPTgl.getSelectedItem().toString());
+                                                psinputrawatpr.setString(10,"20:00:00");
+                                                psinputrawatpr.setDouble(11,biaya);  
+                                                psinputrawatpr.executeUpdate();
+                                            } catch (Exception e) {
+                                            }
+                                        }else{
+                                            pshapustindakan2.setString(1,TNoRw.getText());
+                                            pshapustindakan2.setString(2,DTPTgl.getSelectedItem().toString());
+                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
+                                            pshapustindakan2.setString(4,"20:00:00");
+                                            pshapustindakan2.executeUpdate();                                            
+                                        }
                                         break;
                                 }
                             }                                  
@@ -893,7 +955,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     koneksi.setAutoCommit(true);
                 }  
                 tampil2();
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 System.out.println(ex);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
             }
@@ -1409,7 +1471,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         this.kd_bangsal=Sequel.cariIsi(
                 "select bangsal.kd_bangsal from bangsal inner join kamar inner join kamar_inap "+
                 "on bangsal.kd_bangsal=kamar.kd_bangsal and kamar.kd_kamar=kamar_inap.kd_kamar "+
-                "where no_rawat='"+TNoRw.getText()+"' and tgl_keluar='0000-00-00' order by kamar_inap.tgl_masuk desc limit 1");
+                "where no_rawat='"+TNoRw.getText()+"' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1");
         this.pilihtable=pilihtable;
         switch (pilihtable) {
             case "rawat_inap_dr":

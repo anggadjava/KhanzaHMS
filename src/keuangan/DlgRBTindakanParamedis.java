@@ -597,7 +597,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                a=1;
                while(rs3.next()){
                    Object[] data4={
-                       "","",a+". "+rs3.getString("nm_perawatan")," "+Valid.SetAngka(rs3.getDouble("biayaperawat_luar")),
+                       "","",a+". "+rs3.getString("nm_perawatan")," "+Valid.SetAngka(rs3.getDouble("tarif_tindakanpr")),
                        rs3.getString("jml"),Valid.SetAngka(rs3.getDouble("total"))
                    }; 
                    tabMode.addRow(data4);                   

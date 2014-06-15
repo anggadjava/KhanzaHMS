@@ -9,11 +9,9 @@ package fungsi;
  *
  * @author Owner
  */
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
@@ -22,27 +20,24 @@ import javax.swing.JOptionPane;
  * @author Owner
  */
 public final class koneksiDB {
-    public koneksiDB(){}
-    
+    public koneksiDB(){}    
     private static Connection connection=null;
-    public static Connection condb(){
-        Properties prop = new Properties();        
+    private static final Properties prop = new Properties();  
+    private static final MysqlDataSource dataSource=new MysqlDataSource();
+    public static Connection condb(){      
         if(connection == null){
             try{
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                String url="jdbc:mysql://"+prop.getProperty("HOST")+":"+prop.getProperty("PORT")+"/"+prop.getProperty("DATABASE")+"?zeroDateTimeBehavior=convertToNull";
-                String user=prop.getProperty("USER");
-                String pass=prop.getProperty("PAS");
-                Class.forName("com.mysql.jdbc.Driver");
-                connection=DriverManager.getConnection(url,user,pass);            
+                dataSource.setURL("jdbc:mysql://"+prop.getProperty("HOST")+":"+prop.getProperty("PORT")+"/"+prop.getProperty("DATABASE")+"?zeroDateTimeBehavior=convertToNull");
+                dataSource.setUser(prop.getProperty("USER"));
+                dataSource.setPassword(prop.getProperty("PAS"));
+                connection=dataSource.getConnection();       
                 System.out.println("panggil driver");
-            }catch(IOException | ClassNotFoundException | SQLException e){
-                //System.out.println("gagal di : "+e);
+            }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Error : "+e);
             }
         }
-        return connection;
-        
+        return connection;        
     }
 
 

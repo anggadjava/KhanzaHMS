@@ -361,7 +361,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         label12.setPreferredSize(new java.awt.Dimension(50, 23));
         panelisi3.add(label12);
 
-        Jenisjual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Jalan", "Ranap JKM", "Ranap Umum" }));
+        Jenisjual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Jalan", "Ranap BPJS", "Ranap Umum" }));
         Jenisjual.setName("Jenisjual"); // NOI18N
         Jenisjual.setPreferredSize(new java.awt.Dimension(100, 23));
         Jenisjual.addItemListener(new java.awt.event.ItemListener() {
@@ -711,7 +711,7 @@ private void JenisjualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),rsobat.getDouble("h_distributor"),rsobat.getDouble("stok"),
                                rsobat.getString("nama")});
-                }else if(Jenisjual.getSelectedItem().equals("Ranap JKM")){
+                }else if(Jenisjual.getSelectedItem().equals("Ranap BPJS")){
                     tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),rsobat.getDouble("h_grosir"),rsobat.getDouble("stok"),
                                rsobat.getString("nama")});

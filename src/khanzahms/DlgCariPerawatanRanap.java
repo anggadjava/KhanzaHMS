@@ -1143,7 +1143,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         this.kd_bangsal=Sequel.cariIsi(
                 "select bangsal.kd_bangsal from bangsal inner join kamar inner join kamar_inap "+
                 "on bangsal.kd_bangsal=kamar.kd_bangsal and kamar.kd_kamar=kamar_inap.kd_kamar "+
-                "where no_rawat='"+TNoRw.getText()+"' and tgl_keluar='0000-00-00' order by kamar_inap.tgl_masuk desc limit 1");
+                "where no_rawat='"+TNoRw.getText()+"' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1");
         this.pilihtable=pilihtable;
         switch (pilihtable) {
             case "rawat_inap_dr":

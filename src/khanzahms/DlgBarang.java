@@ -53,7 +53,7 @@ public class DlgBarang extends javax.swing.JDialog {
                     "Letak Barang",
                     "Hrg.Beli(Rp)",
                     "Hrg.Rawat Jalan(Rp)",
-                    "Hrg.Ranap JKM(Rp)",
+                    "Hrg.Ranap BPJS(Rp)",
                     "Hrg.Ranap Umum(Rp)",
                     "Stok",
                     "Kode Jenis",
@@ -104,10 +104,10 @@ public class DlgBarang extends javax.swing.JDialog {
         kdsat.setDocument(new batasInput((byte)3).getKata(kdsat)); 
         Letak.setDocument(new batasInput((byte)50).getKata(Letak));  
         hbeli.setDocument(new batasInput((byte)15).getOnlyAngka(hbeli)); 
-        hdistributor.setDocument(new batasInput((byte)15).getOnlyAngka(hdistributor));    
-        hgrosir.setDocument(new batasInput((byte)15).getOnlyAngka(hgrosir)); 
-        hretail.setDocument(new batasInput((byte)15).getOnlyAngka(hretail)); 
-        Kapasitas.setDocument(new batasInput((byte)15).getOnlyAngka(hretail)); 
+        hjalan.setDocument(new batasInput((byte)15).getOnlyAngka(hjalan));    
+        hbpjs.setDocument(new batasInput((byte)15).getOnlyAngka(hbpjs)); 
+        humum.setDocument(new batasInput((byte)15).getOnlyAngka(humum)); 
+        Kapasitas.setDocument(new batasInput((byte)15).getOnlyAngka(humum)); 
         stok.setDocument(new batasInput((byte)15).getKata(stok)); 
         kdjns.setDocument(new batasInput((byte)5).getKata(kdjns));        
 
@@ -211,13 +211,13 @@ public class DlgBarang extends javax.swing.JDialog {
         Nm = new widget.TextBox();
         label18 = new widget.Label();
         label26 = new widget.Label();
-        hgrosir = new widget.TextBox();
+        hbpjs = new widget.TextBox();
         label28 = new widget.Label();
-        hretail = new widget.TextBox();
+        humum = new widget.TextBox();
         label31 = new widget.Label();
         Letak = new widget.TextBox();
         label27 = new widget.Label();
-        hdistributor = new widget.TextBox();
+        hjalan = new widget.TextBox();
         nmsat = new widget.TextBox();
         label19 = new widget.Label();
         kdsat = new widget.TextBox();
@@ -756,31 +756,31 @@ public class DlgBarang extends javax.swing.JDialog {
         FormInput.add(label18);
         label18.setBounds(8, 42, 88, 23);
 
-        label26.setText("Ranap JKM : Rp.");
+        label26.setText("Ranap BPJS : Rp.");
         label26.setName("label26"); // NOI18N
         label26.setPreferredSize(new java.awt.Dimension(65, 23));
         FormInput.add(label26);
         label26.setBounds(497, 72, 116, 23);
 
-        hgrosir.setName("hgrosir"); // NOI18N
-        hgrosir.setPreferredSize(new java.awt.Dimension(207, 23));
-        hgrosir.addMouseListener(new java.awt.event.MouseAdapter() {
+        hbpjs.setName("hbpjs"); // NOI18N
+        hbpjs.setPreferredSize(new java.awt.Dimension(207, 23));
+        hbpjs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                hgrosirMouseExited(evt);
+                hbpjsMouseExited(evt);
             }
         });
-        hgrosir.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        hbpjs.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                hgrosirMouseMoved(evt);
+                hbpjsMouseMoved(evt);
             }
         });
-        hgrosir.addKeyListener(new java.awt.event.KeyAdapter() {
+        hbpjs.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                hgrosirKeyPressed(evt);
+                hbpjsKeyPressed(evt);
             }
         });
-        FormInput.add(hgrosir);
-        hgrosir.setBounds(617, 72, 110, 23);
+        FormInput.add(hbpjs);
+        hbpjs.setBounds(617, 72, 110, 23);
 
         label28.setText("Ranap Umum : Rp.");
         label28.setName("label28"); // NOI18N
@@ -788,25 +788,25 @@ public class DlgBarang extends javax.swing.JDialog {
         FormInput.add(label28);
         label28.setBounds(497, 102, 116, 23);
 
-        hretail.setName("hretail"); // NOI18N
-        hretail.setPreferredSize(new java.awt.Dimension(207, 23));
-        hretail.addMouseListener(new java.awt.event.MouseAdapter() {
+        humum.setName("humum"); // NOI18N
+        humum.setPreferredSize(new java.awt.Dimension(207, 23));
+        humum.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                hretailMouseExited(evt);
+                humumMouseExited(evt);
             }
         });
-        hretail.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        humum.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                hretailMouseMoved(evt);
+                humumMouseMoved(evt);
             }
         });
-        hretail.addKeyListener(new java.awt.event.KeyAdapter() {
+        humum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                hretailKeyPressed(evt);
+                humumKeyPressed(evt);
             }
         });
-        FormInput.add(hretail);
-        hretail.setBounds(617, 102, 110, 23);
+        FormInput.add(humum);
+        humum.setBounds(617, 102, 110, 23);
 
         label31.setText("Letak Barang :");
         label31.setName("label31"); // NOI18N
@@ -830,25 +830,25 @@ public class DlgBarang extends javax.swing.JDialog {
         FormInput.add(label27);
         label27.setBounds(497, 42, 116, 23);
 
-        hdistributor.setName("hdistributor"); // NOI18N
-        hdistributor.setPreferredSize(new java.awt.Dimension(207, 23));
-        hdistributor.addMouseListener(new java.awt.event.MouseAdapter() {
+        hjalan.setName("hjalan"); // NOI18N
+        hjalan.setPreferredSize(new java.awt.Dimension(207, 23));
+        hjalan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                hdistributorMouseExited(evt);
+                hjalanMouseExited(evt);
             }
         });
-        hdistributor.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        hjalan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                hdistributorMouseMoved(evt);
+                hjalanMouseMoved(evt);
             }
         });
-        hdistributor.addKeyListener(new java.awt.event.KeyAdapter() {
+        hjalan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                hdistributorKeyPressed(evt);
+                hjalanKeyPressed(evt);
             }
         });
-        FormInput.add(hdistributor);
-        hdistributor.setBounds(617, 42, 110, 23);
+        FormInput.add(hjalan);
+        hjalan.setBounds(617, 42, 110, 23);
 
         nmsat.setEditable(false);
         nmsat.setName("nmsat"); // NOI18N
@@ -1102,14 +1102,14 @@ public class DlgBarang extends javax.swing.JDialog {
             Valid.textKosong(Nm,"Nama Barang");
         }else if(Letak.getText().trim().equals("")){
             Valid.textKosong(Letak,"Letak Barang");
-        }else if(hgrosir.getText().trim().equals("")){
-            Valid.textKosong(hgrosir,"Harga Ranap JKMir");
+        }else if(hbpjs.getText().trim().equals("")){
+            Valid.textKosong(hbpjs,"Harga ");
         }else if(hbeli.getText().trim().equals("")){
             Valid.textKosong(hbeli,"Harga Beli");
-        }else if(hretail.getText().trim().equals("")){
-            Valid.textKosong(hretail,"Harga Ranap Umum");
-        }else if(hdistributor.getText().trim().equals("")){
-            Valid.textKosong(hdistributor,"Harga Rawat Jalan");
+        }else if(humum.getText().trim().equals("")){
+            Valid.textKosong(humum,"Harga Ranap Umum");
+        }else if(hjalan.getText().trim().equals("")){
+            Valid.textKosong(hjalan,"Harga Rawat Jalan");
         }else if(kdsat.getText().trim().equals("")||nmsat.getText().trim().equals("")){
             Valid.textKosong(kdsat,"Satuan");
         }else if(kdjns.getText().trim().equals("")||nmjns.getText().trim().equals("")){
@@ -1122,9 +1122,9 @@ public class DlgBarang extends javax.swing.JDialog {
                     kdsat.getText()+"',letak_barang='"+
                     Letak.getText()+"',h_beli='"+
                     hbeli.getText()+"',h_distributor='"+
-                    hdistributor.getText().replaceAll(",","")+"',h_grosir='"+
-                    hgrosir.getText().replaceAll(",","")+"',h_retail='"+
-                    hretail.getText().replaceAll(",","")+"',stok='"+
+                    hjalan.getText().replaceAll(",","")+"',h_grosir='"+
+                    hbpjs.getText().replaceAll(",","")+"',h_retail='"+
+                    humum.getText().replaceAll(",","")+"',stok='"+
                     stok.getText()+"',kdjns='"+
                     kdjns.getText()+"'");
                     if(tabMode.getRowCount()!=0){tampil(" order by databarang.kode_brng ");}
@@ -1217,14 +1217,14 @@ public class DlgBarang extends javax.swing.JDialog {
             Valid.textKosong(Nm,"Nama Barang");
         }else if(Letak.getText().trim().equals("")){
             Valid.textKosong(Letak,"Letak Barang");
-        }else if(hgrosir.getText().trim().equals("")){
-            Valid.textKosong(hgrosir,"Harga Ranap JKMir");
+        }else if(hbpjs.getText().trim().equals("")){
+            Valid.textKosong(hbpjs,"Harga BPJS");
         }else if(hbeli.getText().trim().equals("")){
             Valid.textKosong(hbeli,"Harga Beli");
-        }else if(hretail.getText().trim().equals("")){
-            Valid.textKosong(hretail,"Harga Ranap Umum");
-        }else if(hdistributor.getText().trim().equals("")){
-            Valid.textKosong(hdistributor,"Harga Rawat Jalan");
+        }else if(humum.getText().trim().equals("")){
+            Valid.textKosong(humum,"Harga Umum");
+        }else if(hjalan.getText().trim().equals("")){
+            Valid.textKosong(hjalan,"Harga Rawat Jalan");
         }else if(kdsat.getText().trim().equals("")||nmsat.getText().trim().equals("")){
             Valid.textKosong(kdsat,"Satuan");
         }else if(kdjns.getText().trim().equals("")||nmjns.getText().trim().equals("")){
@@ -1239,9 +1239,9 @@ public class DlgBarang extends javax.swing.JDialog {
                     kdsat.getText()+"','"+
                     Letak.getText()+"','"+
                     hbeli.getText()+"','"+
-                    hdistributor.getText().replaceAll(",","") +"','"+
-                    hgrosir.getText().replaceAll(",","")+"','"+
-                    hretail.getText().replaceAll(",","")+"','"+
+                    hjalan.getText().replaceAll(",","") +"','"+
+                    hbpjs.getText().replaceAll(",","")+"','"+
+                    humum.getText().replaceAll(",","")+"','"+
                     stok.getText()+"','"+
                     kdjns.getText()+"','"+
                     Kapasitas.getText()+"'","Kode Barang");
@@ -1272,21 +1272,21 @@ public class DlgBarang extends javax.swing.JDialog {
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
 }//GEN-LAST:event_BtnBatalKeyPressed
 
-    private void hgrosirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hgrosirKeyPressed
-         Valid.pindah(evt,hdistributor,hretail);
-    }//GEN-LAST:event_hgrosirKeyPressed
+    private void hbpjsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hbpjsKeyPressed
+         Valid.pindah(evt,hjalan,humum);
+    }//GEN-LAST:event_hbpjsKeyPressed
 
-    private void hretailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hretailKeyPressed
-         Valid.pindah(evt,hgrosir,stok);
-    }//GEN-LAST:event_hretailKeyPressed
+    private void humumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_humumKeyPressed
+         Valid.pindah(evt,hbpjs,stok);
+    }//GEN-LAST:event_humumKeyPressed
 
 private void LetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LetakKeyPressed
         Valid.pindah(evt,Nm,Kapasitas);
 }//GEN-LAST:event_LetakKeyPressed
 
-private void hdistributorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hdistributorKeyPressed
-    Valid.pindah(evt,hbeli,hgrosir);
-}//GEN-LAST:event_hdistributorKeyPressed
+private void hjalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hjalanKeyPressed
+    Valid.pindah(evt,hbeli,hbpjs);
+}//GEN-LAST:event_hjalanKeyPressed
 
 private void kdsatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdsatKeyPressed
        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -1310,7 +1310,7 @@ private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_BtnSatuanActionPerformed
 
 private void stokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stokKeyPressed
-        Valid.pindah(evt,hretail,BtnSimpan);
+        Valid.pindah(evt,humum,BtnSimpan);
 }//GEN-LAST:event_stokKeyPressed
 
     private void kdjnsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdjnsKeyPressed
@@ -1344,23 +1344,23 @@ private void stokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok
         }
     }//GEN-LAST:event_stokMouseExited
 
-    private void hdistributorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hdistributorMouseExited
-        if(hdistributor.getText().equals("")){
-            hdistributor.setText("0");
+    private void hjalanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hjalanMouseExited
+        if(hjalan.getText().equals("")){
+            hjalan.setText("0");
         }
-    }//GEN-LAST:event_hdistributorMouseExited
+    }//GEN-LAST:event_hjalanMouseExited
 
-    private void hgrosirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hgrosirMouseExited
-        if(hgrosir.getText().equals("")){
-            hgrosir.setText("0");
+    private void hbpjsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hbpjsMouseExited
+        if(hbpjs.getText().equals("")){
+            hbpjs.setText("0");
         }
-    }//GEN-LAST:event_hgrosirMouseExited
+    }//GEN-LAST:event_hbpjsMouseExited
 
-    private void hretailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hretailMouseExited
-        if(hretail.getText().equals("")){
-            hretail.setText("0");
+    private void humumMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_humumMouseExited
+        if(humum.getText().equals("")){
+            humum.setText("0");
         }
-    }//GEN-LAST:event_hretailMouseExited
+    }//GEN-LAST:event_humumMouseExited
 
     private void stokMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stokMouseMoved
         if(stok.getText().equals("0")){
@@ -1368,23 +1368,23 @@ private void stokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok
         }
     }//GEN-LAST:event_stokMouseMoved
 
-    private void hdistributorMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hdistributorMouseMoved
-        if(hdistributor.getText().equals("0")||hdistributor.getText().equals("0.0")){
-            hdistributor.setText("");
+    private void hjalanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hjalanMouseMoved
+        if(hjalan.getText().equals("0")||hjalan.getText().equals("0.0")){
+            hjalan.setText("");
         }
-    }//GEN-LAST:event_hdistributorMouseMoved
+    }//GEN-LAST:event_hjalanMouseMoved
 
-    private void hgrosirMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hgrosirMouseMoved
-        if(hgrosir.getText().equals("0")||hgrosir.getText().equals("0.0")){
-            hgrosir.setText("");
+    private void hbpjsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hbpjsMouseMoved
+        if(hbpjs.getText().equals("0")||hbpjs.getText().equals("0.0")){
+            hbpjs.setText("");
         }
-    }//GEN-LAST:event_hgrosirMouseMoved
+    }//GEN-LAST:event_hbpjsMouseMoved
 
-    private void hretailMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hretailMouseMoved
-        if(hretail.getText().equals("0")||hretail.getText().equals("0.0")){
-            hretail.setText("");
+    private void humumMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_humumMouseMoved
+        if(humum.getText().equals("0")||humum.getText().equals("0.0")){
+            humum.setText("");
         }
-    }//GEN-LAST:event_hretailMouseMoved
+    }//GEN-LAST:event_humumMouseMoved
 
     private void hbeliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hbeliMouseExited
         if(hbeli.getText().equals("")){
@@ -1399,7 +1399,7 @@ private void stokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok
     }//GEN-LAST:event_hbeliMouseMoved
 
     private void hbeliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hbeliKeyPressed
-        Valid.pindah(evt,kdjns,hdistributor);
+        Valid.pindah(evt,kdjns,hjalan);
     }//GEN-LAST:event_hbeliKeyPressed
 
     private void ppOrderKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppOrderKodeActionPerformed
@@ -1573,9 +1573,9 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private javax.swing.JPopupMenu Popup;
     private widget.TextBox TCari;
     private widget.TextBox hbeli;
-    private widget.TextBox hdistributor;
-    private widget.TextBox hgrosir;
-    private widget.TextBox hretail;
+    private widget.TextBox hbpjs;
+    private widget.TextBox hjalan;
+    private widget.TextBox humum;
     private widget.InternalFrame internalFrame1;
     private javax.swing.JPanel jPanel2;
     private widget.TextBox kdjns;
@@ -1734,9 +1734,9 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         nmsat.setText("");
         Letak.setText("");
         hbeli.setText("0");
-        hretail.setText("0");
-        hgrosir.setText("0");
-        hdistributor.setText("0");
+        humum.setText("0");
+        hbpjs.setText("0");
+        hjalan.setText("0");
         Kapasitas.setText("0");
         stok.setText("0");
         kdjns.setText("");
@@ -1757,9 +1757,9 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             nmsat.setText(tbDokter.getValueAt(row,3).toString());
             Letak.setText(tbDokter.getValueAt(row,4).toString());
             hbeli.setText(tbDokter.getValueAt(row,5).toString());
-            hdistributor.setText(tbDokter.getValueAt(row,6).toString());
-            hgrosir.setText(tbDokter.getValueAt(row,7).toString());
-            hretail.setText(tbDokter.getValueAt(row,8).toString());
+            hjalan.setText(tbDokter.getValueAt(row,6).toString());
+            hbpjs.setText(tbDokter.getValueAt(row,7).toString());
+            humum.setText(tbDokter.getValueAt(row,8).toString());
             kdjns.setText(tbDokter.getValueAt(row,10).toString());
             nmjns.setText(tbDokter.getValueAt(row,11).toString());
             Kapasitas.setText(tbDokter.getValueAt(row,12).toString());
@@ -1783,11 +1783,11 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             while(rs.next()){
                 if(!hbeli.getText().equals("")){
                     x=Double.parseDouble(hbeli.getText())+(Double.parseDouble(hbeli.getText())*(rs.getDouble(1)/100));
-                    hdistributor.setText(Valid.SetAngka2(x));
+                    hjalan.setText(Valid.SetAngka2(x));
                     y=Double.parseDouble(hbeli.getText())+(Double.parseDouble(hbeli.getText())*(rs.getDouble(2)/100));
-                    hgrosir.setText(Valid.SetAngka2(y));
+                    hbpjs.setText(Valid.SetAngka2(y));
                     z=Double.parseDouble(hbeli.getText())+(Double.parseDouble(hbeli.getText())*(rs.getDouble(3)/100));
-                    hretail.setText(Valid.SetAngka2(z));
+                    humum.setText(Valid.SetAngka2(z));
                 }
             }
             //rs.close();
